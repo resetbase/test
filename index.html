@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>採用サイト ベーシック構成</title>
+<style>
+  /* 基本リセットとタイポグラフィ */
+  body { margin: 0; font-family: 'Helvetica Neue', Arial, sans-serif; color: #333; line-height: 1.8; background-color: #fafafa; }
+  h1, h2, h3, p { margin: 0; }
+  a { text-decoration: none; color: inherit; }
+  
+  /* 固定ヘッダー */
+  header {
+    position: fixed; top: 0; width: 100%; display: flex; justify-content: space-between; align-items: center;
+    padding: 20px 40px; box-sizing: border-box; background: rgba(255, 255, 255, 0.95);
+    z-index: 1000; box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  }
+  .logo { font-weight: bold; font-size: 1.2rem; letter-spacing: 0.1em; }
+  .entry-btn { background: #111; color: #fff; padding: 12px 24px; font-weight: bold; font-size: 0.9rem; border-radius: 4px; transition: 0.3s; }
+  .entry-btn:hover { background: #444; }
+
+  /* ヒーローセクション（全画面） */
+  .hero {
+    height: 100vh; background: #e0e0e0; /* ここに実際の画像や動画を設定します */
+    display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
+  }
+  .hero h1 { font-size: 3.5rem; letter-spacing: 0.1em; margin-bottom: 20px; }
+  .hero p { font-size: 1.2rem; letter-spacing: 0.2em; }
+  
+  /* セクション共通レイアウト */
+  section { padding: 120px 20px; max-width: 1100px; margin: 0 auto; }
+  .section-title { text-align: center; font-size: 2.5rem; letter-spacing: 0.1em; margin-bottom: 60px; }
+
+  /* メッセージエリア */
+  .message-text { text-align: center; font-size: 1.2rem; max-width: 700px; margin: 0 auto; font-weight: bold; }
+
+  /* 採用情報（CSSグリッドによるカードレイアウト） */
+  .recruit-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px; }
+  .card { background: #fff; padding: 40px; border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+  .card h3 { font-size: 1.4rem; margin-bottom: 15px; border-bottom: 2px solid #111; padding-bottom: 15px; }
+  .card p { margin-bottom: 20px; font-weight: bold; }
+  .card ul { padding-left: 20px; margin-bottom: 30px; font-size: 0.95rem; }
+  .view-more { display: inline-block; padding-bottom: 5px; border-bottom: 1px solid #111; font-weight: bold; font-size: 0.9rem; letter-spacing: 0.1em; }
+
+  /* フッター */
+  footer { background: #111; color: #fff; text-align: center; padding: 60px 20px; font-size: 0.8rem; letter-spacing: 0.1em; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="logo">COMPANY LOGO</div>
+  <a href="#" class="entry-btn">エントリーはこちら</a>
+</header>
+
+<div class="hero">
+  <h1>沖縄から日本の未来をつくる。</h1>
+  <p>RECRUITING SITE</p>
+</div>
+
+<section id="message">
+  <h2 class="section-title">Message</h2>
+  <p class="message-text">
+    一人の力には限界がある。<br>
+    でも、同じ志を持つ最高の仲間となら、必ず成し遂げられる。<br><br>
+    すべてがつながるこの場所で、忘れられない経験を。
+  </p>
+</section>
+
+<section id="recruit">
+  <h2 class="section-title">Recruit</h2>
+  <div class="recruit-grid">
+    <div class="card">
+      <h3>ナビゲーター採用</h3>
+      <p>感動が生まれる瞬間を、あなたの手で。</p>
+      <ul>
+        <li>未経験でも安心の研修制度</li>
+        <li>ゲストと一緒に感動を分かち合える</li>
+        <li>自分らしく選べる働き方</li>
+      </ul>
+      <a href="#" class="view-more">VIEW MORE &rarr;</a>
+    </div>
+    <div class="card">
+      <h3>新卒採用</h3>
+      <p>前例がない。だから成長できる。</p>
+      <ul>
+        <li>企画から実行まで、任される環境</li>
+        <li>誰もやったことのない挑戦</li>
+        <li>挑戦を後押しする仲間と文化</li>
+      </ul>
+      <a href="#" class="view-more">VIEW MORE &rarr;</a>
+    </div>
+    <div class="card">
+      <h3>キャリア採用</h3>
+      <p>あなたの「これまで」が、沖縄の「これから」をつくる。</p>
+      <ul>
+        <li>多様な強みが生み出す「集団知」</li>
+        <li>職種を超えてナレッジを共有する</li>
+        <li>互いの専門性を尊重し合う文化</li>
+      </ul>
+      <a href="#" class="view-more">VIEW MORE &rarr;</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>&copy; 2026 YOUR COMPANY NAME RECRUITING SITE</p>
+</footer>
+
+</body>
+</html>
