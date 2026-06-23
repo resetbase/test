@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>RESET BASE | デスクトップ＆スマホプレビュー</title>
+    <title>RESET BASE | 専属チーム・サブスクリプション</title>
     <link href="https://fonts.googleapis.com/css?display=swap&family=Lato:300,400,700|Open+Sans:400,600,700|Noto+Sans+JP:300,400,600,700" rel="stylesheet">
     <style>
         :root {
@@ -133,7 +133,7 @@
             position: absolute;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            z-index: 1;
+            z-index: 1; /* スマホの裏側 */
             pointer-events: none;
         }
         
@@ -146,7 +146,7 @@
             opacity: 0; 
             transform: translate(0, 0) scale(0.5);
             width: 240px; 
-            transform-origin: center 80%;
+            transform-origin: center 80%; /* 回転軸を足元に */
         }
 
         .expert img { 
@@ -156,7 +156,7 @@
             background: transparent;
         }
 
-        /* 吹き出し風テキスト */
+        /* 吹き出し風テキストのベース形状 */
         .expert-text { 
             position: absolute;
             background: #fff;
@@ -168,6 +168,7 @@
             white-space: nowrap;
             z-index: 2;
         }
+        /* 吹き出しのしっぽ（共通設定） */
         .expert-text::after {
             content: ''; position: absolute; width: 0; height: 0; border-style: solid;
         }
@@ -175,7 +176,7 @@
         .expert-role { font-size: 10px; color: var(--primary-bg); font-weight: 800; margin-bottom: 4px; }
         .expert-msg { font-size: 15px; font-weight: 700; color: var(--text-dark); }
 
-        /* 左から出る専門家 */
+        /* 左から出る専門家の吹き出し配置 */
         .expert.left { top: 15%; left: 0; }
         .expert.left.active { 
             opacity: 1; 
@@ -187,7 +188,7 @@
             border-color: #fff transparent transparent transparent;
         }
 
-        /* 右から出る専門家 */
+        /* 右から出る専門家の吹き出し配置 */
         .expert.right { top: 40%; right: 0; }
         .expert.right.active { 
             opacity: 1; 
@@ -199,7 +200,7 @@
             border-color: #fff transparent transparent transparent;
         }
 
-        /* 上から出る専門家 */
+        /* 上から出る専門家の吹き出し配置 */
         .expert.top { top: 0; left: 50%; width: 260px; }
         .expert.top.active { 
             opacity: 1; 
@@ -212,7 +213,7 @@
         }
 
 
-        /* --- スマホ内部コンテンツ（gym.txt再現用） --- */
+        /* --- スマホ内部コンテンツ --- */
         .header {
             display: flex; justify-content: space-between; align-items: center;
             padding: 16px; background: #fff; border-bottom: 1px solid #eee;
@@ -252,7 +253,7 @@
         /* 各種セクション */
         .hero {
             position: relative; height: 380px; display: flex; justify-content: flex-end; padding: 0 32px;
-            background: url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=600&q=80') center/cover;
+            background: url('https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?auto=format&fit=crop&w=600&q=80') center/cover;
         }
         .hero::before { content: ""; position: absolute; inset: 0; background: rgba(0,0,0,0.4); }
         .hero-text {
@@ -356,11 +357,11 @@
         <aside class="desktop-sidebar">
             <div class="desktop-logo">
                 <h1>RESET BASE</h1>
-                <p>24h いつでも利用可能</p>
+                <p>すべての人に、専属チームを</p>
             </div>
             <nav class="desktop-nav">
                 <ul>
-                    <li class="active"><a href="#about">当ジムについて</a></li>
+                    <li class="active"><a href="#about">サービスについて</a></li>
                     <li><a href="#feature">特徴</a></li>
                     <li><a href="#plan">料金プラン</a></li>
                     <li><a href="#faq">よくあるご質問</a></li>
@@ -376,24 +377,24 @@
                 
                 <div class="experts-layer">
                     <div class="expert left" id="exp-1">
-                        <img src="https://i.imgur.com/9qzg7jM.png" alt="理学療法士">
+                        <img src="https://i.imgur.com/9qzg7jM.png" alt="整体師">
                         <div class="expert-text">
-                            <span class="expert-role">理学療法士</span>
-                            <span class="expert-msg">一緒に！</span>
+                            <span class="expert-role">整体師</span>
+                            <span class="expert-msg">身体のケアはお任せ！</span>
                         </div>
                     </div>
                     <div class="expert right" id="exp-2">
-                        <img src="https://i.imgur.com/4LIOFht.png" alt="トレーナー">
+                        <img src="https://i.imgur.com/9qzg7jM.png" alt="ボイストレーナー">
                         <div class="expert-text">
-                            <span class="expert-role">コンディショニングチーフ</span>
-                            <span class="expert-msg">大丈夫！</span>
+                            <span class="expert-role">ボイストレーナー</span>
+                            <span class="expert-msg">一緒に声を出そう！</span>
                         </div>
                     </div>
                     <div class="expert top" id="exp-3">
-                        <img src="https://i.imgur.com/4LIOFht.png" alt="管理栄養士">
+                        <img src="https://i.imgur.com/9qzg7jM.png" alt="元プロアスリート">
                         <div class="expert-text">
-                            <span class="expert-role">管理栄養士</span>
-                            <span class="expert-msg">一緒に！</span>
+                            <span class="expert-role">元プロサッカー選手</span>
+                            <span class="expert-msg">全力で応援するよ！</span>
                         </div>
                     </div>
                 </div>
@@ -401,13 +402,13 @@
                 <div class="phone-mockup">
                     <header class="header">
                         <div class="logo-mobile">
-                            FlexGymMen
-                            <span>24h いつでも利用可能</span>
+                            RESET BASE
+                            <span>すべての人に、専属チームを</span>
                         </div>
                         <div class="header-right">
                             <div class="header-btns">
                                 <a href="#" class="circle-btn">会員<br>ページ</a>
-                                <a href="#" class="circle-btn">見学<br>予約</a>
+                                <a href="#" class="circle-btn">登録<br>相談</a>
                             </div>
                             <button class="hamburger-btn" id="js-hamburger">
                                 <span></span><span></span><span></span>
@@ -417,7 +418,7 @@
 
                     <nav class="mobile-menu" id="js-mobile-menu">
                         <ul>
-                            <li><a href="#about">当ジムについて</a></li>
+                            <li><a href="#about">サービスについて</a></li>
                             <li><a href="#feature">特徴</a></li>
                             <li><a href="#plan">料金プラン</a></li>
                             <li><a href="#faq">よくあるご質問</a></li>
@@ -428,8 +429,8 @@
 
                     <section class="hero">
                         <div class="hero-text">
-                            あなたの生活の中に<br>
-                            フレックスに健康を！
+                            すべての人に、<br>
+                            専属チームを。
                         </div>
                     </section>
 
@@ -437,84 +438,85 @@
                         
                         <div class="section-box" id="about">
                             <div class="section-tag">About</div>
-                            <h2 class="section-title">当ジムについて</h2>
-                            <h3 class="section-subtitle">ジムに通ったことがない人も簡単に継続できるユーザー密接型フレックスジム</h3>
+                            <h2 class="section-title">RESET BASEとは</h2>
+                            <h3 class="section-subtitle">各領域のプロフェッショナルが<br>あなたの「専属チーム」に</h3>
                             <p class="text-body">
-                                私たちのジムはただのフィットネススペース以上のものを提供したいと考えています。健康は単なる身体的な状態以上のもの、それは心の健康、社会的なつながり、さらには持続可能な環境に至るまで多面的です。そういった全体的な健康を追求する場として、私たちのジムが皆様に寄り添える存在でありたいと願っています。
+                                健康管理、スキルアップ、そして日々の悩み。一人で抱え込まず、プロフェッショナルをあなたの「専属チーム」として迎え入れませんか？<br><br>
+                                RESET BASEは、独自のポイントシステムを使って、整体師、栄養士、保育士、元プロアスリートなど、多彩な専門家と自由にチームを組める新しいサブスクリプションサービスです。
                             </p>
                         </div>
 
                         <div class="section-box" id="feature">
                             <div class="section-tag">Feature</div>
-                            <h2 class="section-title">特徴</h2>
+                            <h2 class="section-title">3つの特徴</h2>
                             
                             <div class="feature-item">
-                                <img src="https://images.unsplash.com/photo-1549060279-7e168fcee0c2?auto=format&fit=crop&w=400&q=80" class="feature-img" alt="">
+                                <img src="https://images.unsplash.com/photo-1552581234-26160f608093?auto=format&fit=crop&w=400&q=80" class="feature-img" alt="">
                                 <div class="feature-meta">
                                     <span class="feature-num">01</span>
-                                    <h4 class="feature-title">最新のトレーニング器具と施設</h4>
+                                    <h4 class="feature-title">自由自在なチーム編成</h4>
                                 </div>
-                                <p class="text-body">私たちのジムでは、最先端のトレーニング器具を提供しています。これには、高度なウェイトマシン、最新式のトレッドミル、各種のエアロバイクなどが含まれます。また、施設も清潔で広々としており、最高のトレーニング環境を確保しています。</p>
+                                <p class="text-body">整体師、栄養士、元プロサッカー選手、保育士、スポーツトレーナー、ボイストレーナーなど、多様なジャンルのプロフェッショナルが在籍。あなたの目標や課題に合わせて、自由に専門家をアサインできます。</p>
                             </div>
 
                             <div class="feature-item">
-                                <img src="https://images.unsplash.com/photo-1595079676601-f1adf5be5dee?auto=format&fit=crop&w=400&q=80" class="feature-img" alt="">
+                                <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=400&q=80" class="feature-img" alt="">
                                 <div class="feature-meta">
                                     <span class="feature-num">02</span>
-                                    <h4 class="feature-title">オンライン予約システム</h4>
+                                    <h4 class="feature-title">無駄のないポイント制</h4>
                                 </div>
-                                <p class="text-body">私たちの独自のオンライン予約システムを使用すると、いつでもどこでも手軽にクラスやトレーナーの予約ができます。また、現在のクラスの空き状況やトレーナーのスケジュールもリアルタイムで確認できます。</p>
+                                <p class="text-body">毎月付与されるポイントを使って、必要な時に、必要な専門家のサポートを受けられます。ライフスタイルの変化に合わせて、今月は身体のケア、来月はメンタルサポートといった使い方が可能です。</p>
                             </div>
 
                             <div class="feature-item">
-                                <img src="https://images.unsplash.com/photo-1625763689440-74d0f74d604d?auto=format&fit=crop&w=400&q=80" class="feature-img" alt="">
+                                <img src="https://images.unsplash.com/photo-1511556820780-d912e42b4980?auto=format&fit=crop&w=400&q=80" class="feature-img" alt="">
                                 <div class="feature-meta">
                                     <span class="feature-num">03</span>
-                                    <h4 class="feature-title">24時間営業</h4>
+                                    <h4 class="feature-title">応援や物販にも使える</h4>
                                 </div>
-                                <p class="text-body">当ジムは24時間営業していますので、忙しい日常から抜け出して好きな時間にトレーニングができます。夜遅くや早朝に通いたい方にも最適です。</p>
+                                <p class="text-body">保有ポイントはセッションの予約だけでなく、活動を頑張るアスリートや専門家への「応援（ギフティング）」や、プロ厳選のケアグッズなどの「物販」購入にもご利用いただけます。</p>
                             </div>
                         </div>
 
                         <div class="section-box" id="plan">
                             <div class="section-tag">Plan</div>
-                            <h2 class="section-title">料金プラン</h2>
+                            <h2 class="section-title">ポイントプラン</h2>
 
                             <div class="plan-card">
                                 <div class="badge">まずはここから！</div>
                                 <div class="plan-name">ベーシックプラン</div>
-                                <div class="plan-price">¥8,000<span>/月</span></div>
+                                <div class="plan-price">¥10,000<span>/月</span></div>
                                 <div class="plan-details">
-                                    <p>【時間】平日 9:00〜18:00</p>
-                                    <p style="margin-top:4px;">【内容】一般的な器具の利用 / ロッカー利用 / シャワー利用</p>
+                                    <p>【付与ポイント】 11,000 pt</p>
+                                    <p style="margin-top:4px;">【内容】毎月のメンテナンスや、特定の専門家のアドバイスを定期的に受けたい方におすすめの入門プランです。</p>
                                 </div>
                             </div>
 
                             <div class="plan-card popular">
                                 <div class="badge">一番人気！</div>
                                 <div class="plan-name">スタンダードプラン</div>
-                                <div class="plan-price">¥9,800<span>/月</span></div>
+                                <div class="plan-price">¥30,000<span>/月</span></div>
                                 <div class="plan-details">
-                                    <p>【時間】無制限</p>
-                                    <p style="margin-top:4px;">【内容】一般的な器具の利用 / グループクラス参加（週3回まで） / ロッカー・シャワー利用</p>
+                                    <p>【付与ポイント】 35,000 pt</p>
+                                    <p style="margin-top:4px;">【内容】身体のケアに加え、栄養指導やスキルトレーニングなど、複数の専門家でチームを組みたい方に最適です。</p>
                                 </div>
                             </div>
 
                             <div class="plan-card premium">
                                 <div class="badge">贅沢に！</div>
                                 <div class="plan-name">プレミアムプラン</div>
-                                <div class="plan-price">¥15,000<span>/月</span></div>
+                                <div class="plan-price">¥50,000<span>/月</span></div>
                                 <div class="plan-details">
-                                    <p>【時間】無制限</p>
-                                    <p style="margin-top:4px;">【内容】一般的な器具の利用 / グループクラス無制限参加 / 専門のパーソナルトレーナーによる月1回のコンサルテーション / ロッカー・シャワー・サウナ利用</p>
+                                    <p>【付与ポイント】 60,000 pt</p>
+                                    <p style="margin-top:4px;">【内容】万全のサポート体制を築きたい方へ。余ったポイントでグッズ購入や専門家の応援も余裕を持って行えます。</p>
                                 </div>
                             </div>
 
                             <div class="plan-note">
                                 ※全ての価格は税込みです。<br>
-                                ※入会金が¥4,000必要です。<br>
-                                ※プラン変更は月初めにのみ可能です。<br>
-                                ※解約を希望する場合は、最低1ヶ月前にご連絡ください。
+                                ※ポイントの有効期限は付与日から6ヶ月間です。<br>
+                                ※プラン変更は前月の20日までにお手続きください。<br>
+                                ※専門家ごとの消費ポイント数は、マイページよりご確認いただけます。
                             </div>
                         </div>
 
@@ -523,26 +525,27 @@
                             <h2 class="section-title">よくあるご質問</h2>
 
                             <div class="faq-item">
-                                <div class="faq-q">オンライン予約はどうやってキャンセルできますか？</div>
-                                <div class="faq-a">オンライン予約は、当ジムのアプリまたはウェブサイト上で24時間前までにキャンセルすることができます。それ以内のキャンセルにはペナルティが適用されます。</div>
+                                <div class="faq-q">余ったポイントは翌月に繰り越せますか？</div>
+                                <div class="faq-a">はい、繰り越し可能です。ポイントの有効期限は付与された日から6ヶ月間となりますので、ご自身のペースでご利用いただけます。</div>
                             </div>
 
                             <div class="faq-item">
-                                <div class="faq-q">24時間営業は安全ですか？</div>
-                                <div class="faq-a">当ジムは24時間監視カメラとセキュリティスタッフを配置しており、会員の安全を確保しています。</div>
+                                <div class="faq-q">専門家を「応援する」とはどういうことですか？</div>
+                                <div class="faq-a">競技を頑張るアスリートや、素晴らしい知識を提供する専門家に対して、ポイントを使って直接ギフティング（支援）ができる機能です。応援ポイントは彼らの活動資金として還元されます。</div>
                             </div>
 
                             <div class="faq-item">
-                                <div class="faq-q">料金プランを途中で変更することはできますか？</div>
-                                <div class="faq-a">料金プランの変更は月初めにのみ可能です。変更手続きには数日かかる場合がありますので、早めにフロントまでお知らせください。</div>
+                                <div class="faq-q">どんな専門家が在籍していますか？</div>
+                                <div class="faq-a">理学療法士、管理栄養士、元プロスポーツ選手、保育士、ボイストレーナー、スポーツトレーナーなど、身体と心、スキルアップをサポートする多様なプロフェッショナルが在籍しています。</div>
                             </div>
                         </div>
 
                         <div class="section-box" id="access">
                             <div class="section-tag">Access</div>
-                            <h2 class="section-title">アクセス</h2>
-                            <a href="https://goo.gl/maps/LPch2UsXLLVKEz978" target="_blank" class="maps-btn">Google Mapsを開く</a>
-                            <p class="address-text">〒105-0011 東京都港区芝公園４丁目２−８</p>
+                            <h2 class="section-title">実店舗アクセス</h2>
+                            <p class="text-body" style="text-align:center; margin-bottom:12px;">対面でのフィジカルケアやコンディショニングは、浅草の店舗でもご提供しております。</p>
+                            <a href="https://maps.google.com" target="_blank" class="maps-btn">Google Mapsを開く</a>
+                            <p class="address-text">〒111-0032 東京都台東区浅草<br>RESET BASE 実店舗</p>
                         </div>
 
                         <div class="section-box" id="contact">
@@ -571,12 +574,12 @@
                         </div>
 
                         <footer class="phone-footer">
-                            <div class="footer-logo">FlexGymMen</div>
+                            <div class="footer-logo">RESET BASE</div>
                             <div class="footer-links">
                                 <a href="#">プライバシーポリシー</a>
                                 <a href="#">利用規約</a>
                             </div>
-                            <p class="copyright">©︎2023 FlexFitGym All rights reserved.</p>
+                            <p class="copyright">©︎2026 RESET BASE All rights reserved.</p>
                         </footer>
 
                     </div>
@@ -594,21 +597,18 @@
             const phoneMockup = document.querySelector('.phone-mockup');
             const desktopLinks = document.querySelectorAll('.desktop-nav a');
 
-            // ★ PCサイドメニュークリック時のスマホ内部連動スクロール処理 ★
+            // PCサイドメニュークリック時のスマホ内部連動スクロール処理
             desktopLinks.forEach(link => {
                 link.addEventListener('click', (e) => {
                     e.preventDefault();
                     
-                    // PC側メニューのアクティブクラス切り替え
                     document.querySelector('.desktop-nav .active').classList.remove('active');
                     link.parentElement.classList.add('active');
 
-                    // 連動先のスマホ内要素を取得
                     const targetId = link.getAttribute('href').replace('#', '');
                     const targetElement = phoneMockup.querySelector(`#${targetId}`);
                     
                     if (targetElement) {
-                        // スマホ本体の現在のスクロール量を考慮した絶対座標を計算してスクロール
                         const targetTop = targetElement.getBoundingClientRect().top - phoneMockup.getBoundingClientRect().top + phoneMockup.scrollTop;
                         phoneMockup.scrollTo({
                             top: targetTop,
