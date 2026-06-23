@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>RESET BASE | 全体中央配置＆アニメーション</title>
+    <title>RESET BASE | デスクトップ＆スマホプレビュー</title>
     <link href="https://fonts.googleapis.com/css?display=swap&family=Lato:300,400,700|Open+Sans:400,600,700|Noto+Sans+JP:300,400,600,700" rel="stylesheet">
     <style>
         :root {
@@ -133,7 +133,7 @@
             position: absolute;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            z-index: 1; /* スマホの裏側 */
+            z-index: 1;
             pointer-events: none;
         }
         
@@ -146,7 +146,7 @@
             opacity: 0; 
             transform: translate(0, 0) scale(0.5);
             width: 240px; 
-            transform-origin: center 80%; /* 回転軸を足元に */
+            transform-origin: center 80%;
         }
 
         .expert img { 
@@ -156,7 +156,7 @@
             background: transparent;
         }
 
-        /* 吹き出し風テキストのベース形状 */
+        /* 吹き出し風テキスト */
         .expert-text { 
             position: absolute;
             background: #fff;
@@ -168,81 +168,61 @@
             white-space: nowrap;
             z-index: 2;
         }
-        /* 吹き出しのしっぽ（共通設定） */
         .expert-text::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 0;
-            border-style: solid;
+            content: ''; position: absolute; width: 0; height: 0; border-style: solid;
         }
 
         .expert-role { font-size: 10px; color: var(--primary-bg); font-weight: 800; margin-bottom: 4px; }
         .expert-msg { font-size: 15px; font-weight: 700; color: var(--text-dark); }
 
-        /* 左から出る専門家の吹き出し配置 */
+        /* 左から出る専門家 */
         .expert.left { top: 15%; left: 0; }
         .expert.left.active { 
             opacity: 1; 
             transform: translate(-70%, 0) scale(1.1) rotate(-15deg); 
         }
-        .expert.left .expert-text { 
-            top: -20px; 
-            left: -40px; /* 顔を避けて左上に */
-        }
+        .expert.left .expert-text { top: -20px; left: -40px; }
         .expert.left .expert-text::after {
-            bottom: -12px;
-            right: 30px; /* しっぽを右下に向けて顔の方へ */
-            border-width: 15px 15px 0 0;
+            bottom: -12px; right: 30px; border-width: 15px 15px 0 0;
             border-color: #fff transparent transparent transparent;
         }
 
-        /* 右から出る専門家の吹き出し配置 */
+        /* 右から出る専門家 */
         .expert.right { top: 40%; right: 0; }
         .expert.right.active { 
             opacity: 1; 
             transform: translate(70%, 0) scale(1.1) rotate(15deg); 
         }
-        .expert.right .expert-text { 
-            top: -30px; 
-            right: -60px; /* 顔を避けて右上に */
-        }
+        .expert.right .expert-text { top: -30px; right: -60px; }
         .expert.right .expert-text::after {
-            bottom: -12px;
-            left: 30px; /* しっぽを左下に向けて顔の方へ */
-            border-width: 15px 0 0 15px;
+            bottom: -12px; left: 30px; border-width: 15px 0 0 15px;
             border-color: #fff transparent transparent transparent;
         }
 
-        /* 上から出る専門家の吹き出し配置 */
+        /* 上から出る専門家 */
         .expert.top { top: 0; left: 50%; width: 260px; }
         .expert.top.active { 
             opacity: 1; 
             transform: translate(-30%, -60%) scale(1.1) rotate(8deg); 
         }
-        .expert.top .expert-text { 
-            bottom: -80px; 
-            left: -20px; /* 顔を避けて左下に */
-        }
+        .expert.top .expert-text { bottom: -80px; left: -20px; }
         .expert.top .expert-text::after {
-            top: -12px;
-            left: 50px; /* しっぽを上に向けて顔の方へ */
-            border-width: 0 10px 15px 10px;
+            top: -12px; left: 50px; border-width: 0 10px 15px 10px;
             border-color: transparent transparent #fff transparent;
         }
 
 
-        /* --- 内部コンテンツ --- */
+        /* --- スマホ内部コンテンツ（gym.txt再現用） --- */
         .header {
             display: flex; justify-content: space-between; align-items: center;
-            padding: 24px 16px; background: #fff; border-bottom: 1px solid #eee;
+            padding: 16px; background: #fff; border-bottom: 1px solid #eee;
             position: relative; z-index: 50;
         }
-        .logo-mobile { color: var(--primary-bg); font-size: 20px; font-weight: 800; font-family: var(--font-en); font-style: italic; line-height: 1.2;}
+        .logo-mobile { color: var(--primary-bg); font-size: 18px; font-weight: 800; font-family: var(--font-en); font-style: italic; line-height: 1.2;}
         .logo-mobile span { display: block; font-size: 8px; font-style: normal; font-weight: 400; color: #666;}
         
         .header-right { display: flex; align-items: center; gap: 8px; }
-        .header-btns { display: flex; gap: 8px; }
+        .header-btns { display: flex; gap: 6px; }
         .circle-btn {
             width: 44px; height: 44px; border: 1px dashed var(--primary-bg); border-radius: 50%;
             display: flex; justify-content: center; align-items: center;
@@ -256,13 +236,7 @@
             flex-direction: column; justify-content: center; align-items: center; gap: 5px;
             cursor: pointer; z-index: 100; position: relative;
         }
-        .hamburger-btn span {
-            display: block; width: 20px; height: 2px; background: #fff;
-            transition: 0.3s;
-        }
-        .hamburger-btn.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-        .hamburger-btn.open span:nth-child(2) { opacity: 0; }
-        .hamburger-btn.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+        .hamburger-btn span { display: block; width: 20px; height: 2px; background: #fff; transition: 0.3s; }
 
         .mobile-menu {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
@@ -275,6 +249,7 @@
         .mobile-menu li { margin: 24px 0; }
         .mobile-menu a { color: #fff; text-decoration: none; font-size: 20px; font-weight: 700; letter-spacing: 2px; }
 
+        /* 各種セクション */
         .hero {
             position: relative; height: 380px; display: flex; justify-content: flex-end; padding: 0 32px;
             background: url('https://images.unsplash.com/photo-1517836357463-d25dfeac3438?auto=format&fit=crop&w=600&q=80') center/cover;
@@ -286,19 +261,67 @@
             margin-top: 32px; padding: 8px; background: var(--primary-bg); height: fit-content;
         }
 
-        .content-sheet { background: #fff; padding: 40px 24px; min-height: 500px; }
-        .section-tag { color: #adc1f0; font-family: var(--font-en); font-size: 14px; text-align: center; margin-bottom: 4px; }
-        .section-title { color: var(--primary-bg); font-size: 22px; font-weight: 700; text-align: center; margin-bottom: 24px; }
+        .content-sheet { background: #fff; }
         
-        .plan-card { background: #e6efff; border-radius: 8px; padding: 24px; text-align: center; position: relative; margin-top: 40px; }
+        .section-box { padding: 50px 24px; border-bottom: 1px solid #eee; }
+        .section-tag { color: #adc1f0; font-family: var(--font-en); font-size: 14px; text-align: center; margin-bottom: 4px; text-transform: uppercase; font-weight: 600; }
+        .section-title { color: var(--primary-bg); font-size: 22px; font-weight: 700; text-align: center; margin-bottom: 24px; }
+        .section-subtitle { font-size: 16px; font-weight: 700; color: #333; line-height: 1.5; margin-bottom: 16px; text-align: center; }
+        .text-body { font-size: 13px; line-height: 1.8; color: #555; text-align: justify; }
+
+        /* 特徴パーツ */
+        .feature-item { margin-top: 30px; }
+        .feature-img { width: 100%; height: 160px; object-fit: cover; border-radius: 6px; margin-bottom: 12px; }
+        .feature-meta { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+        .feature-num { font-size: 24px; font-weight: 800; color: var(--primary-bg); font-family: var(--font-en); font-style: italic; }
+        .feature-title { font-size: 15px; font-weight: 700; color: #333; }
+
+        /* 料金プランカード */
+        .plan-card { border: 2px solid var(--primary-bg); border-radius: 8px; padding: 24px; text-align: center; position: relative; margin-top: 32px; overflow: hidden; }
+        .plan-card.popular { border-color: #fc557d; }
+        .plan-card.premium { border-color: #333; }
+        
         .badge {
-            position: absolute; top: -20px; right: -10px; background: var(--primary-bg); color: #fff;
-            width: 60px; height: 60px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
-            font-size: 12px; font-weight: 700; line-height: 1.2;
+            position: absolute; top: -5px; right: -15px; background: #FFD740; color: #333;
+            padding: 8px 24px; font-size: 10px; font-weight: 700; transform: rotate(15deg);
         }
-        .plan-name { color: var(--primary-bg); font-size: 18px; font-weight: 700; margin-bottom: 16px; }
-        .plan-price { font-size: 42px; font-weight: 800; color: var(--primary-bg); font-family: var(--font-en); }
-        .plan-price span { font-size: 14px; }
+        .plan-card.popular .badge { background: #fc557d; color: #fff; }
+        .plan-name { font-size: 16px; font-weight: 700; color: #333; margin-bottom: 12px; }
+        .plan-price { font-size: 36px; font-weight: 800; color: var(--primary-bg); font-family: var(--font-en); font-style: italic; }
+        .plan-price span { font-size: 13px; font-style: normal; color: #666; font-weight: 400; }
+        .plan-card.popular .plan-price { color: #fc557d; }
+        .plan-details { font-size: 12px; line-height: 1.6; color: #555; text-align: left; margin-top: 16px; border-top: 1px dashed #eee; padding-top: 12px; }
+        .plan-note { font-size: 11px; color: #777; line-height: 1.6; margin-top: 24px; background: #f9f9f9; padding: 12px; border-radius: 6px; }
+
+        /* FAQアコーディオン */
+        .faq-item { border: 1px solid #eee; border-radius: 6px; margin-top: 12px; overflow: hidden; }
+        .faq-q { background: #f9f9f9; padding: 14px 16px; font-weight: 700; font-size: 13px; color: #333; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
+        .faq-q::after { content: '＋'; font-size: 12px; color: var(--primary-bg); }
+        .faq-item.open .faq-q::after { content: 'ー'; }
+        .faq-a { padding: 14px 16px; font-size: 13px; line-height: 1.6; color: #555; border-top: 1px solid #eee; display: none; background: #fff; }
+        .faq-item.open .faq-a { display: block; }
+
+        /* アクセス */
+        .maps-btn { display: flex; justify-content: center; align-items: center; gap: 8px; background: var(--primary-bg); color: #fff; text-decoration: none; padding: 12px; border-radius: 6px; font-weight: 700; font-size: 14px; margin-top: 16px; }
+        .address-text { font-size: 13px; color: #555; margin-top: 12px; text-align: center; }
+
+        /* フォーム */
+        .contact-form { display: flex; flex-direction: column; gap: 16px; margin-top: 20px; }
+        .form-group { display: flex; flex-direction: column; gap: 6px; }
+        .form-group label { font-size: 13px; font-weight: 700; color: #333; display: flex; align-items: center; gap: 6px; }
+        .req-tag { background: #fc557d; color: #fff; font-size: 9px; padding: 2px 6px; border-radius: 2px; }
+        .form-control { width: 100%; padding: 10px 12px; border: 1px solid #ddd; border-radius: 4px; font-size: 13px; }
+        textarea.form-control { height: 100px; resize: none; }
+        .check-label { display: flex; align-items: flex-start; gap: 8px; font-size: 12px; color: #555; cursor: pointer; line-height: 1.4; }
+        .check-label input { margin-top: 2px; }
+        .submit-btn { background: var(--primary-bg); color: #fff; border: none; padding: 14px; border-radius: 4px; font-weight: 700; font-size: 15px; cursor: pointer; }
+
+        /* スマホ用フッター */
+        .phone-footer { background: #1f5cf0; padding: 32px 16px; text-align: center; color: #fff; }
+        .footer-logo { font-size: 20px; font-weight: 800; font-style: italic; font-family: var(--font-en); margin-bottom: 12px; }
+        .footer-links { display: flex; justify-content: center; gap: 12px; font-size: 11px; margin-bottom: 16px; }
+        .footer-links a { color: #fff; text-decoration: underline; }
+        .copyright { font-size: 10px; opacity: 0.7; }
 
         /* --- スマホ用レスポンシブ (768px以下) --- */
         @media (max-width: 768px) {
@@ -307,13 +330,7 @@
             .desktop-sidebar { display: none; }
             
             .preview-area { width: 100%; padding: 0; align-items: flex-start; height: 100vh;}
-            
-            .phone-container-wrapper {
-                position: relative;
-                top: 0; left: 0;
-                width: 100%; height: 100vh;
-                transform: none;
-            }
+            .phone-container-wrapper { position: relative; top: 0; left: 0; width: 100%; height: 100vh; transform: none; }
             .phone-mockup { border: none; border-radius: 0; box-shadow: none; }
             .experts-layer { position: fixed; width: 100%; height: 100vh; }
 
@@ -359,14 +376,14 @@
                 
                 <div class="experts-layer">
                     <div class="expert left" id="exp-1">
-                        <img src="https://i.imgur.com/Mr20aqL.png" alt="理学療法士">
+                        <img src="https://i.imgur.com/9qzg7jM.png" alt="理学療法士">
                         <div class="expert-text">
                             <span class="expert-role">理学療法士</span>
                             <span class="expert-msg">一緒に！</span>
                         </div>
                     </div>
                     <div class="expert right" id="exp-2">
-                        <img src="https://i.imgur.com/Q4oZWxI.png" alt="トレーナー">
+                        <img src="https://i.imgur.com/4LIOFht.png" alt="トレーナー">
                         <div class="expert-text">
                             <span class="expert-role">コンディショニングチーフ</span>
                             <span class="expert-msg">大丈夫！</span>
@@ -376,7 +393,7 @@
                         <img src="https://i.imgur.com/4LIOFht.png" alt="管理栄養士">
                         <div class="expert-text">
                             <span class="expert-role">管理栄養士</span>
-                            <span class="expert-msg">一緒に頑張りましょう！</span>
+                            <span class="expert-msg">一緒に！</span>
                         </div>
                     </div>
                 </div>
@@ -384,7 +401,7 @@
                 <div class="phone-mockup">
                     <header class="header">
                         <div class="logo-mobile">
-                            RESET BASE
+                            FlexGymMen
                             <span>24h いつでも利用可能</span>
                         </div>
                         <div class="header-right">
@@ -406,9 +423,6 @@
                             <li><a href="#faq">よくあるご質問</a></li>
                             <li><a href="#access">アクセス</a></li>
                             <li><a href="#contact">お問い合わせ</a></li>
-                            <li style="margin-top: 40px;">
-                                <a href="#" style="font-size: 14px; border: 1px solid #fff; padding: 10px 20px; border-radius: 20px;">会員ページ / 見学予約</a>
-                            </li>
                         </ul>
                     </nav>
 
@@ -420,25 +434,151 @@
                     </section>
 
                     <div class="content-sheet">
-                        <div class="section-tag">Plan</div>
-                        <h2 class="section-title">ジム使い放題プラン</h2>
-
-                        <div class="plan-card">
-                            <div class="badge">期間<br>限定</div>
-                            <div class="plan-name">Standard Plan</div>
-                            <div class="plan-price"><span>月額</span> 9,800 <span>円(税込)</span></div>
-                            <p style="font-size: 10px; color: var(--primary-bg); margin-top: 16px; text-align: left;">
-                                通常 月額12,000円(税込)のところ3/31限定で上記価格になります。別途入会金が4,000円(税込)かかります。
+                        
+                        <div class="section-box" id="about">
+                            <div class="section-tag">About</div>
+                            <h2 class="section-title">当ジムについて</h2>
+                            <h3 class="section-subtitle">ジムに通ったことがない人も簡単に継続できるユーザー密接型フレックスジム</h3>
+                            <p class="text-body">
+                                私たちのジムはただのフィットネススペース以上のものを提供したいと考えています。健康は単なる身体的な状態以上のもの、それは心の健康、社会的なつながり、さらには持続可能な環境に至るまで多面的です。そういった全体的な健康を追求する場として、私たちのジムが皆様に寄り添える存在でありたいと願っています。
                             </p>
                         </div>
 
-                        <div class="plan-card" style="background: #fff; border: 2px solid var(--primary-bg);">
-                            <div class="plan-name">Premium Course</div>
-                            <div class="plan-price"><span>1回</span> 18,000 <span>円(90分)</span></div>
-                            <p style="font-size: 11px; color: #333; margin-top: 16px; text-align: left;">
-                                理学療法・コンディショニングアプローチを用いた完全オーダーメイドのセルフケア処方。
-                            </p>
+                        <div class="section-box" id="feature">
+                            <div class="section-tag">Feature</div>
+                            <h2 class="section-title">特徴</h2>
+                            
+                            <div class="feature-item">
+                                <img src="https://images.unsplash.com/photo-1549060279-7e168fcee0c2?auto=format&fit=crop&w=400&q=80" class="feature-img" alt="">
+                                <div class="feature-meta">
+                                    <span class="feature-num">01</span>
+                                    <h4 class="feature-title">最新のトレーニング器具と施設</h4>
+                                </div>
+                                <p class="text-body">私たちのジムでは、最先端のトレーニング器具を提供しています。これには、高度なウェイトマシン、最新式のトレッドミル、各種のエアロバイクなどが含まれます。また、施設も清潔で広々としており、最高のトレーニング環境を確保しています。</p>
+                            </div>
+
+                            <div class="feature-item">
+                                <img src="https://images.unsplash.com/photo-1595079676601-f1adf5be5dee?auto=format&fit=crop&w=400&q=80" class="feature-img" alt="">
+                                <div class="feature-meta">
+                                    <span class="feature-num">02</span>
+                                    <h4 class="feature-title">オンライン予約システム</h4>
+                                </div>
+                                <p class="text-body">私たちの独自のオンライン予約システムを使用すると、いつでもどこでも手軽にクラスやトレーナーの予約ができます。また、現在のクラスの空き状況やトレーナーのスケジュールもリアルタイムで確認できます。</p>
+                            </div>
+
+                            <div class="feature-item">
+                                <img src="https://images.unsplash.com/photo-1625763689440-74d0f74d604d?auto=format&fit=crop&w=400&q=80" class="feature-img" alt="">
+                                <div class="feature-meta">
+                                    <span class="feature-num">03</span>
+                                    <h4 class="feature-title">24時間営業</h4>
+                                </div>
+                                <p class="text-body">当ジムは24時間営業していますので、忙しい日常から抜け出して好きな時間にトレーニングができます。夜遅くや早朝に通いたい方にも最適です。</p>
+                            </div>
                         </div>
+
+                        <div class="section-box" id="plan">
+                            <div class="section-tag">Plan</div>
+                            <h2 class="section-title">料金プラン</h2>
+
+                            <div class="plan-card">
+                                <div class="badge">まずはここから！</div>
+                                <div class="plan-name">ベーシックプラン</div>
+                                <div class="plan-price">¥8,000<span>/月</span></div>
+                                <div class="plan-details">
+                                    <p>【時間】平日 9:00〜18:00</p>
+                                    <p style="margin-top:4px;">【内容】一般的な器具の利用 / ロッカー利用 / シャワー利用</p>
+                                </div>
+                            </div>
+
+                            <div class="plan-card popular">
+                                <div class="badge">一番人気！</div>
+                                <div class="plan-name">スタンダードプラン</div>
+                                <div class="plan-price">¥9,800<span>/月</span></div>
+                                <div class="plan-details">
+                                    <p>【時間】無制限</p>
+                                    <p style="margin-top:4px;">【内容】一般的な器具の利用 / グループクラス参加（週3回まで） / ロッカー・シャワー利用</p>
+                                </div>
+                            </div>
+
+                            <div class="plan-card premium">
+                                <div class="badge">贅沢に！</div>
+                                <div class="plan-name">プレミアムプラン</div>
+                                <div class="plan-price">¥15,000<span>/月</span></div>
+                                <div class="plan-details">
+                                    <p>【時間】無制限</p>
+                                    <p style="margin-top:4px;">【内容】一般的な器具の利用 / グループクラス無制限参加 / 専門のパーソナルトレーナーによる月1回のコンサルテーション / ロッカー・シャワー・サウナ利用</p>
+                                </div>
+                            </div>
+
+                            <div class="plan-note">
+                                ※全ての価格は税込みです。<br>
+                                ※入会金が¥4,000必要です。<br>
+                                ※プラン変更は月初めにのみ可能です。<br>
+                                ※解約を希望する場合は、最低1ヶ月前にご連絡ください。
+                            </div>
+                        </div>
+
+                        <div class="section-box" id="faq">
+                            <div class="section-tag">Faq</div>
+                            <h2 class="section-title">よくあるご質問</h2>
+
+                            <div class="faq-item">
+                                <div class="faq-q">オンライン予約はどうやってキャンセルできますか？</div>
+                                <div class="faq-a">オンライン予約は、当ジムのアプリまたはウェブサイト上で24時間前までにキャンセルすることができます。それ以内のキャンセルにはペナルティが適用されます。</div>
+                            </div>
+
+                            <div class="faq-item">
+                                <div class="faq-q">24時間営業は安全ですか？</div>
+                                <div class="faq-a">当ジムは24時間監視カメラとセキュリティスタッフを配置しており、会員の安全を確保しています。</div>
+                            </div>
+
+                            <div class="faq-item">
+                                <div class="faq-q">料金プランを途中で変更することはできますか？</div>
+                                <div class="faq-a">料金プランの変更は月初めにのみ可能です。変更手続きには数日かかる場合がありますので、早めにフロントまでお知らせください。</div>
+                            </div>
+                        </div>
+
+                        <div class="section-box" id="access">
+                            <div class="section-tag">Access</div>
+                            <h2 class="section-title">アクセス</h2>
+                            <a href="https://goo.gl/maps/LPch2UsXLLVKEz978" target="_blank" class="maps-btn">Google Mapsを開く</a>
+                            <p class="address-text">〒105-0011 東京都港区芝公園４丁目２−８</p>
+                        </div>
+
+                        <div class="section-box" id="contact">
+                            <div class="section-tag">Contact</div>
+                            <h2 class="section-title">お問い合わせ</h2>
+                            
+                            <form class="contact-form" onsubmit="return false;">
+                                <div class="form-group">
+                                    <label>お名前<span class="req-tag">必須</span></label>
+                                    <input type="text" class="form-control" required autocomplete="off">
+                                </div>
+                                <div class="form-group">
+                                    <label>メールアドレス<span class="req-tag">必須</span></label>
+                                    <input type="email" class="form-control" required autocomplete="off">
+                                </div>
+                                <div class="form-group">
+                                    <label>お問い合わせ内容</label>
+                                    <textarea class="form-control"></textarea>
+                                </div>
+                                <label class="check-label">
+                                    <input type="checkbox" required>
+                                    <span>プライバシーポリシーについて同意する</span>
+                                </label>
+                                <button type="submit" class="submit-btn">送信する</button>
+                            </form>
+                        </div>
+
+                        <footer class="phone-footer">
+                            <div class="footer-logo">FlexGymMen</div>
+                            <div class="footer-links">
+                                <a href="#">プライバシーポリシー</a>
+                                <a href="#">利用規約</a>
+                            </div>
+                            <p class="copyright">©︎2023 FlexFitGym All rights reserved.</p>
+                        </footer>
+
                     </div>
                 </div>
 
@@ -451,22 +591,56 @@
             const hamburgerBtn = document.getElementById('js-hamburger');
             const mobileMenu = document.getElementById('js-mobile-menu');
             const menuLinks = mobileMenu.querySelectorAll('a');
+            const phoneMockup = document.querySelector('.phone-mockup');
+            const desktopLinks = document.querySelectorAll('.desktop-nav a');
 
-            const toggleMenu = () => {
-                hamburgerBtn.classList.toggle('open');
-                mobileMenu.classList.toggle('open');
-            };
+            // ★ PCサイドメニュークリック時のスマホ内部連動スクロール処理 ★
+            desktopLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    
+                    // PC側メニューのアクティブクラス切り替え
+                    document.querySelector('.desktop-nav .active').classList.remove('active');
+                    link.parentElement.classList.add('active');
 
-            hamburgerBtn.addEventListener('click', toggleMenu);
-
-            menuLinks.forEach(link => {
-                link.addEventListener('click', () => {
-                    if (mobileMenu.classList.contains('open')) {
-                        toggleMenu();
+                    // 連動先のスマホ内要素を取得
+                    const targetId = link.getAttribute('href').replace('#', '');
+                    const targetElement = phoneMockup.querySelector(`#${targetId}`);
+                    
+                    if (targetElement) {
+                        // スマホ本体の現在のスクロール量を考慮した絶対座標を計算してスクロール
+                        const targetTop = targetElement.getBoundingClientRect().top - phoneMockup.getBoundingClientRect().top + phoneMockup.scrollTop;
+                        phoneMockup.scrollTo({
+                            top: targetTop,
+                            behavior: 'smooth'
+                        });
                     }
                 });
             });
 
+            // FAQのアコーディオン開閉
+            const faqItems = document.querySelectorAll('.faq-item');
+            faqItems.forEach(item => {
+                const q = item.querySelector('.faq-q');
+                q.addEventListener('click', () => {
+                    item.classList.toggle('open');
+                });
+            });
+
+            // ハンバーガーメニューの開閉
+            const toggleMenu = () => {
+                hamburgerBtn.classList.toggle('open');
+                mobileMenu.classList.toggle('open');
+            };
+            if(hamburgerBtn) hamburgerBtn.addEventListener('click', toggleMenu);
+
+            menuLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (mobileMenu.classList.contains('open')) toggleMenu();
+                });
+            });
+
+            // 専門家アニメーション
             const experts = [
                 document.getElementById('exp-1'),
                 document.getElementById('exp-2'),
