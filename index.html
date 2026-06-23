@@ -61,7 +61,7 @@
             display: flex;
             width: 100%;
             height: 100%;
-            position: relative; /* スマホの中央配置の基準はここ（100%の幅） */
+            position: relative; 
             z-index: 10;
         }
 
@@ -73,7 +73,7 @@
             flex-direction: column;
             justify-content: center;
             padding-left: 5vw;
-            z-index: 20;
+            z-index: 20; 
         }
         .desktop-logo { margin-bottom: 60px; color: #fff; }
         .desktop-logo h1 { font-family: var(--font-en); font-size: 42px; font-style: italic; font-weight: 800; line-height: 1; }
@@ -99,17 +99,17 @@
         /* --- 右側：プレビュー領域 (70%) --- */
         .preview-area {
             width: 70%;
-            /* ここにあった position: relative; を削除したことで、スマホが画面全体の中央になります！ */
+            position: relative;
         }
 
-        /* ★スマホ本体コンテナ（画面全体の100%中央に絶対配置） ★ */
+        /* スマホ本体コンテナ（画面全体の100%中央に絶対配置） */
         .phone-container-wrapper {
             position: absolute;
             top: 50%;
-            left: 50%; /* layout-wrapper(画面全体100%)の中心 */
+            left: 50%;
             width: var(--phone-width);
             height: var(--phone-height);
-            transform: translate(-50%, -50%); /* 自身の幅の半分戻して真ん中に */
+            transform: translate(-50%, -50%); 
             z-index: 10;
         }
 
@@ -129,36 +129,67 @@
         }
         .phone-mockup::-webkit-scrollbar { width: 0; }
 
-        /* --- 専門家アニメーション（スマホ枠を基準に固定） --- */
+        /* --- 専門家アニメーション（大きくくり抜かれた画像を飛び出させる） --- */
         .experts-layer {
             position: absolute;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            z-index: 1;
+            z-index: 1; /* スマホの裏側 */
             pointer-events: none;
         }
+        
         .expert {
-            position: absolute; display: flex; align-items: center;
+            position: absolute;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.4s ease;
-            opacity: 0; background: #fff; padding: 12px 20px 12px 12px;
-            border-radius: 60px; box-shadow: 0 10px 25px rgba(0,0,0,0.2); gap: 12px;
-            transform: translate(0, 0) scale(0.8);
+            opacity: 0; 
+            /* 初期位置はスマホの真裏で少し小さく */
+            transform: translate(0, 0) scale(0.5);
+            /* 画像を大きく見せるための幅設定 */
+            width: 240px; 
         }
-        .expert img { width: 70px; height: 70px; border-radius: 50%; background: #f0f0f0; object-fit: contain; }
-        .expert-text { display: flex; flex-direction: column; }
-        .expert-role { font-size: 10px; color: var(--primary-bg); font-weight: 700; margin-bottom: 4px; }
-        .expert-msg { font-size: 14px; font-weight: 700; color: var(--text-dark); white-space: nowrap; }
 
-        .expert.left { top: 20%; left: 0; flex-direction: row-reverse; padding: 12px 12px 12px 20px;}
-        .expert.left.active { opacity: 1; transform: translate(-85%, 0) scale(1); }
-        .expert.left .expert-text { align-items: flex-end; }
+        .expert img { 
+            width: 100%; 
+            height: auto; 
+            object-fit: contain;
+            /* 背景や枠線を無くし、画像そのものの形を活かす */
+            background: transparent;
+            border-radius: 0;
+        }
 
-        .expert.right { top: 50%; right: 0; }
-        .expert.right.active { opacity: 1; transform: translate(85%, 0) scale(1); }
+        /* 文字テキストを別途重ねる（吹き出し風） */
+        .expert-text { 
+            position: absolute;
+            background: #fff;
+            padding: 10px 16px;
+            border-radius: 24px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            display: flex; 
+            flex-direction: column; 
+            white-space: nowrap;
+            z-index: 2;
+        }
+        .expert-role { font-size: 10px; color: var(--primary-bg); font-weight: 700; margin-bottom: 2px; }
+        .expert-msg { font-size: 14px; font-weight: 700; color: var(--text-dark); }
 
-        .expert.top { top: 0; left: 50%; flex-direction: column; padding: 16px 24px 12px 24px; border-radius: 30px;}
+        /* 左から出る */
+        .expert.left { top: 10%; left: 0; }
+        .expert.left.active { opacity: 1; transform: translate(-80%, 0) scale(1); }
+        .expert.left .expert-text { top: 10px; left: -20px; } /* 画像の左上に重ねる */
+
+        /* 右から出る */
+        .expert.right { top: 40%; right: 0; }
+        .expert.right.active { opacity: 1; transform: translate(80%, 0) scale(1); }
+        .expert.right .expert-text { top: -10px; right: -20px; } /* 画像の右上に重ねる */
+
+        /* 上から出る */
+        .expert.top { top: 0; left: 50%; width: 260px; }
         .expert.top.active { opacity: 1; transform: translate(-50%, -60%) scale(1); }
-        .expert.top .expert-text { align-items: center; margin-top: 8px;}
+        .expert.top .expert-text { bottom: -20px; left: 50%; transform: translateX(-50%); } /* 画像の下に重ねる */
+
 
         /* --- 内部コンテンツ --- */
         .header {
@@ -236,7 +267,6 @@
             
             .preview-area { width: 100%; padding: 0; align-items: flex-start; height: 100vh;}
             
-            /* スマホ時は絶対配置を解除して全画面フィット */
             .phone-container-wrapper {
                 position: relative;
                 top: 0; left: 0;
@@ -249,9 +279,10 @@
             .header-btns { display: none; }
             .hamburger-btn { display: flex; }
 
-            .expert.left.active { transform: translate(-50%, 0) scale(0.9); }
-            .expert.right.active { transform: translate(50%, 0) scale(0.9); }
-            .expert.top.active { transform: translate(-50%, -30%) scale(0.9); }
+            /* スマホ時の飛び出し具合の調整 */
+            .expert.left.active { transform: translate(-45%, 0) scale(0.8); }
+            .expert.right.active { transform: translate(45%, 0) scale(0.8); }
+            .expert.top.active { transform: translate(-50%, -30%) scale(0.8); }
         }
     </style>
 </head>
@@ -288,21 +319,21 @@
                 
                 <div class="experts-layer">
                     <div class="expert left" id="exp-1">
-                        <img src="https://i.imgur.com/9qzg7jM.png" alt="元プロサッカー選手">
+                        <img src="https://i.imgur.com/9qzg7jM.png" alt="理学療法士">
                         <div class="expert-text">
-                            <span class="expert-role">元プロサッカー選手</span>
+                            <span class="expert-role">理学療法士</span>
                             <span class="expert-msg">動作分析はお任せを！</span>
                         </div>
                     </div>
                     <div class="expert right" id="exp-2">
-                        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Yoshimasa&backgroundColor=transparent" alt="トレーナー">
+                        <img src="https://i.imgur.com/9qzg7jM.png" alt="トレーナー">
                         <div class="expert-text">
                             <span class="expert-role">コンディショニングチーフ</span>
                             <span class="expert-msg">絶対に妥協しません！</span>
                         </div>
                     </div>
                     <div class="expert top" id="exp-3">
-                        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Misaki&backgroundColor=transparent" alt="管理栄養士">
+                        <img src="https://i.imgur.com/9qzg7jM.png" alt="管理栄養士">
                         <div class="expert-text">
                             <span class="expert-role">管理栄養士</span>
                             <span class="expert-msg">内側からもサポート！</span>
