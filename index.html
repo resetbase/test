@@ -147,20 +147,20 @@
             opacity: 0; 
             /* 初期位置はスマホの真裏で少し小さく */
             transform: translate(0, 0) scale(0.5);
-            /* 画像を大きく見せるための幅設定 */
             width: 240px; 
+            /* ★ポイント: 回転の軸を下寄りにすることで、足元が外にはみ出さず綺麗に隠れます */
+            transform-origin: center 80%;
         }
 
         .expert img { 
             width: 100%; 
             height: auto; 
             object-fit: contain;
-            /* 背景や枠線を無くし、画像そのものの形を活かす */
             background: transparent;
             border-radius: 0;
         }
 
-        /* 文字テキストを別途重ねる（吹き出し風） */
+        /* 吹き出し風テキスト */
         .expert-text { 
             position: absolute;
             background: #fff;
@@ -175,32 +175,32 @@
         .expert-role { font-size: 10px; color: var(--primary-bg); font-weight: 700; margin-bottom: 2px; }
         .expert-msg { font-size: 14px; font-weight: 700; color: var(--text-dark); }
 
-        /* 左から出る (角度をつけて飛び出させる) */
-        .expert.left { top: 10%; left: 0; }
+        /* 左から出る */
+        .expert.left { top: 15%; left: 0; }
         .expert.left.active { 
             opacity: 1; 
-            /* 角度をつけて飛び出させる (時計回り) */
-            transform: translate(-80%, 0) scale(1.1) rotate(10deg); 
+            /* ★反時計回り(-15deg)にして、下半身をスマホの裏に隠す */
+            transform: translate(-70%, 0) scale(1.1) rotate(-15deg); 
         }
-        .expert.left .expert-text { top: 10px; left: -20px; } /* 画像の左上に重ねる */
+        .expert.left .expert-text { top: 0; left: -10px; }
 
-        /* 右から出る (角度をつけて飛び出させる) */
+        /* 右から出る */
         .expert.right { top: 40%; right: 0; }
         .expert.right.active { 
             opacity: 1; 
-            /* 角度をつけて飛び出させる (反時計回り) */
-            transform: translate(80%, 0) scale(1.1) rotate(-10deg); 
+            /* ★時計回り(15deg)にして、下半身をスマホの裏に隠す */
+            transform: translate(70%, 0) scale(1.1) rotate(15deg); 
         }
-        .expert.right .expert-text { top: -10px; right: -20px; } /* 画像の右上に重ねる */
+        .expert.right .expert-text { top: -20px; right: -10px; }
 
-        /* 上から出る (角度をつけて飛び出させる) */
+        /* 上から出る */
         .expert.top { top: 0; left: 50%; width: 260px; }
         .expert.top.active { 
             opacity: 1; 
-            /* 斜めに飛び出させる (反時計回り) */
-            transform: translate(-50%, -60%) scale(1.1) rotate(-15deg); 
+            /* 斜めに傾けて飛び出させる */
+            transform: translate(-30%, -60%) scale(1.1) rotate(8deg); 
         }
-        .expert.top .expert-text { bottom: -20px; left: 50%; transform: translateX(-50%); } /* 画像の下に重ねる */
+        .expert.top .expert-text { bottom: -10px; left: 60%; transform: translateX(-50%); }
 
 
         /* --- 内部コンテンツ --- */
@@ -291,10 +291,10 @@
             .header-btns { display: none; }
             .hamburger-btn { display: flex; }
 
-            /* スマホ時の飛び出し具合の調整 (角度をつけて飛び出させる) */
-            .expert.left.active { transform: translate(-45%, 0) scale(0.9) rotate(8deg); }
-            .expert.right.active { transform: translate(45%, 0) scale(0.9) rotate(-8deg); }
-            .expert.top.active { transform: translate(-50%, -30%) scale(0.9) rotate(-10deg); }
+            /* スマホ時の飛び出し具合の調整 */
+            .expert.left.active { transform: translate(-45%, 0) scale(0.85) rotate(-12deg); }
+            .expert.right.active { transform: translate(45%, 0) scale(0.85) rotate(12deg); }
+            .expert.top.active { transform: translate(-30%, -30%) scale(0.85) rotate(8deg); }
         }
     </style>
 </head>
@@ -400,7 +400,7 @@
                             <div class="plan-name">Standard Plan</div>
                             <div class="plan-price"><span>月額</span> 9,800 <span>円(税込)</span></div>
                             <p style="font-size: 10px; color: var(--primary-bg); margin-top: 16px; text-align: left;">
-                                通常 月額12,000円(税込)のところ3/31限定で上記価格になります. 別途入会金が4,000円(税込)かかります。
+                                通常 月額12,000円(税込)のところ3/31限定で上記価格になります。別途入会金が4,000円(税込)かかります。
                             </p>
                         </div>
 
