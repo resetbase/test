@@ -27,24 +27,21 @@
             position: relative;
         }
 
-        /* --- 背景の流れる透かし文字（マーキー） --- */
+        /* --- 背景の流れる透かし文字 --- */
         .bg-watermark {
             position: absolute;
-            bottom: -20px; /* 位置の微調整 */
+            bottom: -20px;
             left: 0;
             width: 100%;
             overflow: hidden;
             z-index: 0;
             pointer-events: none;
         }
-
         .marquee-content {
             display: flex;
             width: fit-content;
-            /* 30秒かけて半分の位置まで移動し、ループさせる */
             animation: marquee 30s linear infinite;
         }
-
         .marquee-content span {
             font-size: clamp(80px, 12vw, 150px);
             font-weight: 800;
@@ -54,7 +51,6 @@
             white-space: nowrap;
             padding-right: 20px;
         }
-
         @keyframes marquee {
             0% { transform: translateX(0); }
             100% { transform: translateX(-50%); }
@@ -69,20 +65,18 @@
             z-index: 10;
         }
 
-        /* --- 左側：PCナビゲーション --- */
+        /* --- 左側：PCナビゲーション (30%) --- */
         .desktop-sidebar {
-            width: 30%; /* 画面の30%をサイドバーに割り当て */
+            width: 30%;
             min-width: 250px;
             display: flex;
             flex-direction: column;
             justify-content: center;
             padding-left: 5vw;
         }
-
         .desktop-logo { margin-bottom: 60px; color: #fff; }
         .desktop-logo h1 { font-family: var(--font-en); font-size: 42px; font-style: italic; font-weight: 800; line-height: 1; }
         .desktop-logo p { font-size: 12px; margin-top: 4px; letter-spacing: 2px; padding-left: 4px; }
-
         .desktop-nav ul { list-style: none; }
         .desktop-nav li { margin-bottom: 24px; }
         .desktop-nav a {
@@ -101,21 +95,30 @@
             height: 60%; width: 3px; background: #fff;
         }
 
-        /* --- 右側：スマホエリア --- */
+        /* --- 右側：プレビュー領域 (70%) --- */
         .preview-area {
-            width: 70%; /* 画面の70%をプレビュー領域に割り当て */
+            width: 70%;
             display: flex;
-            justify-content: center; /* 領域のド真ん中に配置 */
+            justify-content: flex-start; /* ★中央ではなく左寄せに変更 */
             align-items: center;
             position: relative;
+        }
+
+        /* スマホ本体コンテナ（専門家レイヤーとスマホ本体をセットで動かす枠） */
+        .phone-container-wrapper {
+            position: relative;
+            width: var(--phone-width);
+            height: var(--phone-height);
+            /* ★ここを調整することで、画面全体（100%）の中央に綺麗に収まります */
+            margin-left: 4vw; 
         }
 
         /* スマホ本体モックアップ */
         .phone-mockup {
             position: relative;
             z-index: 10;
-            width: var(--phone-width);
-            height: var(--phone-height);
+            width: 100%;
+            height: 100%;
             background: var(--primary-bg);
             border: 12px solid #fff;
             border-radius: 40px;
@@ -126,13 +129,12 @@
         }
         .phone-mockup::-webkit-scrollbar { width: 0; }
 
-        /* --- 専門家アニメーション --- */
+        /* --- 専門家アニメーション（スマホ枠を基準に固定） --- */
         .experts-layer {
             position: absolute;
-            top: 50%; left: 50%;
-            width: var(--phone-width); height: var(--phone-height);
-            transform: translate(-50%, -50%);
-            z-index: 1; /* スマホの裏側 */
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            z-index: 1;
             pointer-events: none;
         }
         .expert {
@@ -157,7 +159,6 @@
         .expert.top { top: 0; left: 50%; flex-direction: column; padding: 16px 24px 12px 24px; border-radius: 30px;}
         .expert.top.active { opacity: 1; transform: translate(-50%, -60%) scale(1); }
         .expert.top .expert-text { align-items: center; margin-top: 8px;}
-
 
         /* --- 内部コンテンツ --- */
         .header {
@@ -227,31 +228,19 @@
         .plan-price { font-size: 42px; font-weight: 800; color: var(--primary-bg); font-family: var(--font-en); }
         .plan-price span { font-size: 14px; }
 
-
-        /* =========================================
-           スマホ用レスポンシブ (768px以下)
-           ========================================= */
+        /* --- スマホ用レスポンシブ (768px以下) --- */
         @media (max-width: 768px) {
             body { overflow: auto; }
             .layout-wrapper { display: block; }
-            
-            /* PC用サイドバーは非表示 */
             .desktop-sidebar { display: none; }
             
-            /* スマホモックアップを全画面化 */
             .preview-area { width: 100%; padding: 0; align-items: flex-start; height: 100vh;}
-            .phone-mockup {
-                width: 100%; height: 100vh;
-                border: none; border-radius: 0; box-shadow: none;
-            }
+            
+            /* スマホ時は位置調整用の枠を全画面に */
+            .phone-container-wrapper { width: 100%; height: 100vh; margin-left: 0; }
+            .phone-mockup { border: none; border-radius: 0; box-shadow: none; }
+            .experts-layer { position: fixed; width: 100%; height: 100vh; }
 
-            /* スマホの裏で動くアニメーションも幅を合わせる */
-            .experts-layer {
-                width: 100%; height: 100vh;
-                position: fixed; /* スクロールしても追従 */
-            }
-
-            /* ヘッダーのボタン切り替え */
             .header-btns { display: none; }
             .hamburger-btn { display: flex; }
 
@@ -290,96 +279,99 @@
 
         <main class="preview-area">
             
-            <div class="experts-layer">
-                <div class="expert left" id="exp-1">
-                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Kenji&backgroundColor=transparent" alt="理学療法士">
-                    <div class="expert-text">
-                        <span class="expert-role">理学療法士</span>
-                        <span class="expert-msg">動作分析はお任せを！</span>
-                    </div>
-                </div>
-                <div class="expert right" id="exp-2">
-                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Yoshimasa&backgroundColor=transparent" alt="トレーナー">
-                    <div class="expert-text">
-                        <span class="expert-role">コンディショニングチーフ</span>
-                        <span class="expert-msg">絶対に妥協しません！</span>
-                    </div>
-                </div>
-                <div class="expert top" id="exp-3">
-                    <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Misaki&backgroundColor=transparent" alt="管理栄養士">
-                    <div class="expert-text">
-                        <span class="expert-role">管理栄養士</span>
-                        <span class="expert-msg">内側からもサポート！</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="phone-mockup">
-                <header class="header">
-                    <div class="logo-mobile">
-                        RESET BASE
-                        <span>24h いつでも利用可能</span>
-                    </div>
-                    <div class="header-right">
-                        <div class="header-btns">
-                            <a href="#" class="circle-btn">会員<br>ページ</a>
-                            <a href="#" class="circle-btn">見学<br>予約</a>
+            <div class="phone-container-wrapper">
+                
+                <div class="experts-layer">
+                    <div class="expert left" id="exp-1">
+                        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Kenji&backgroundColor=transparent" alt="理学療法士">
+                        <div class="expert-text">
+                            <span class="expert-role">理学療法士</span>
+                            <span class="expert-msg">動作分析はお任せを！</span>
                         </div>
-                        <button class="hamburger-btn" id="js-hamburger">
-                            <span></span><span></span><span></span>
-                        </button>
                     </div>
-                </header>
-
-                <nav class="mobile-menu" id="js-mobile-menu">
-                    <ul>
-                        <li><a href="#about">当ジムについて</a></li>
-                        <li><a href="#feature">特徴</a></li>
-                        <li><a href="#plan">料金プラン</a></li>
-                        <li><a href="#faq">よくあるご質問</a></li>
-                        <li><a href="#access">アクセス</a></li>
-                        <li><a href="#contact">お問い合わせ</a></li>
-                        <li style="margin-top: 40px;">
-                            <a href="#" style="font-size: 14px; border: 1px solid #fff; padding: 10px 20px; border-radius: 20px;">会員ページ / 見学予約</a>
-                        </li>
-                    </ul>
-                </nav>
-
-                <section class="hero">
-                    <div class="hero-text">
-                        あなたの生活の中に<br>
-                        フレックスに健康を！
+                    <div class="expert right" id="exp-2">
+                        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Yoshimasa&backgroundColor=transparent" alt="トレーナー">
+                        <div class="expert-text">
+                            <span class="expert-role">コンディショニングチーフ</span>
+                            <span class="expert-msg">絶対に妥協しません！</span>
+                        </div>
                     </div>
-                </section>
-
-                <div class="content-sheet">
-                    <div class="section-tag">Plan</div>
-                    <h2 class="section-title">ジム使い放題プラン</h2>
-
-                    <div class="plan-card">
-                        <div class="badge">期間<br>限定</div>
-                        <div class="plan-name">Standard Plan</div>
-                        <div class="plan-price"><span>月額</span> 9,800 <span>円(税込)</span></div>
-                        <p style="font-size: 10px; color: var(--primary-bg); margin-top: 16px; text-align: left;">
-                            通常 月額12,000円(税込)のところ3/31限定で上記価格になります。別途入会金が4,000円(税込)かかります。
-                        </p>
-                    </div>
-
-                    <div class="plan-card" style="background: #fff; border: 2px solid var(--primary-bg);">
-                        <div class="plan-name">Premium Course</div>
-                        <div class="plan-price"><span>1回</span> 18,000 <span>円(90分)</span></div>
-                        <p style="font-size: 11px; color: #333; margin-top: 16px; text-align: left;">
-                            理学療法・コンディショニングアプローチを用いた完全オーダーメイドのセルフケア処方。
-                        </p>
+                    <div class="expert top" id="exp-3">
+                        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Misaki&backgroundColor=transparent" alt="管理栄養士">
+                        <div class="expert-text">
+                            <span class="expert-role">管理栄養士</span>
+                            <span class="expert-msg">内側からもサポート！</span>
+                        </div>
                     </div>
                 </div>
+
+                <div class="phone-mockup">
+                    <header class="header">
+                        <div class="logo-mobile">
+                            RESET BASE
+                            <span>24h いつでも利用可能</span>
+                        </div>
+                        <div class="header-right">
+                            <div class="header-btns">
+                                <a href="#" class="circle-btn">会員<br>ページ</a>
+                                <a href="#" class="circle-btn">見学<br>予約</a>
+                            </div>
+                            <button class="hamburger-btn" id="js-hamburger">
+                                <span></span><span></span><span></span>
+                            </button>
+                        </div>
+                    </header>
+
+                    <nav class="mobile-menu" id="js-mobile-menu">
+                        <ul>
+                            <li><a href="#about">当ジムについて</a></li>
+                            <li><a href="#feature">特徴</a></li>
+                            <li><a href="#plan">料金プラン</a></li>
+                            <li><a href="#faq">よくあるご質問</a></li>
+                            <li><a href="#access">アクセス</a></li>
+                            <li><a href="#contact">お問い合わせ</a></li>
+                            <li style="margin-top: 40px;">
+                                <a href="#" style="font-size: 14px; border: 1px solid #fff; padding: 10px 20px; border-radius: 20px;">会員ページ / 見学予約</a>
+                            </li>
+                        </ul>
+                    </nav>
+
+                    <section class="hero">
+                        <div class="hero-text">
+                            あなたの生活の中に<br>
+                            フレックスに健康を！
+                        </div>
+                    </section>
+
+                    <div class="content-sheet">
+                        <div class="section-tag">Plan</div>
+                        <h2 class="section-title">ジム使い放題プラン</h2>
+
+                        <div class="plan-card">
+                            <div class="badge">期間<br>限定</div>
+                            <div class="plan-name">Standard Plan</div>
+                            <div class="plan-price"><span>月額</span> 9,800 <span>円(税込)</span></div>
+                            <p style="font-size: 10px; color: var(--primary-bg); margin-top: 16px; text-align: left;">
+                                通常 月額12,000円(税込)のところ3/31限定で上記価格になります。別途入会金が4,000円(税込)かかります。
+                            </p>
+                        </div>
+
+                        <div class="plan-card" style="background: #fff; border: 2px solid var(--primary-bg);">
+                            <div class="plan-name">Premium Course</div>
+                            <div class="plan-price"><span>1回</span> 18,000 <span>円(90分)</span></div>
+                            <p style="font-size: 11px; color: #333; margin-top: 16px; text-align: left;">
+                                理学療法・コンディショニングアプローチを用いた完全オーダーメイドのセルフケア処方。
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </main>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // ハンバーガーメニューの開閉ロジック
             const hamburgerBtn = document.getElementById('js-hamburger');
             const mobileMenu = document.getElementById('js-mobile-menu');
             const menuLinks = mobileMenu.querySelectorAll('a');
@@ -399,7 +391,6 @@
                 });
             });
 
-            // 専門家アニメーションのロジック
             const experts = [
                 document.getElementById('exp-1'),
                 document.getElementById('exp-2'),
