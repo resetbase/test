@@ -61,7 +61,7 @@
             display: flex;
             width: 100%;
             height: 100%;
-            position: relative;
+            position: relative; /* スマホの中央配置の基準はここ（100%の幅） */
             z-index: 10;
         }
 
@@ -73,7 +73,7 @@
             flex-direction: column;
             justify-content: center;
             padding-left: 5vw;
-            z-index: 20; /* スマホの裏の専門家より前面に出す */
+            z-index: 20;
         }
         .desktop-logo { margin-bottom: 60px; color: #fff; }
         .desktop-logo h1 { font-family: var(--font-en); font-size: 42px; font-style: italic; font-weight: 800; line-height: 1; }
@@ -99,17 +99,17 @@
         /* --- 右側：プレビュー領域 (70%) --- */
         .preview-area {
             width: 70%;
-            position: relative;
+            /* ここにあった position: relative; を削除したことで、スマホが画面全体の中央になります！ */
         }
 
         /* ★スマホ本体コンテナ（画面全体の100%中央に絶対配置） ★ */
         .phone-container-wrapper {
             position: absolute;
             top: 50%;
-            left: 50%; /* 画面全体の真ん中を基準にする */
+            left: 50%; /* layout-wrapper(画面全体100%)の中心 */
             width: var(--phone-width);
             height: var(--phone-height);
-            transform: translate(-50%, -50%); /* 自身の幅・高さの半分だけ戻して完全中央揃え */
+            transform: translate(-50%, -50%); /* 自身の幅の半分戻して真ん中に */
             z-index: 10;
         }
 
@@ -233,6 +233,8 @@
             body { overflow: auto; }
             .layout-wrapper { display: block; }
             .desktop-sidebar { display: none; }
+            
+            .preview-area { width: 100%; padding: 0; align-items: flex-start; height: 100vh;}
             
             /* スマホ時は絶対配置を解除して全画面フィット */
             .phone-container-wrapper {
