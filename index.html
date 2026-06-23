@@ -99,7 +99,6 @@
         /* --- 右側：プレビュー領域 (70%) --- */
         .preview-area {
             width: 70%;
-            /* ★ここにあった position: relative; を削除しています ★ */
         }
 
         /* スマホ本体コンテナ（画面全体の100%中央に絶対配置） */
@@ -145,11 +144,9 @@
             justify-content: center;
             transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.4s ease;
             opacity: 0; 
-            /* 初期位置はスマホの真裏で少し小さく */
             transform: translate(0, 0) scale(0.5);
             width: 240px; 
-            /* 回転の軸を下寄りにする */
-            transform-origin: center 80%;
+            transform-origin: center 80%; /* 回転軸を足元に */
         }
 
         .expert img { 
@@ -157,50 +154,82 @@
             height: auto; 
             object-fit: contain;
             background: transparent;
-            border-radius: 0;
         }
 
-        /* 吹き出し風テキスト */
+        /* ★ 吹き出し風テキストのベース形状 ★ */
         .expert-text { 
             position: absolute;
             background: #fff;
-            padding: 10px 16px;
-            border-radius: 24px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            padding: 12px 20px;
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
             display: flex; 
             flex-direction: column; 
             white-space: nowrap;
             z-index: 2;
         }
-        .expert-role { font-size: 10px; color: var(--primary-bg); font-weight: 700; margin-bottom: 2px; }
-        .expert-msg { font-size: 14px; font-weight: 700; color: var(--text-dark); }
+        /* 吹き出しのしっぽ（共通設定） */
+        .expert-text::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-style: solid;
+        }
 
-        /* 左から出る */
+        .expert-role { font-size: 10px; color: var(--primary-bg); font-weight: 800; margin-bottom: 4px; }
+        .expert-msg { font-size: 15px; font-weight: 700; color: var(--text-dark); }
+
+        /* === 左から出る専門家の吹き出し配置 === */
         .expert.left { top: 15%; left: 0; }
         .expert.left.active { 
             opacity: 1; 
-            /* 反時計回り(-15deg) */
             transform: translate(-70%, 0) scale(1.1) rotate(-15deg); 
         }
-        .expert.left .expert-text { top: 0; left: -10px; }
+        .expert.left .expert-text { 
+            top: -20px; 
+            left: -40px; /* 顔を避けて左上に */
+        }
+        .expert.left .expert-text::after {
+            bottom: -12px;
+            right: 30px; /* しっぽを右下に向けて顔の方へ */
+            border-width: 15px 15px 0 0;
+            border-color: #fff transparent transparent transparent;
+        }
 
-        /* 右から出る */
+        /* === 右から出る専門家の吹き出し配置 === */
         .expert.right { top: 40%; right: 0; }
         .expert.right.active { 
             opacity: 1; 
-            /* 時計回り(15deg) */
             transform: translate(70%, 0) scale(1.1) rotate(15deg); 
         }
-        .expert.right .expert-text { top: -20px; right: -10px; }
+        .expert.right .expert-text { 
+            top: -30px; 
+            right: -60px; /* 顔を避けて右上に */
+        }
+        .expert.right .expert-text::after {
+            bottom: -12px;
+            left: 30px; /* しっぽを左下に向けて顔の方へ */
+            border-width: 15px 0 0 15px;
+            border-color: #fff transparent transparent transparent;
+        }
 
-        /* 上から出る */
+        /* === 上から出る専門家の吹き出し配置 === */
         .expert.top { top: 0; left: 50%; width: 260px; }
         .expert.top.active { 
             opacity: 1; 
-            /* 斜めに傾けて飛び出させる */
             transform: translate(-30%, -60%) scale(1.1) rotate(8deg); 
         }
-        .expert.top .expert-text { bottom: -10px; left: 60%; transform: translateX(-50%); }
+        .expert.top .expert-text { 
+            bottom: -80px; 
+            left: -20px; /* 顔を避けて左下に */
+        }
+        .expert.top .expert-text::after {
+            top: -12px;
+            left: 50px; /* しっぽを上に向けて顔の方へ */
+            border-width: 0 10px 15px 10px;
+            border-color: transparent transparent #fff transparent;
+        }
 
 
         /* --- 内部コンテンツ --- */
@@ -291,7 +320,6 @@
             .header-btns { display: none; }
             .hamburger-btn { display: flex; }
 
-            /* スマホ時の飛び出し具合の調整 */
             .expert.left.active { transform: translate(-45%, 0) scale(0.85) rotate(-12deg); }
             .expert.right.active { transform: translate(45%, 0) scale(0.85) rotate(12deg); }
             .expert.top.active { transform: translate(-30%, -30%) scale(0.85) rotate(8deg); }
@@ -334,21 +362,21 @@
                         <img src="https://i.imgur.com/9qzg7jM.png" alt="理学療法士">
                         <div class="expert-text">
                             <span class="expert-role">理学療法士</span>
-                            <span class="expert-msg">動作分析はお任せを！</span>
+                            <span class="expert-msg">医学的根拠で動作を徹底分析！</span>
                         </div>
                     </div>
                     <div class="expert right" id="exp-2">
                         <img src="https://i.imgur.com/4LIOFht.png" alt="トレーナー">
                         <div class="expert-text">
-                            <span class="expert-role">コンディショニングチーフ</span>
-                            <span class="expert-msg">絶対に妥協しません！</span>
+                            <span class="expert-role">コンディショニングチーフ 石出</span>
+                            <span class="expert-msg">90分18,000円。絶対に妥協しません！</span>
                         </div>
                     </div>
                     <div class="expert top" id="exp-3">
                         <img src="https://i.imgur.com/4LIOFht.png" alt="管理栄養士">
                         <div class="expert-text">
                             <span class="expert-role">管理栄養士</span>
-                            <span class="expert-msg">内側からもサポート！</span>
+                            <span class="expert-msg">内側からの栄養戦略もバッチリ！</span>
                         </div>
                     </div>
                 </div>
