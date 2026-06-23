@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>RESET BASE | レスポンシブ＆アニメーション</title>
+    <title>RESET BASE | 全体中央配置＆アニメーション</title>
     <link href="https://fonts.googleapis.com/css?display=swap&family=Lato:300,400,700|Open+Sans:400,600,700|Noto+Sans+JP:300,400,600,700" rel="stylesheet">
     <style>
         :root {
@@ -65,7 +65,7 @@
             z-index: 10;
         }
 
-        /* --- 左側：PCナビゲーション (30%) --- */
+        /* --- 左側：PCナビゲーション (30%固定) --- */
         .desktop-sidebar {
             width: 30%;
             min-width: 250px;
@@ -73,6 +73,7 @@
             flex-direction: column;
             justify-content: center;
             padding-left: 5vw;
+            z-index: 20; /* スマホの裏の専門家より前面に出す */
         }
         .desktop-logo { margin-bottom: 60px; color: #fff; }
         .desktop-logo h1 { font-family: var(--font-en); font-size: 42px; font-style: italic; font-weight: 800; line-height: 1; }
@@ -98,19 +99,18 @@
         /* --- 右側：プレビュー領域 (70%) --- */
         .preview-area {
             width: 70%;
-            display: flex;
-            justify-content: flex-start; /* ★中央ではなく左寄せに変更 */
-            align-items: center;
             position: relative;
         }
 
-        /* スマホ本体コンテナ（専門家レイヤーとスマホ本体をセットで動かす枠） */
+        /* ★スマホ本体コンテナ（画面全体の100%中央に絶対配置） ★ */
         .phone-container-wrapper {
-            position: relative;
+            position: absolute;
+            top: 50%;
+            left: 50%; /* 画面全体の真ん中を基準にする */
             width: var(--phone-width);
             height: var(--phone-height);
-            /* ★ここを調整することで、画面全体（100%）の中央に綺麗に収まります */
-            margin-left: 4vw; 
+            transform: translate(-50%, -50%); /* 自身の幅・高さの半分だけ戻して完全中央揃え */
+            z-index: 10;
         }
 
         /* スマホ本体モックアップ */
@@ -234,10 +234,13 @@
             .layout-wrapper { display: block; }
             .desktop-sidebar { display: none; }
             
-            .preview-area { width: 100%; padding: 0; align-items: flex-start; height: 100vh;}
-            
-            /* スマホ時は位置調整用の枠を全画面に */
-            .phone-container-wrapper { width: 100%; height: 100vh; margin-left: 0; }
+            /* スマホ時は絶対配置を解除して全画面フィット */
+            .phone-container-wrapper {
+                position: relative;
+                top: 0; left: 0;
+                width: 100%; height: 100vh;
+                transform: none;
+            }
             .phone-mockup { border: none; border-radius: 0; box-shadow: none; }
             .experts-layer { position: fixed; width: 100%; height: 100vh; }
 
