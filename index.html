@@ -99,7 +99,7 @@
         /* --- 右側：プレビュー領域 (70%) --- */
         .preview-area {
             width: 70%;
-            position: relative;
+            /* ★ここにあった position: relative; を削除しています ★ */
         }
 
         /* スマホ本体コンテナ（画面全体の100%中央に絶対配置） */
@@ -129,7 +129,7 @@
         }
         .phone-mockup::-webkit-scrollbar { width: 0; }
 
-        /* --- 専門家アニメーション（大きくくり抜かれた画像を角度をつけて飛び出させる） --- */
+        /* --- 専門家アニメーション --- */
         .experts-layer {
             position: absolute;
             top: 0; left: 0;
@@ -148,7 +148,7 @@
             /* 初期位置はスマホの真裏で少し小さく */
             transform: translate(0, 0) scale(0.5);
             width: 240px; 
-            /* ★ポイント: 回転の軸を下寄りにすることで、足元が外にはみ出さず綺麗に隠れます */
+            /* 回転の軸を下寄りにする */
             transform-origin: center 80%;
         }
 
@@ -179,7 +179,7 @@
         .expert.left { top: 15%; left: 0; }
         .expert.left.active { 
             opacity: 1; 
-            /* ★反時計回り(-15deg)にして、下半身をスマホの裏に隠す */
+            /* 反時計回り(-15deg) */
             transform: translate(-70%, 0) scale(1.1) rotate(-15deg); 
         }
         .expert.left .expert-text { top: 0; left: -10px; }
@@ -188,7 +188,7 @@
         .expert.right { top: 40%; right: 0; }
         .expert.right.active { 
             opacity: 1; 
-            /* ★時計回り(15deg)にして、下半身をスマホの裏に隠す */
+            /* 時計回り(15deg) */
             transform: translate(70%, 0) scale(1.1) rotate(15deg); 
         }
         .expert.right .expert-text { top: -20px; right: -10px; }
