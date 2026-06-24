@@ -4,14 +4,16 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>RESET BASE | 専属チーム・サブスクリプション</title>
-    <link href="https://fonts.googleapis.com/css?display=swap&family=Lato:300,400,700|Open+Sans:400,600,700|Noto+Sans+JP:300,400,600,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?display=swap&family=Lato:300,400,700|Open+Sans:400,600,700|Noto+Sans+JP:300,400,500,700,900" rel="stylesheet">
     <style>
         :root {
             --font-jp: 'Noto Sans JP', sans-serif;
-            --font-en: 'Open Sans', sans-serif;
-            --primary-bg: #2b65f1;
-            --text-dark: #333333;
-            /* ★変更：スマホ風画面のサイズを大きくしました */
+            --font-en: 'Lato', 'Open Sans', sans-serif;
+            --primary-bg: #1a1a2e; /* より洗練されたダークトーンへ */
+            --primary-accent: #2b65f1;
+            --text-dark: #222222;
+            --text-light: #f5f5f7;
+            --line-green: #06C755;
             --phone-width: 520px;
             --phone-height: 92vh;
         }
@@ -19,7 +21,7 @@
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
-            background-color: var(--primary-bg);
+            background-color: var(--primary-accent);
             background-image: radial-gradient(rgba(255, 255, 255, 0.15) 1px, transparent 1px);
             background-size: 8px 8px;
             font-family: var(--font-jp);
@@ -30,315 +32,141 @@
 
         /* --- 背景の流れる透かし文字 --- */
         .bg-watermark {
-            position: absolute;
-            bottom: -20px;
-            left: 0;
-            width: 100%;
-            overflow: hidden;
-            z-index: 0;
-            pointer-events: none;
+            position: absolute; bottom: -20px; left: 0; width: 100%;
+            overflow: hidden; z-index: 0; pointer-events: none;
         }
-        .marquee-content {
-            display: flex;
-            width: fit-content;
-            animation: marquee 30s linear infinite;
-        }
+        .marquee-content { display: flex; width: fit-content; animation: marquee 30s linear infinite; }
         .marquee-content span {
-            font-size: clamp(80px, 12vw, 150px);
-            font-weight: 800;
-            color: rgba(255, 255, 255, 0.08);
-            font-family: var(--font-en);
-            font-style: italic;
-            white-space: nowrap;
-            padding-right: 20px;
+            font-size: clamp(80px, 12vw, 150px); font-weight: 900;
+            color: rgba(255, 255, 255, 0.08); font-family: var(--font-en);
+            font-style: italic; white-space: nowrap; padding-right: 20px;
         }
-        @keyframes marquee {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
+        @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
         /* 左上の固定ロゴ */
-        .top-left-logo {
-            position: absolute;
-            top: 40px;
-            left: 5vw;
-            z-index: 30;
-            color: #fff;
-        }
-        .top-left-logo h1 {
-            font-family: var(--font-en);
-            font-size: 40px;
-            font-style: italic;
-            font-weight: 800;
-            line-height: 1;
-            letter-spacing: -0.02em;
-        }
-        .top-left-logo p {
-            font-family: var(--font-jp);
-            font-size: 10px;
-            margin-top: 4px;
-            letter-spacing: 0.1em;
-            padding-left: 2px;
-            font-weight: 400;
-        }
+        .top-left-logo { position: absolute; top: 40px; left: 5vw; z-index: 30; color: #fff; }
+        .top-left-logo h1 { font-family: var(--font-en); font-size: 40px; font-style: italic; font-weight: 900; line-height: 1; letter-spacing: -0.02em; }
+        .top-left-logo p { font-family: var(--font-jp); font-size: 10px; margin-top: 4px; letter-spacing: 0.1em; padding-left: 2px; font-weight: 400; }
 
         /* --- 大枠のレイアウト --- */
-        .layout-wrapper {
-            display: flex;
-            width: 100%;
-            height: 100%;
-            position: relative; 
-            z-index: 10;
-        }
-
-        /* --- 左側：PCナビゲーション (30%固定) --- */
-        .desktop-sidebar {
-            width: 30%;
-            min-width: 250px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding-left: 5vw;
-            z-index: 20; 
-        }
-
+        .layout-wrapper { display: flex; width: 100%; height: 100%; position: relative; z-index: 10; }
+        .desktop-sidebar { width: 30%; min-width: 250px; display: flex; flex-direction: column; justify-content: center; padding-left: 5vw; z-index: 20; }
         .desktop-nav ul { list-style: none; }
         .desktop-nav li { margin-bottom: 24px; }
         .desktop-nav a {
-            display: inline-flex; align-items: center; color: #fff;
-            text-decoration: none; font-size: 18px; font-weight: 700;
-            letter-spacing: 2px; padding: 8px 16px; position: relative;
-            transition: all 0.3s ease;
+            display: inline-flex; align-items: center; color: #fff; text-decoration: none; font-size: 18px; font-weight: 700;
+            letter-spacing: 2px; padding: 8px 16px; position: relative; transition: all 0.3s ease;
         }
-        .desktop-nav li:not(.active) a::before {
-            content: ""; position: absolute; left: 0; top: 50%; transform: translateY(-50%);
-            height: 60%; width: 3px; background: rgba(255, 255, 255, 0.4);
-        }
+        .desktop-nav li:not(.active) a::before { content: ""; position: absolute; left: 0; top: 50%; transform: translateY(-50%); height: 60%; width: 3px; background: rgba(255, 255, 255, 0.4); }
         .desktop-nav li.active a { border: 2px solid #fff; border-radius: 4px; background: rgba(255, 255, 255, 0.1); }
-        .desktop-nav li.active a::before {
-            content: ""; position: absolute; left: 8px; top: 50%; transform: translateY(-50%);
-            height: 60%; width: 3px; background: #fff;
-        }
+        .desktop-nav li.active a::before { content: ""; position: absolute; left: 8px; top: 50%; transform: translateY(-50%); height: 60%; width: 3px; background: #fff; }
 
-        /* --- 右側：プレビュー領域 (70%) --- */
-        .preview-area {
-            width: 70%;
-        }
+        .preview-area { width: 70%; }
+        .phone-container-wrapper { position: absolute; top: 50%; left: 50%; width: var(--phone-width); height: var(--phone-height); max-height: 95vh; transform: translate(-50%, -50%); z-index: 10; }
 
-        /* スマホ本体コンテナ */
-        .phone-container-wrapper {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            width: var(--phone-width);
-            height: var(--phone-height);
-            /* ★変更：縦の最大サイズを少し緩和しました */
-            max-height: 95vh; 
-            transform: translate(-50%, -50%); 
-            z-index: 10;
-        }
-
-        /* スマホ本体モックアップ */
         .phone-mockup {
-            position: relative;
-            z-index: 10;
-            width: 100%;
-            height: 100%;
-            background: var(--primary-bg);
-            border: 12px solid #fff;
-            border-radius: 40px;
-            box-shadow: 0 30px 60px rgba(0,0,0,0.3);
-            overflow-y: auto;
-            overflow-x: hidden;
-            scroll-behavior: smooth;
+            position: relative; z-index: 10; width: 100%; height: 100%;
+            background: #fff; border: 12px solid #fff; border-radius: 40px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.3); overflow-y: auto; overflow-x: hidden; scroll-behavior: smooth;
         }
         .phone-mockup::-webkit-scrollbar { width: 0; }
 
         /* --- 専門家アニメーション --- */
-        .experts-layer {
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            z-index: 1;
-            pointer-events: none;
-        }
-        
-        .expert {
-            position: absolute;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.4s ease;
-            opacity: 0; 
-            transform: translate(0, 0) scale(0.5);
-            /* ★変更：モックアップが大きくなったのに合わせて画像も少し大きく */
-            width: 280px; 
-            transform-origin: center 80%;
-            pointer-events: none;
-        }
+        .experts-layer { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
+        .expert { position: absolute; display: flex; align-items: center; justify-content: center; transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.4s ease; opacity: 0; transform: translate(0, 0) scale(0.5); width: 280px; pointer-events: none; }
+        .expert.active.out { opacity: 0; transform: scale(0.5) !important; transition: all 0.4s ease-out !important; }
+        .expert img { width: 100%; height: auto; object-fit: contain; -webkit-mask-image: linear-gradient(to bottom, black 70%, transparent 95%); mask-image: linear-gradient(to bottom, black 70%, transparent 95%); }
+        .expert.right { top: 40%; right: 10px; transform-origin: bottom left; }
+        .expert.right.active { opacity: 1; transform: translate(60%, -10%) scale(1.1) rotate(25deg); }
+        .expert.left { top: 15%; left: 10px; transform-origin: bottom right; }
+        .expert.left.active { opacity: 1; transform: translate(-60%, -10%) scale(1.1) rotate(-25deg); }
 
-        .expert.active.out {
-            opacity: 0;
-            transform: scale(0.5) !important;
-            transition: all 0.4s ease-out !important;
-        }
-
-        .expert img { 
-            width: 100%; 
-            height: auto; 
-            object-fit: contain;
-            background: transparent;
-            -webkit-mask-image: linear-gradient(to bottom, black 70%, transparent 95%);
-            mask-image: linear-gradient(to bottom, black 70%, transparent 95%);
-        }
-
-        /* --- 左右の位置・出現時アニメーション設定 --- */
-        .expert.right { 
-            top: 40%; 
-            right: 10px;
-            transform-origin: bottom left;
-        }
-        .expert.right.active { 
-            opacity: 1; 
-            transform: translate(60%, -10%) scale(1.1) rotate(25deg); 
-        }
-
-        .expert.left { 
-            top: 15%; 
-            left: 10px;
-            transform-origin: bottom right;
-        }
-        .expert.left.active { 
-            opacity: 1; 
-            transform: translate(-60%, -10%) scale(1.1) rotate(-25deg); 
-        }
-
-        /* --- スマホ内部コンテンツ --- */
-        .header {
+        /* --- LP内部スタイル --- */
+        .lp-header {
             display: flex; justify-content: space-between; align-items: center;
-            padding: 16px; background: #fff; border-bottom: 1px solid #eee;
-            position: relative; z-index: 50;
+            padding: 16px 24px; background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 100;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
         }
-        .logo-mobile { color: var(--primary-bg); font-size: 18px; font-weight: 800; font-family: var(--font-en); font-style: italic; line-height: 1.2;}
-        .logo-mobile span { display: block; font-size: 8px; font-style: normal; font-weight: 400; color: #666;}
-        
-        .header-right { display: flex; align-items: center; gap: 8px; }
-        .header-btns { display: flex; gap: 6px; }
-        .circle-btn {
-            width: 44px; height: 44px; border: 1px dashed var(--primary-bg); border-radius: 50%;
-            display: flex; justify-content: center; align-items: center;
-            color: var(--primary-bg); font-size: 9px; font-weight: 600; text-align: center;
-            line-height: 1.2; text-decoration: none;
+        .lp-logo { color: var(--primary-bg); font-size: 20px; font-weight: 900; font-family: var(--font-en); font-style: italic; line-height: 1.1; }
+        .lp-logo span { display: block; font-size: 9px; font-style: normal; font-weight: 500; color: #888; letter-spacing: 0.05em; }
+        .btn-sm-line {
+            background: var(--line-green); color: #fff; text-decoration: none;
+            font-size: 11px; font-weight: 700; padding: 8px 16px; border-radius: 20px;
+            box-shadow: 0 4px 10px rgba(6, 199, 85, 0.3);
         }
 
-        .hamburger-btn {
-            display: none; width: 44px; height: 44px;
-            background: var(--primary-bg); border: none; border-radius: 8px;
-            flex-direction: column; justify-content: center; align-items: center; gap: 5px;
-            cursor: pointer; z-index: 100; position: relative;
-        }
-        .hamburger-btn span { display: block; width: 20px; height: 2px; background: #fff; transition: 0.3s; }
-
-        .mobile-menu {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(43, 101, 241, 0.95); backdrop-filter: blur(5px);
-            z-index: 40; display: flex; justify-content: center; align-items: center;
-            opacity: 0; pointer-events: none; transition: 0.3s;
-        }
-        .mobile-menu.open { opacity: 1; pointer-events: auto; }
-        .mobile-menu ul { list-style: none; text-align: center; }
-        .mobile-menu li { margin: 24px 0; }
-        .mobile-menu a { color: #fff; text-decoration: none; font-size: 20px; font-weight: 700; letter-spacing: 2px; }
-
-        /* セクション */
+        /* ヒーローセクション */
         .hero {
-            position: relative; height: 380px; display: flex; justify-content: flex-end; padding: 0 32px;
-            background: url('https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?auto=format&fit=crop&w=600&q=80') center/cover;
+            position: relative; height: 500px; display: flex; flex-direction: column; justify-content: flex-end; padding: 40px 24px;
+            background: url('https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=800&q=80') center/cover no-repeat;
         }
-        .hero::before { content: ""; position: absolute; inset: 0; background: rgba(0,0,0,0.4); }
-        .hero-text {
-            position: relative; z-index: 2; color: #fff; writing-mode: vertical-rl;
-            font-size: 24px; font-weight: 700; letter-spacing: 0.2em; line-height: 1.4;
-            margin-top: 32px; padding: 8px; background: var(--primary-bg); height: fit-content;
+        .hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, var(--primary-bg) 0%, rgba(26,26,46,0.3) 100%); z-index: 1; }
+        .hero-content { position: relative; z-index: 2; color: var(--text-light); }
+        .hero-catch { font-size: 32px; font-weight: 900; line-height: 1.3; margin-bottom: 16px; letter-spacing: 0.05em; }
+        .hero-sub { font-size: 14px; font-weight: 400; line-height: 1.6; opacity: 0.9; margin-bottom: 24px; }
+        .hero-cta { display: inline-flex; align-items: center; justify-content: center; width: 100%; background: var(--line-green); color: #fff; padding: 16px; border-radius: 8px; font-size: 16px; font-weight: 700; text-decoration: none; box-shadow: 0 8px 20px rgba(6, 199, 85, 0.4); }
+
+        /* セクション共通 */
+        .section { padding: 60px 24px; }
+        .bg-light { background-color: #f8f9fa; }
+        .bg-dark { background-color: var(--primary-bg); color: var(--text-light); }
+        .sec-title-wrap { text-align: center; margin-bottom: 40px; }
+        .sec-en { font-family: var(--font-en); color: var(--primary-accent); font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; display: block; margin-bottom: 8px; }
+        .bg-dark .sec-en { color: #82a3ff; }
+        .sec-jp { font-size: 24px; font-weight: 700; color: var(--text-dark); line-height: 1.4; }
+        .bg-dark .sec-jp { color: var(--text-light); }
+
+        /* WHO: 課題喚起 */
+        .pain-list { list-style: none; display: flex; flex-direction: column; gap: 16px; }
+        .pain-list li {
+            background: #fff; padding: 20px; border-radius: 8px; font-size: 15px; font-weight: 700; color: var(--text-dark);
+            display: flex; align-items: center; gap: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.03); border-left: 4px solid var(--primary-accent);
         }
+        .pain-list li::before { content: "✓"; display: flex; justify-content: center; align-items: center; width: 24px; height: 24px; background: rgba(43, 101, 241, 0.1); color: var(--primary-accent); border-radius: 50%; font-size: 12px; }
 
-        .content-sheet { background: #fff; }
-        
-        .section-box { padding: 50px 24px; border-bottom: 1px solid #eee; }
-        .section-tag { color: #adc1f0; font-family: var(--font-en); font-size: 14px; text-align: center; margin-bottom: 4px; text-transform: uppercase; font-weight: 600; }
-        .section-title { color: var(--primary-bg); font-size: 22px; font-weight: 700; text-align: center; margin-bottom: 24px; }
-        .section-subtitle { font-size: 16px; font-weight: 700; color: #333; line-height: 1.5; margin-bottom: 16px; text-align: center; }
-        .text-body { font-size: 13px; line-height: 1.8; color: #555; text-align: justify; }
+        /* WHAT: 解決策（コンセプト） */
+        .concept-text { font-size: 15px; line-height: 1.8; text-align: center; margin-bottom: 32px; font-weight: 500; }
+        .concept-highlight { color: var(--primary-accent); font-weight: 700; font-size: 18px; display: block; margin: 16px 0; }
 
-        /* 特徴パーツ */
-        .feature-item { margin-top: 30px; }
-        .feature-img { width: 100%; height: 160px; object-fit: cover; border-radius: 6px; margin-bottom: 12px; }
-        .feature-meta { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
-        .feature-num { font-size: 24px; font-weight: 800; color: var(--primary-bg); font-family: var(--font-en); font-style: italic; }
-        .feature-title { font-size: 15px; font-weight: 700; color: #333; }
+        /* HOW: 特徴 */
+        .feature-card { background: #fff; border-radius: 12px; overflow: hidden; margin-bottom: 24px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); }
+        .feature-img { width: 100%; height: 200px; object-fit: cover; }
+        .feature-body { padding: 24px; }
+        .feature-num { font-family: var(--font-en); font-size: 32px; font-weight: 900; color: var(--primary-accent); opacity: 0.3; line-height: 1; margin-bottom: -10px; }
+        .feature-title { font-size: 18px; font-weight: 700; margin-bottom: 12px; color: var(--text-dark); }
+        .feature-desc { font-size: 14px; line-height: 1.7; color: #555; }
 
-        /* 料金プランカード */
-        .plan-card { border: 2px solid var(--primary-bg); border-radius: 8px; padding: 24px; text-align: center; position: relative; margin-top: 32px; overflow: hidden; }
-        .plan-card.popular { border-color: #fc557d; }
-        .plan-card.premium { border-color: #333; }
-        
-        .badge {
-            position: absolute; top: -5px; right: -15px; background: #FFD740; color: #333;
-            padding: 8px 24px; font-size: 10px; font-weight: 700; transform: rotate(15deg);
-        }
-        .plan-card.popular .badge { background: #fc557d; color: #fff; }
-        .plan-name { font-size: 16px; font-weight: 700; color: #333; margin-bottom: 12px; }
-        .plan-price { font-size: 36px; font-weight: 800; color: var(--primary-bg); font-family: var(--font-en); font-style: italic; }
-        .plan-price span { font-size: 13px; font-style: normal; color: #666; font-weight: 400; }
-        .plan-card.popular .plan-price { color: #fc557d; }
-        .plan-details { font-size: 12px; line-height: 1.6; color: #555; text-align: left; margin-top: 16px; border-top: 1px dashed #eee; padding-top: 12px; }
-        .plan-note { font-size: 11px; color: #777; line-height: 1.6; margin-top: 24px; background: #f9f9f9; padding: 12px; border-radius: 6px; }
+        /* 店舗・料金セクション */
+        .store-card { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 24px; text-align: center; margin-bottom: 32px; }
+        .store-card h4 { font-size: 18px; margin-bottom: 16px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 12px; }
+        .price-box { font-family: var(--font-en); font-size: 36px; font-weight: 900; color: #fff; margin: 16px 0; display: flex; align-items: baseline; justify-content: center; gap: 4px; }
+        .price-box span { font-size: 14px; font-weight: 400; opacity: 0.8; }
+        .store-desc { font-size: 13px; line-height: 1.6; opacity: 0.8; text-align: left; }
 
-        /* FAQアコーディオン */
-        .faq-item { border: 1px solid #eee; border-radius: 6px; margin-top: 12px; overflow: hidden; }
-        .faq-q { background: #f9f9f9; padding: 14px 16px; font-weight: 700; font-size: 13px; color: #333; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
-        .faq-q::after { content: '＋'; font-size: 12px; color: var(--primary-bg); }
-        .faq-item.open .faq-q::after { content: 'ー'; }
-        .faq-a { padding: 14px 16px; font-size: 13px; line-height: 1.6; color: #555; border-top: 1px solid #eee; display: none; background: #fff; }
-        .faq-item.open .faq-a { display: block; }
+        /* LINE CTA (ゴール) */
+        .line-section { background: #fff; padding: 60px 24px; text-align: center; }
+        .line-wrap { border: 2px solid var(--line-green); border-radius: 16px; padding: 40px 24px; background: rgba(6, 199, 85, 0.03); }
+        .line-title { font-size: 20px; font-weight: 700; color: var(--text-dark); margin-bottom: 16px; }
+        .qr-code { width: 160px; height: 160px; margin: 0 auto 24px; background: #fff; padding: 10px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        .qr-code img { width: 100%; height: 100%; display: block; }
+        .line-btn-large { display: flex; align-items: center; justify-content: center; gap: 8px; background: var(--line-green); color: #fff; font-size: 18px; font-weight: 700; padding: 20px; border-radius: 8px; text-decoration: none; box-shadow: 0 8px 20px rgba(6, 199, 85, 0.3); transition: transform 0.2s; }
+        .line-btn-large:active { transform: scale(0.98); }
+        .line-step { margin-top: 24px; text-align: left; background: #fff; padding: 16px; border-radius: 8px; font-size: 13px; color: #555; line-height: 1.6; }
 
-        /* アクセス */
-        .maps-btn { display: flex; justify-content: center; align-items: center; gap: 8px; background: var(--primary-bg); color: #fff; text-decoration: none; padding: 12px; border-radius: 6px; font-weight: 700; font-size: 14px; margin-top: 16px; }
-        .address-text { font-size: 13px; color: #555; margin-top: 12px; text-align: center; }
+        /* フッター */
+        .footer { background: #111111; padding: 40px 24px; text-align: center; color: #888; }
+        .footer-logo { font-size: 24px; font-weight: 900; font-family: var(--font-en); font-style: italic; color: #fff; margin-bottom: 16px; }
+        .footer-links { display: flex; justify-content: center; gap: 16px; font-size: 12px; margin-bottom: 24px; }
+        .footer-links a { color: #888; text-decoration: none; }
+        .footer-copy { font-size: 10px; }
 
-        /* フォーム */
-        .contact-form { display: flex; flex-direction: column; gap: 16px; margin-top: 20px; }
-        .form-group { display: flex; flex-direction: column; gap: 6px; }
-        .form-group label { font-size: 13px; font-weight: 700; color: #333; display: flex; align-items: center; gap: 6px; }
-        .req-tag { background: #fc557d; color: #fff; font-size: 9px; padding: 2px 6px; border-radius: 2px; }
-        .form-control { width: 100%; padding: 10px 12px; border: 1px solid #ddd; border-radius: 4px; font-size: 13px; }
-        textarea.form-control { height: 100px; resize: none; }
-        .check-label { display: flex; align-items: flex-start; gap: 8px; font-size: 12px; color: #555; cursor: pointer; line-height: 1.4; }
-        .check-label input { margin-top: 2px; }
-        .submit-btn { background: var(--primary-bg); color: #fff; border: none; padding: 14px; border-radius: 4px; font-weight: 700; font-size: 15px; cursor: pointer; }
-
-        /* スマホ用フッター */
-        .phone-footer { background: #1f5cf0; padding: 32px 16px; text-align: center; color: #fff; }
-        .footer-logo { font-size: 20px; font-weight: 800; font-style: italic; font-family: var(--font-en); margin-bottom: 12px; }
-        .footer-links { display: flex; justify-content: center; gap: 12px; font-size: 11px; margin-bottom: 16px; }
-        .footer-links a { color: #fff; text-decoration: underline; }
-        .copyright { font-size: 10px; opacity: 0.7; }
-
-        /* --- スマホ用レスポンシブ (768px以下) --- */
         @media (max-width: 768px) {
-            body { overflow: auto; }
-            .top-left-logo { display: none; }
             .layout-wrapper { display: block; }
-            .desktop-sidebar { display: none; }
-            
-            .preview-area { width: 100%; padding: 0; align-items: flex-start; height: 100vh;}
-            .phone-container-wrapper { position: relative; top: 0; left: 0; width: 100%; height: 100vh; transform: none; max-height: none; }
+            .desktop-sidebar, .top-left-logo, .bg-watermark, .experts-layer { display: none !important; }
+            .preview-area { width: 100%; height: 100vh; }
+            .phone-container-wrapper { position: relative; top: 0; left: 0; width: 100%; height: 100%; transform: none; max-height: none; }
             .phone-mockup { border: none; border-radius: 0; box-shadow: none; }
-            
-            .experts-layer { display: none !important; }
-
-            .header-btns { display: none; }
-            .hamburger-btn { display: flex; }
         }
     </style>
 </head>
@@ -346,8 +174,8 @@
 
     <div class="bg-watermark">
         <div class="marquee-content">
-            <span>RESET BASE RESET BASE RESET BASE RESET BASE RESET BASE</span>
-            <span>RESET BASE RESET BASE RESET BASE RESET BASE RESET BASE</span>
+            <span>RESET BASE RESET BASE RESET BASE</span>
+            <span>RESET BASE RESET BASE RESET BASE</span>
         </div>
     </div>
 
@@ -360,254 +188,154 @@
         <aside class="desktop-sidebar">
             <nav class="desktop-nav">
                 <ul>
-                    <li class="active"><a href="#about">サービスについて</a></li>
-                    <li><a href="#feature">特徴</a></li>
-                    <li><a href="#plan">料金プラン</a></li>
-                    <li><a href="#faq">よくあるご質問</a></li>
-                    <li><a href="#access">アクセス</a></li>
-                    <li><a href="#contact">お問い合わせ</a></li>
+                    <li class="active"><a href="#hero">トップ</a></li>
+                    <li><a href="#problem">課題</a></li>
+                    <li><a href="#solution">解決策</a></li>
+                    <li><a href="#feature">特徴とプラン</a></li>
+                    <li><a href="#contact">LINE無料相談</a></li>
                 </ul>
             </nav>
         </aside>
 
         <main class="preview-area">
-            
             <div class="phone-container-wrapper">
                 
                 <div class="experts-layer">
-                    <div class="expert group1 left" id="exp-1-1">
-                        <img src="https://i.imgur.com/3NXwzm5.png" alt="理学療法士">
-                    </div>
-                    <div class="expert group1 right" id="exp-1-2">
-                        <img src="https://i.imgur.com/A0H5v7d.png" alt="トレーナー">
-                    </div>
-
-                    <div class="expert group2 left" id="exp-2-1">
-                        <img src="https://i.imgur.com/3NXwzm5.png" alt="ボイストレーナー">
-                    </div>
-                    <div class="expert group2 right" id="exp-2-2">
-                        <img src="https://i.imgur.com/GcKwfCS.png" alt="元プロアスリート">
-                    </div>
+                    <div class="expert group1 left"><img src="https://i.imgur.com/3NXwzm5.png" alt=""></div>
+                    <div class="expert group1 right"><img src="https://i.imgur.com/A0H5v7d.png" alt=""></div>
+                    <div class="expert group2 left"><img src="https://i.imgur.com/3NXwzm5.png" alt=""></div>
+                    <div class="expert group2 right"><img src="https://i.imgur.com/GcKwfCS.png" alt=""></div>
                 </div>
 
                 <div class="phone-mockup">
-                    <header class="header">
-                        <div class="logo-mobile">
+                    
+                    <header class="lp-header">
+                        <div class="lp-logo">
                             RESET BASE
                             <span>すべての人に、専属チームを</span>
                         </div>
-                        <div class="header-right">
-                            <div class="header-btns">
-                                <a href="#" class="circle-btn">会員<br>ページ</a>
-                                <a href="#" class="circle-btn">登録<br>相談</a>
-                            </div>
-                            <button class="hamburger-btn" id="js-hamburger">
-                                <span></span><span></span><span></span>
-                            </button>
-                        </div>
+                        <a href="#contact" class="btn-sm-line">LINE相談</a>
                     </header>
 
-                    <nav class="mobile-menu" id="js-mobile-menu">
-                        <ul>
-                            <li><a href="#about">サービスについて</a></li>
-                            <li><a href="#feature">特徴</a></li>
-                            <li><a href="#plan">料金プラン</a></li>
-                            <li><a href="#faq">よくあるご質問</a></li>
-                            <li><a href="#access">アクセス</a></li>
-                            <li><a href="#contact">お問い合わせ</a></li>
-                        </ul>
-                    </nav>
-
-                    <section class="hero">
-                        <div class="hero-text">
-                            すべての人に、<br>
-                            専属チームを。
+                    <section class="hero" id="hero">
+                        <div class="hero-content">
+                            <h2 class="hero-catch">一人で悩むのは、<br>もう終わりにしよう。</h2>
+                            <p class="hero-sub">各領域のプロフェッショナルが結集。<br>あなただけの「専属チーム」が、<br>パフォーマンスの最大化をサポートします。</p>
+                            <a href="#contact" class="hero-cta">LINEで無料相談を始める</a>
                         </div>
                     </section>
 
-                    <div class="content-sheet">
-                        
-                        <div class="section-box" id="about">
-                            <div class="section-tag">About</div>
-                            <h2 class="section-title">RESET BASEとは</h2>
-                            <h3 class="section-subtitle">各領域のプロフェッショナルが<br>あなたの「専属チーム」に</h3>
-                            <p class="text-body">
-                                健康管理、スキルアップ、そして日々の悩み。一人で抱え込まず、プロフェッショナルをあなたの「専属チーム」として迎え入れませんか？<br><br>
-                                RESET BASEは、独自のポイントシステムを使って、整体師、栄養士、保育士、元プロアスリートなど、多彩な専門家と自由にチームを組める新しいサブスクリプションサービスです。
-                            </p>
+                    <section class="section bg-light" id="problem">
+                        <div class="sec-title-wrap">
+                            <span class="sec-en">Problem</span>
+                            <h2 class="sec-jp">本気で向き合いたいのに、<br>最適解がわからない。</h2>
+                        </div>
+                        <ul class="pain-list">
+                            <li>身体の痛みが取れず、仕事や競技に集中しきれない</li>
+                            <li>「整体」「ジム」「コーチ」誰に頼るのが正解か迷う</li>
+                            <li>一貫したサポートがなく、その場しのぎになっている</li>
+                        </ul>
+                    </section>
+
+                    <section class="section" id="solution">
+                        <div class="sec-title-wrap">
+                            <span class="sec-en">Concept</span>
+                            <h2 class="sec-jp">「専属チーム」という、<br>新しい最適解。</h2>
+                        </div>
+                        <p class="concept-text">
+                            トップアスリートや経営者だけのものであった「専属チーム」を、すべての人へ。<br>
+                            <span class="concept-highlight">RESET BASEは、多彩なプロフェッショナルを自由に組み合わせる全く新しいサブスクリプションです。</span>
+                            理学療法士、トレーナー、栄養士などが連携し、あなたを多角的にサポートします。
+                        </p>
+                    </section>
+
+                    <section class="section bg-dark" id="feature">
+                        <div class="sec-title-wrap">
+                            <span class="sec-en">Features & Pricing</span>
+                            <h2 class="sec-jp">あなたに合わせた<br>自由なサポート体制</h2>
                         </div>
 
-                        <div class="section-box" id="feature">
-                            <div class="section-tag">Feature</div>
-                            <h2 class="section-title">3つの特徴</h2>
+                        <div class="feature-card">
+                            <img src="https://images.unsplash.com/photo-1552581234-26160f608093?auto=format&fit=crop&w=600&q=80" class="feature-img" alt="自由なチーム編成">
+                            <div class="feature-body">
+                                <div class="feature-num">01</div>
+                                <h3 class="feature-title">ポイント制で自由にアサイン</h3>
+                                <p class="feature-desc">毎月付与されるポイントを使って、必要な時に最適な専門家を予約。身体のケアからスキルトレーニングまで、その時の課題に合わせて自在にチームを編成できます。</p>
+                            </div>
+                        </div>
+
+                        <div class="feature-card">
+                            <img src="https://images.unsplash.com/photo-1511556820780-d912e42b4980?auto=format&fit=crop&w=600&q=80" class="feature-img" alt="応援・物販">
+                            <div class="feature-body">
+                                <div class="feature-num">02</div>
+                                <h3 class="feature-title">余ったポイントは応援・物販へ</h3>
+                                <p class="feature-desc">ポイントはプロ厳選のケアグッズ購入や、活動を頑張る専門家・アスリートへのギフティング（応援）にも利用可能。無駄なく価値を循環させます。</p>
+                            </div>
+                        </div>
+
+                        <div class="store-card">
+                            <h4>実店舗での完全オーダーメイドケア</h4>
+                            <p class="store-desc" style="text-align: center; margin-bottom: 8px;">東京・浅草のRESET BASE実店舗にて<br>トッププロによる対面セッション</p>
+                            <div class="price-box">¥18,000<span> / 90min</span></div>
+                            <p class="store-desc">サブスクリプションのポイント利用はもちろん、都度決済でもご利用可能。現在のご自身の状態を正確に把握し、根本改善を目指すための特別な90分をご提供します。</p>
+                        </div>
+                    </section>
+
+                    <section class="line-section" id="contact">
+                        <div class="line-wrap">
+                            <h2 class="line-title">まずは公式LINEで<br>無料相談・プラン診断</h2>
                             
-                            <div class="feature-item">
-                                <img src="https://images.unsplash.com/photo-1552581234-26160f608093?auto=format&fit=crop&w=400&q=80" class="feature-img" alt="">
-                                <div class="feature-meta">
-                                    <span class="feature-num">01</span>
-                                    <h4 class="feature-title">自由自在なチーム編成</h4>
-                                </div>
-                                <p class="text-body">整体師、栄養士、元プロサッカー選手、保育士、スポーツトレーナー、ボイストレーナーなど、多様なジャンルのプロフェッショナルが在籍。あなたの目標や課題に合わせて、自由に専門家をアサインできます。</p>
+                            <div class="qr-code">
+                                <img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=https://line.me/R/ti/p/@your_line_id_here" alt="LINE QRコード">
                             </div>
 
-                            <div class="feature-item">
-                                <img src="https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=400&q=80" class="feature-img" alt="">
-                                <div class="feature-meta">
-                                    <span class="feature-num">02</span>
-                                    <h4 class="feature-title">無駄のないポイント制</h4>
-                                </div>
-                                <p class="text-body">毎月付与されるポイントを使って、必要な時に、必要な専門家のサポートを受けられます。ライフスタイルの変化に合わせて、今月は身体のケア、来月はメンタルサポートといった使い方が可能です。</p>
-                            </div>
+                            <a href="https://line.me/R/ti/p/@your_line_id_here" class="line-btn-large">
+                                LINEアプリで開く
+                            </a>
 
-                            <div class="feature-item">
-                                <img src="https://images.unsplash.com/photo-1511556820780-d912e42b4980?auto=format&fit=crop&w=400&q=80" class="feature-img" alt="">
-                                <div class="feature-meta">
-                                    <span class="feature-num">03</span>
-                                    <h4 class="feature-title">応援や物販にも使える</h4>
-                                </div>
-                                <p class="text-body">保有ポイントはセッションの予約だけでなく、活動を頑張るアスリートや専門家への「応援（ギフティング）」や、プロ厳選のケアグッズなどの「物販」購入にもご利用いただけます。</p>
+                            <div class="line-step">
+                                <strong>【ご相談の流れ】</strong><br>
+                                1. 「LINEアプリで開く」またはQRコードを読み込み<br>
+                                2. RESET BASE公式アカウントを友だち追加<br>
+                                3. メッセージにて「無料相談希望」とお送りください。担当コンシェルジュがご案内いたします。
                             </div>
                         </div>
+                    </section>
 
-                        <div class="section-box" id="plan">
-                            <div class="section-tag">Plan</div>
-                            <h2 class="section-title">ポイントプラン</h2>
-
-                            <div class="plan-card">
-                                <div class="badge">まずはここから！</div>
-                                <div class="plan-name">ベーシックプラン</div>
-                                <div class="plan-price">¥10,000<span>/月</span></div>
-                                <div class="plan-details">
-                                    <p>【付与ポイント】 11,000 pt</p>
-                                    <p style="margin-top:4px;">【内容】毎月のメンテナンスや、特定の専門家のアドバイスを定期的に受けたい方におすすめの入門プランです。</p>
-                                </div>
-                            </div>
-
-                            <div class="plan-card popular">
-                                <div class="badge">一番人気！</div>
-                                <div class="plan-name">スタンダードプラン</div>
-                                <div class="plan-price">¥30,000<span>/月</span></div>
-                                <div class="plan-details">
-                                    <p>【付与ポイント】 35,000 pt</p>
-                                    <p style="margin-top:4px;">【内容】身体のケアに加え、栄養指導やスキルトレーニングなど、複数の専門家でチームを組みたい方に最適です。</p>
-                                </div>
-                            </div>
-
-                            <div class="plan-card premium">
-                                <div class="badge">贅沢に！</div>
-                                <div class="plan-name">プレミアムプラン</div>
-                                <div class="plan-price">¥50,000<span>/月</span></div>
-                                <div class="plan-details">
-                                    <p>【付与ポイント】 60,000 pt</p>
-                                    <p style="margin-top:4px;">【内容】万全のサポート体制を築きたい方へ。余ったポイントでグッズ購入や専門家の応援も余裕を持って行えます。</p>
-                                </div>
-                            </div>
-
-                            <div class="plan-note">
-                                ※全ての価格は税込みです。<br>
-                                ※ポイントの有効期限は付与日から6ヶ月間です。<br>
-                                ※プラン変更は前月の20日までにお手続きください。<br>
-                                ※専門家ごとの消費ポイント数は、マイページよりご確認いただけます。
-                            </div>
+                    <footer class="footer">
+                        <div class="footer-logo">RESET BASE</div>
+                        <div class="footer-links">
+                            <a href="#">運営会社</a>
+                            <a href="#">プライバシーポリシー</a>
+                            <a href="#">特定商取引法に基づく表記</a>
                         </div>
+                        <div class="footer-copy">© 2026 RESET BASE All Rights Reserved.</div>
+                    </footer>
 
-                        <div class="section-box" id="faq">
-                            <div class="section-tag">Faq</div>
-                            <h2 class="section-title">よくあるご質問</h2>
-
-                            <div class="faq-item">
-                                <div class="faq-q">余ったポイントは翌月に繰り越せますか？</div>
-                                <div class="faq-a">はい、繰り越し可能です。ポイントの有効期限は付与された日から6ヶ月間となりますので、ご自身のペースでご利用いただけます。</div>
-                            </div>
-
-                            <div class="faq-item">
-                                <div class="faq-q">専門家を「応援する」とはどういうことですか？</div>
-                                <div class="faq-a">競技を頑張るアスリートや、素晴らしい知識を提供する専門家に対して、ポイントを使って直接ギフティング（支援）ができる機能です。応援ポイントは彼らの活動資金として還元されます。</div>
-                            </div>
-
-                            <div class="faq-item">
-                                <div class="faq-q">どんな専門家が在籍していますか？</div>
-                                <div class="faq-a">理学療法士、管理栄養士、元プロスポーツ選手、保育士、ボイストレーナー、スポーツトレーナーなど、身体と心、スキルアップをサポートする多様なプロフェッショナルが在籍しています。</div>
-                            </div>
-                        </div>
-
-                        <div class="section-box" id="access">
-                            <div class="section-tag">Access</div>
-                            <h2 class="section-title">実店舗アクセス</h2>
-                            <p class="text-body" style="text-align:center; margin-bottom:12px;">対面でのフィジカルケアやコンディショニングは、浅草の店舗でもご提供しております。</p>
-                            <a href="https://goo.gl/maps/LPch2UsXLLVKEz978" target="_blank" class="maps-btn">Google Mapsを開く</a>
-                            <p class="address-text">〒111-0032 東京都台東区浅草<br>RESET BASE 実店舗</p>
-                        </div>
-
-                        <div class="section-box" id="contact">
-                            <div class="section-tag">Contact</div>
-                            <h2 class="section-title">お問い合わせ</h2>
-                            
-                            <form class="contact-form" onsubmit="return false;">
-                                <div class="form-group">
-                                    <label>お名前<span class="req-tag">必須</span></label>
-                                    <input type="text" class="form-control" required autocomplete="off">
-                                </div>
-                                <div class="form-group">
-                                    <label>メールアドレス<span class="req-tag">必須</span></label>
-                                    <input type="email" class="form-control" required autocomplete="off">
-                                </div>
-                                <div class="form-group">
-                                    <label>お問い合わせ内容</label>
-                                    <textarea class="form-control"></textarea>
-                                </div>
-                                <label class="check-label">
-                                    <input type="checkbox" required>
-                                    <span>プライバシーポリシーについて同意する</span>
-                                </label>
-                                <button type="submit" class="submit-btn">送信する</button>
-                            </form>
-                        </div>
-
-                        <footer class="phone-footer">
-                            <div class="footer-logo">RESET BASE</div>
-                            <div class="footer-links">
-                                <a href="#">プライバシーポリシー</a>
-                                <a href="#">利用規約</a>
-                            </div>
-                            <p class="copyright">©︎2026 RESET BASE All rights reserved.</p>
-                        </footer>
-
-                    </div>
                 </div>
-
             </div>
         </main>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const hamburgerBtn = document.getElementById('js-hamburger');
-            const mobileMenu = document.getElementById('js-mobile-menu');
-            const menuLinks = mobileMenu.querySelectorAll('a');
             const phoneMockup = document.querySelector('.phone-mockup');
             const desktopLinks = document.querySelectorAll('.desktop-nav a');
 
-            function isMobile() {
-                return window.innerWidth <= 768;
-            }
+            function isMobile() { return window.innerWidth <= 768; }
 
-            // ★追加：画面のどこでスクロールしてもスマホ内部をスクロールさせる
+            // ホイールスクロール連動
             window.addEventListener('wheel', (e) => {
-                // スマホ実機サイズの時は標準のスクロールに任せる
                 if (isMobile()) return;
-                
-                // カーソルがスマホモックアップの中にない場合のみ、スクロール量を同期
                 if (!phoneMockup.contains(e.target) && e.target !== phoneMockup) {
                     phoneMockup.scrollTop += e.deltaY;
                 }
             }, { passive: true });
 
-            // PCサイドメニュークリック時のスマホ内部連動スクロール処理
+            // ナビゲーション連動
             desktopLinks.forEach(link => {
                 link.addEventListener('click', (e) => {
                     e.preventDefault();
-                    
                     document.querySelector('.desktop-nav .active').classList.remove('active');
                     link.parentElement.classList.add('active');
 
@@ -615,70 +343,55 @@
                     const targetElement = phoneMockup.querySelector(`#${targetId}`);
                     
                     if (targetElement) {
-                        const targetTop = targetElement.getBoundingClientRect().top - phoneMockup.getBoundingClientRect().top + phoneMockup.scrollTop;
-                        phoneMockup.scrollTo({
-                            top: targetTop,
-                            behavior: 'smooth'
-                        });
+                        const targetTop = targetElement.getBoundingClientRect().top - phoneMockup.getBoundingClientRect().top + phoneMockup.scrollTop - 60; // ヘッダー分少しずらす
+                        phoneMockup.scrollTo({ top: targetTop, behavior: 'smooth' });
                     }
                 });
             });
 
-            // FAQのアコーディオン開閉
-            const faqItems = document.querySelectorAll('.faq-item');
-            faqItems.forEach(item => {
-                const q = item.querySelector('.faq-q');
-                q.addEventListener('click', () => {
-                    item.classList.toggle('open');
+            // スクロール時の現在位置ナビゲーションハイライト
+            phoneMockup.addEventListener('scroll', () => {
+                let current = '';
+                const sections = phoneMockup.querySelectorAll('section');
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    if (phoneMockup.scrollTop >= sectionTop - 100) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                desktopLinks.forEach(link => {
+                    link.parentElement.classList.remove('active');
+                    if (link.getAttribute('href').includes(current)) {
+                        link.parentElement.classList.add('active');
+                    }
                 });
             });
 
-            // ハンバーガーメニューの開閉
-            const toggleMenu = () => {
-                hamburgerBtn.classList.toggle('open');
-                mobileMenu.classList.toggle('open');
-            };
-            if(hamburgerBtn) hamburgerBtn.addEventListener('click', toggleMenu);
-
-            menuLinks.forEach(link => {
-                link.addEventListener('click', () => {
-                    if (mobileMenu.classList.contains('open')) toggleMenu();
-                });
-            });
-
+            // 専門家アニメーション
             const expertsGroup1 = document.querySelectorAll('.expert.group1');
             const expertsGroup2 = document.querySelectorAll('.expert.group2');
             let currentGroup = 1;
 
             function cycleExperts() {
                 if (isMobile()) return;
-
                 const groupToAnimate = (currentGroup === 1) ? expertsGroup1 : expertsGroup2;
 
                 groupToAnimate[0].classList.add('active'); 
                 setTimeout(() => groupToAnimate[1].classList.add('active'), 600); 
 
                 setTimeout(() => {
-                    groupToAnimate.forEach(exp => {
-                        exp.classList.add('out'); 
-                    });
-
+                    groupToAnimate.forEach(exp => exp.classList.add('out'));
                     setTimeout(() => {
-                        groupToAnimate.forEach(exp => {
-                            exp.classList.remove('active', 'out');
-                        });
+                        groupToAnimate.forEach(exp => exp.classList.remove('active', 'out'));
                         currentGroup = (currentGroup === 1) ? 2 : 1;
                         cycleExperts(); 
                     }, 500); 
                 }, 4000);
             }
 
-            // 初回実行
-            setTimeout(() => {
-                if (!isMobile()) {
-                    cycleExperts();
-                }
-            }, 1000); 
+            setTimeout(() => { if (!isMobile()) cycleExperts(); }, 1000); 
 
             window.addEventListener('resize', () => {
                 if (isMobile()) {
