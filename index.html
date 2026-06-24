@@ -71,10 +71,12 @@
         .preview-area { width: 70%; }
         .phone-container-wrapper { position: absolute; top: 50%; left: 50%; width: var(--phone-width); height: var(--phone-height); max-height: 95vh; transform: translate(-50%, -50%); z-index: 10; }
 
-        /* ★修正：scroll-behavior: smoothを削除して画面外からのスクロール遅延を解消 */
+        /* ★修正：スマホ自体の左右パディングを排除して画像が端まで届くように修正（borderを別構造化） */
         .phone-mockup {
             position: relative; z-index: 10; width: 100%; height: 100%;
-            background: #fff; border: 12px solid #fff; border-radius: 40px;
+            background: #fff; 
+            border: 12px solid #fff; /* 白いベゼルは維持 */
+            border-radius: 40px;
             box-shadow: 0 30px 60px rgba(0,0,0,0.3); overflow-y: auto; overflow-x: hidden;
         }
         .phone-mockup::-webkit-scrollbar { width: 0; }
@@ -92,7 +94,7 @@
         /* --- LP内部スタイル --- */
         .lp-header {
             display: flex; justify-content: space-between; align-items: center;
-            padding: 16px 24px; background: rgba(255, 255, 255, 0.95);
+            padding: 16px 20px; background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 100;
             border-bottom: 1px solid rgba(0,0,0,0.05);
         }
@@ -104,40 +106,35 @@
             box-shadow: 0 4px 10px rgba(6, 199, 85, 0.3);
         }
 
-        /* ファーストビュー（スライダー・波打ち・縦書き） */
-        .hero { position: relative; height: 480px; overflow: hidden; background: #fff; }
+        /* ★修正：widthを100%にし、ネガティブマージン等で余白を絶対に出さない設計に */
+        .hero { position: relative; height: 480px; overflow: hidden; background: #fff; width: 100%; }
         
-        .hero-slider { position: absolute; inset: 0; z-index: 1; }
-        .hero-slider .slide { position: absolute; inset: 0; background-size: cover; background-position: center; opacity: 0; transition: opacity 1.5s ease-in-out; }
+        .hero-slider { position: absolute; inset: 0; z-index: 1; width: 100%; }
+        .hero-slider .slide { position: absolute; inset: 0; background-size: cover; background-position: center; opacity: 0; transition: opacity 1.5s ease-in-out; width: 100%; }
         .hero-slider .slide.active { opacity: 1; }
         .hero::after { content: ""; position: absolute; inset: 0; background: rgba(0,0,0,0.2); z-index: 2; }
 
+        /* 波打ちの横幅を完全に画面いっぱいに広げる設定 */
         .wave-top { position: absolute; top: -1px; left: 0; width: 100%; height: 50px; z-index: 3; }
         .wave-bottom { position: absolute; bottom: -1px; left: 0; width: 100%; height: 50px; z-index: 3; }
         .wave-top svg, .wave-bottom svg { width: 100%; height: 100%; display: block; fill: #fff; }
 
-        /* ★修正：縦書きキャッチコピーの段差配置 */
+        /* 縦書きキャッチコピー */
         .hero-content {
-            position: absolute; top: 12%; right: 24px; z-index: 4;
+            position: absolute; top: 12%; right: 20px; z-index: 4;
             display: flex; flex-direction: row-reverse; gap: 12px;
-            align-items: flex-start; /* 上揃えを基準にする */
+            align-items: flex-start;
         }
         .vertical-catch {
             writing-mode: vertical-rl; color: #fff; padding: 24px 10px;
             font-size: 15px; font-weight: 700; letter-spacing: 0.2em; white-space: nowrap;
             box-shadow: 0 10px 25px rgba(0,0,0,0.2); text-align: center;
         }
-        .vertical-catch.accent-box {
-            background-color: #1a49b8; 
-            margin-top: 0px; /* 上に配置 */
-        }
-        .vertical-catch.main-box {
-            background-color: var(--primary-bg);
-            margin-top: 60px; /* 下にずらして配置 */
-        }
+        .vertical-catch.accent-box { background-color: #1a49b8; margin-top: 0px; }
+        .vertical-catch.main-box { background-color: var(--primary-bg); margin-top: 60px; }
 
         /* セクション共通 */
-        .section { padding: 60px 24px; background: #fff; border-bottom: 1px solid #f0f0f0; }
+        .section { padding: 60px 20px; background: #fff; border-bottom: 1px solid #f0f0f0; }
         .bg-light { background-color: #f9fafb; }
         
         .sec-title-wrap { text-align: center; margin-bottom: 32px; }
@@ -194,14 +191,14 @@
         .maps-btn { display: flex; justify-content: center; align-items: center; background: var(--primary-bg); color: #fff; text-decoration: none; padding: 12px; border-radius: 6px; font-weight: 700; font-size: 14px; margin-top: 16px; }
 
         /* LINE CTA */
-        .line-section { background: #f4f7fc; padding: 60px 24px; text-align: center; }
+        .line-section { background: #f4f7fc; padding: 60px 20px; text-align: center; }
         .line-wrap { border: 2px solid #06C755; border-radius: 12px; padding: 40px 24px; background: #fff; box-shadow: 0 10px 30px rgba(6,199,85,0.08); }
         .line-title { font-size: 18px; font-weight: 700; color: var(--text-dark); margin-bottom: 24px; line-height: 1.5; }
         .qr-code { width: 140px; height: 140px; margin: 0 auto 24px; }
         .qr-code img { width: 100%; height: 100%; display: block; }
         .line-btn-large { display: flex; align-items: center; justify-content: center; background: #06C755; color: #fff; font-size: 16px; font-weight: 700; padding: 18px; border-radius: 8px; text-decoration: none; box-shadow: 0 6px 15px rgba(6, 199, 85, 0.3); }
         
-        /* ★修正：フッターデザインを完全再現 */
+        /* フッター */
         .footer {
             background-color: var(--primary-bg);
             background-image: radial-gradient(rgba(255, 255, 255, 0.15) 2px, transparent 2px);
@@ -209,13 +206,13 @@
             padding: 50px 24px 30px; 
             text-align: center; 
             color: #fff;
+            width: 100%;
         }
         .footer-logo { font-size: 32px; font-weight: 900; font-family: var(--font-en); font-style: italic; margin-bottom: 4px; line-height: 1; }
         .footer-sub { font-size: 10px; font-weight: 400; letter-spacing: 0.1em; margin-bottom: 32px; opacity: 0.9; }
         
         .footer-sns { display: flex; justify-content: center; gap: 24px; margin-bottom: 32px; }
         .footer-sns a { color: #fff; font-size: 28px; text-decoration: none; transition: opacity 0.3s; }
-        .footer-sns a:hover { opacity: 0.7; }
         
         .footer-links { display: flex; justify-content: center; gap: 16px; font-size: 11px; margin-bottom: 24px; flex-wrap: wrap; }
         .footer-links a { color: #fff; text-decoration: underline; text-underline-offset: 3px; }
@@ -441,7 +438,7 @@
                         </div>
                         <div class="faq-item">
                             <div class="faq-q">どんな専門家が在籍していますか？</div>
-                            <div class="faq-a">理学療法士、管理栄養士、ボイストレーナー、スポーツトレーナーなど、多様なプロフェッショナルが在籍しています。</div>
+                            <div class="faq-a">理学療法士、管理栄養士、ボいストレーナー、スポーツトレーナーなど、多様なプロフェッショナルが在籍しています。</div>
                         </div>
                     </section>
 
@@ -511,7 +508,6 @@
             }
             setInterval(nextSlide, 4000);
 
-            // ホイールスクロール連動（CSS側のsmooth scrollを外したことでラグ解消）
             window.addEventListener('wheel', (e) => {
                 if (isMobile()) return;
                 if (!phoneMockup.contains(e.target) && e.target !== phoneMockup) {
@@ -519,7 +515,6 @@
                 }
             }, { passive: true });
 
-            // ナビゲーションのクリック時のみJSでスムーズスクロールさせる
             desktopLinks.forEach(link => {
                 link.addEventListener('click', (e) => {
                     e.preventDefault();
