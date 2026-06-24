@@ -187,12 +187,12 @@
             background: transparent;
         }
 
-        /* 左右の位置・出現時アニメーション設定 */
+        /* ★ 修正：左右の位置・出現時アニメーション設定をさらに10度回転 ★ */
         .expert.right { top: 40%; right: 0; width: 240px; transform-origin: right center; }
-        .expert.right.active { opacity: 1; transform: translate(70%, 0) scale(1.1) rotate(15deg); }
+        .expert.right.active { opacity: 1; transform: translate(70%, 0) scale(1.1) rotate(25deg); }
 
         .expert.left { top: 15%; left: 0; width: 240px; transform-origin: left center; }
-        .expert.left.active { opacity: 1; transform: translate(-70%, 0) scale(1.1) rotate(-15deg); }
+        .expert.left.active { opacity: 1; transform: translate(-70%, 0) scale(1.1) rotate(-25deg); }
 
         /* --- スマホ内部コンテンツ --- */
         .header {
@@ -357,17 +357,17 @@
                 
                 <div class="experts-layer">
                     <div class="expert group1 left" id="exp-1-1">
-                        <img src="https://i.imgur.com/Q99O8ag.png" alt="理学療法士">
+                        <img src="https://i.imgur.com/3NXwzm5.png" alt="理学療法士">
                     </div>
                     <div class="expert group1 right" id="exp-1-2">
-                        <img src="https://i.imgur.com/ewhrNYB.png" alt="トレーナー">
+                        <img src="https://i.imgur.com/yXDQy2F.png" alt="トレーナー">
                     </div>
 
                     <div class="expert group2 left" id="exp-2-1">
-                        <img src="https://i.imgur.com/Q99O8ag.png" alt="ボイストレーナー">
+                        <img src="https://i.imgur.com/3NXwzm5.png" alt="ボイストレーナー">
                     </div>
                     <div class="expert group2 right" id="exp-2-2">
-                        <img src="https://i.imgur.com/ewhrNYB.png" alt="元プロアスリート">
+                        <img src="https://i.imgur.com/3NXwzm5.png" alt="元プロアスリート">
                     </div>
                 </div>
 
@@ -612,7 +612,6 @@
                 });
             });
 
-            // --- 修正：左右2名がテンポよくアサインされるアニメーション（テキストなし） ---
             const expertsGroup1 = document.querySelectorAll('.expert.group1');
             const expertsGroup2 = document.querySelectorAll('.expert.group2');
             let currentGroup = 1;
@@ -626,11 +625,9 @@
 
                 const groupToAnimate = (currentGroup === 1) ? expertsGroup1 : expertsGroup2;
 
-                // 左右を順番に出現させる（1人目：即時、2人目：0.6秒後）
                 groupToAnimate[0].classList.add('active'); 
                 setTimeout(() => groupToAnimate[1].classList.add('active'), 600); 
 
-                // 一定時間表示させてからフェードアウト（表示時間：計4秒程度に最適化）
                 setTimeout(() => {
                     groupToAnimate.forEach(exp => {
                         exp.classList.add('out'); 
