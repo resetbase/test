@@ -75,9 +75,31 @@
             padding-left: 5vw;
             z-index: 20; 
         }
-        .desktop-logo { margin-bottom: 60px; color: #fff; }
-        .desktop-logo h1 { font-family: var(--font-en); font-size: 42px; font-style: italic; font-weight: 800; line-height: 1; }
-        .desktop-logo p { font-size: 12px; margin-top: 4px; letter-spacing: 2px; padding-left: 4px; }
+
+        /* ★ 左上のロゴスタイルを Flex Gym Men と同じ位置・サイズに調整 ★ */
+        .desktop-logo { 
+            margin-bottom: 40px; 
+            color: #fff; 
+        }
+        .desktop-logo h1 { 
+            font-family: var(--font-en); 
+            font-size: 40px; 
+            font-style: italic; 
+            font-weight: 800; 
+            line-height: 1.1; 
+            letter-spacing: -0.05em;
+        }
+        .desktop-logo h1 span {
+            display: block;
+        }
+        .desktop-logo p { 
+            font-size: 10px; 
+            margin-top: 4px; 
+            letter-spacing: 0.05em; 
+            padding-left: 2px;
+            font-weight: 700;
+        }
+
         .desktop-nav ul { list-style: none; }
         .desktop-nav li { margin-bottom: 24px; }
         .desktop-nav a {
@@ -133,7 +155,7 @@
             position: absolute;
             top: 0; left: 0;
             width: 100%; height: 100%;
-            z-index: 1; /* スマホの裏側 */
+            z-index: 1; 
             pointer-events: none;
         }
         
@@ -146,7 +168,7 @@
             opacity: 0; 
             transform: translate(0, 0) scale(0.5);
             width: 240px; 
-            transform-origin: center 80%; /* 回転軸を足元に */
+            transform-origin: center 80%; 
         }
 
         .expert img { 
@@ -168,7 +190,6 @@
             white-space: nowrap;
             z-index: 2;
         }
-        /* 吹き出しのしっぽ（共通設定） */
         .expert-text::after {
             content: ''; position: absolute; width: 0; height: 0; border-style: solid;
         }
@@ -176,7 +197,7 @@
         .expert-role { font-size: 10px; color: var(--primary-bg); font-weight: 800; margin-bottom: 4px; }
         .expert-msg { font-size: 15px; font-weight: 700; color: var(--text-dark); }
 
-        /* 左から出る専門家の吹き出し配置 */
+        /* 各専門家の配置設定 */
         .expert.left { top: 15%; left: 0; }
         .expert.left.active { 
             opacity: 1; 
@@ -188,7 +209,6 @@
             border-color: #fff transparent transparent transparent;
         }
 
-        /* 右から出る専門家の吹き出し配置 */
         .expert.right { top: 40%; right: 0; }
         .expert.right.active { 
             opacity: 1; 
@@ -200,7 +220,6 @@
             border-color: #fff transparent transparent transparent;
         }
 
-        /* 上から出る専門家の吹き出し配置 */
         .expert.top { top: 0; left: 50%; width: 260px; }
         .expert.top.active { 
             opacity: 1; 
@@ -211,7 +230,6 @@
             top: -12px; left: 50px; border-width: 0 10px 15px 10px;
             border-color: transparent transparent #fff transparent;
         }
-
 
         /* --- スマホ内部コンテンツ --- */
         .header {
@@ -250,7 +268,6 @@
         .mobile-menu li { margin: 24px 0; }
         .mobile-menu a { color: #fff; text-decoration: none; font-size: 20px; font-weight: 700; letter-spacing: 2px; }
 
-        /* 各種セクション */
         .hero {
             position: relative; height: 380px; display: flex; justify-content: flex-end; padding: 0 32px;
             background: url('https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?auto=format&fit=crop&w=600&q=80') center/cover;
@@ -270,14 +287,12 @@
         .section-subtitle { font-size: 16px; font-weight: 700; color: #333; line-height: 1.5; margin-bottom: 16px; text-align: center; }
         .text-body { font-size: 13px; line-height: 1.8; color: #555; text-align: justify; }
 
-        /* 特徴パーツ */
         .feature-item { margin-top: 30px; }
         .feature-img { width: 100%; height: 160px; object-fit: cover; border-radius: 6px; margin-bottom: 12px; }
         .feature-meta { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
         .feature-num { font-size: 24px; font-weight: 800; color: var(--primary-bg); font-family: var(--font-en); font-style: italic; }
         .feature-title { font-size: 15px; font-weight: 700; color: #333; }
 
-        /* 料金プランカード */
         .plan-card { border: 2px solid var(--primary-bg); border-radius: 8px; padding: 24px; text-align: center; position: relative; margin-top: 32px; overflow: hidden; }
         .plan-card.popular { border-color: #fc557d; }
         .plan-card.premium { border-color: #333; }
@@ -294,7 +309,6 @@
         .plan-details { font-size: 12px; line-height: 1.6; color: #555; text-align: left; margin-top: 16px; border-top: 1px dashed #eee; padding-top: 12px; }
         .plan-note { font-size: 11px; color: #777; line-height: 1.6; margin-top: 24px; background: #f9f9f9; padding: 12px; border-radius: 6px; }
 
-        /* FAQアコーディオン */
         .faq-item { border: 1px solid #eee; border-radius: 6px; margin-top: 12px; overflow: hidden; }
         .faq-q { background: #f9f9f9; padding: 14px 16px; font-weight: 700; font-size: 13px; color: #333; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
         .faq-q::after { content: '＋'; font-size: 12px; color: var(--primary-bg); }
@@ -302,11 +316,9 @@
         .faq-a { padding: 14px 16px; font-size: 13px; line-height: 1.6; color: #555; border-top: 1px solid #eee; display: none; background: #fff; }
         .faq-item.open .faq-a { display: block; }
 
-        /* アクセス */
         .maps-btn { display: flex; justify-content: center; align-items: center; gap: 8px; background: var(--primary-bg); color: #fff; text-decoration: none; padding: 12px; border-radius: 6px; font-weight: 700; font-size: 14px; margin-top: 16px; }
         .address-text { font-size: 13px; color: #555; margin-top: 12px; text-align: center; }
 
-        /* フォーム */
         .contact-form { display: flex; flex-direction: column; gap: 16px; margin-top: 20px; }
         .form-group { display: flex; flex-direction: column; gap: 6px; }
         .form-group label { font-size: 13px; font-weight: 700; color: #333; display: flex; align-items: center; gap: 6px; }
@@ -317,7 +329,6 @@
         .check-label input { margin-top: 2px; }
         .submit-btn { background: var(--primary-bg); color: #fff; border: none; padding: 14px; border-radius: 4px; font-weight: 700; font-size: 15px; cursor: pointer; }
 
-        /* スマホ用フッター */
         .phone-footer { background: #1f5cf0; padding: 32px 16px; text-align: center; color: #fff; }
         .footer-logo { font-size: 20px; font-weight: 800; font-style: italic; font-family: var(--font-en); margin-bottom: 12px; }
         .footer-links { display: flex; justify-content: center; gap: 12px; font-size: 11px; margin-bottom: 16px; }
@@ -356,7 +367,7 @@
     <div class="layout-wrapper">
         <aside class="desktop-sidebar">
             <div class="desktop-logo">
-                <h1>RESET BASE</h1>
+                <h1>RESET<span>BASE</span></h1>
                 <p>すべての人に、専属チームを</p>
             </div>
             <nav class="desktop-nav">
@@ -377,24 +388,24 @@
                 
                 <div class="experts-layer">
                     <div class="expert left" id="exp-1">
-                        <img src="https://i.imgur.com/9qzg7jM.png" alt="整体師">
+                        <img src="https://i.imgur.com/9qzg7jM.png" alt="理学療法士">
                         <div class="expert-text">
-                            <span class="expert-role">整体師</span>
-                            <span class="expert-msg">身体のケアはお任せ！</span>
+                            <span class="expert-role">理学療法士</span>
+                            <span class="expert-msg">一緒に！</span>
                         </div>
                     </div>
                     <div class="expert right" id="exp-2">
-                        <img src="https://i.imgur.com/9qzg7jM.png" alt="ボイストレーナー">
+                        <img src="https://i.imgur.com/4LIOFht.png" alt="トレーナー">
                         <div class="expert-text">
-                            <span class="expert-role">ボイストレーナー</span>
-                            <span class="expert-msg">一緒に声を出そう！</span>
+                            <span class="expert-role">コンディショニングチーフ</span>
+                            <span class="expert-msg">大丈夫！</span>
                         </div>
                     </div>
                     <div class="expert top" id="exp-3">
-                        <img src="https://i.imgur.com/9qzg7jM.png" alt="元プロアスリート">
+                        <img src="https://i.imgur.com/4LIOFht.png" alt="管理栄養士">
                         <div class="expert-text">
-                            <span class="expert-role">元プロサッカー選手</span>
-                            <span class="expert-msg">全力で応援するよ！</span>
+                            <span class="expert-role">管理栄養士</span>
+                            <span class="expert-msg">一緒に！</span>
                         </div>
                     </div>
                 </div>
@@ -508,7 +519,7 @@
                                 <div class="plan-price">¥50,000<span>/月</span></div>
                                 <div class="plan-details">
                                     <p>【付与ポイント】 60,000 pt</p>
-                                    <p style="margin-top:4px;">【内容】万全のサポート体制を築きたい方へ。余ったポイントでグッズ購入や専門家の応援も余裕を持って行えます。</p>
+                                    <p style="margin-top:4px;">【内容】万全 of サポート体制を築きたい方へ。余ったポイントでグッズ購入や専門家の応援も余裕を持って行えます。</p>
                                 </div>
                             </div>
 
@@ -544,7 +555,7 @@
                             <div class="section-tag">Access</div>
                             <h2 class="section-title">実店舗アクセス</h2>
                             <p class="text-body" style="text-align:center; margin-bottom:12px;">対面でのフィジカルケアやコンディショニングは、浅草の店舗でもご提供しております。</p>
-                            <a href="https://maps.google.com" target="_blank" class="maps-btn">Google Mapsを開く</a>
+                            <a href="https://goo.gl/maps/LPch2UsXLLVKEz978" target="_blank" class="maps-btn">Google Mapsを開く</a>
                             <p class="address-text">〒111-0032 東京都台東区浅草<br>RESET BASE 実店舗</p>
                         </div>
 
