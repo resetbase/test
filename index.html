@@ -11,8 +11,9 @@
             --font-en: 'Open Sans', sans-serif;
             --primary-bg: #2b65f1;
             --text-dark: #333333;
-            --phone-width: 380px;
-            --phone-height: 750px;
+            /* ★ スマホ画面サイズを大きく変更 (元は 380px / 750px) */
+            --phone-width: 440px;
+            --phone-height: 850px;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -131,6 +132,8 @@
             left: 50%;
             width: var(--phone-width);
             height: var(--phone-height);
+            /* ノートPCなど画面が低い場合でもはみ出さないよう調整 */
+            max-height: 90vh; 
             transform: translate(-50%, -50%); 
             z-index: 10;
         }
@@ -170,10 +173,9 @@
             transform: translate(0, 0) scale(0.5);
             width: 240px; 
             transform-origin: center 80%; /* 回転軸を足元に */
-            pointer-events: none; /* JavaScriptで制御するため無効化 */
+            pointer-events: none;
         }
 
-        /* ★ 新規：一斉に戻るアニメーション ★ */
         .expert.active.out {
             opacity: 0;
             transform: scale(0.5) !important;
@@ -199,7 +201,6 @@
             white-space: nowrap;
             z-index: 2;
         }
-        /* 吹き出しのしっぽ（共通設定） */
         .expert-text::after {
             content: ''; position: absolute; width: 0; height: 0; border-style: solid;
         }
@@ -208,69 +209,25 @@
         .expert-msg { font-size: 15px; font-weight: 700; color: var(--text-dark); }
 
         /* 各位置の配置設定（出現時のtransform） */
-        /* ★ 新規：上（時計回りの起点） ★ */
         .expert.top { top: 0; left: 50%; width: 260px; transform-origin: top center; }
-        .expert.top.active { 
-            opacity: 1; 
-            transform: translate(-50%, -60%) scale(1.1) rotate(8deg); 
-        }
-        .expert.top .expert-text { 
-            bottom: -10px; 
-            left: 60%; transform: translateX(-50%); /* 顔を避けて左下に */
-        }
-        .expert.top .expert-text::after {
-            top: -12px;
-            left: 50px; /* しっぽを上に向けて顔の方へ */
-            border-width: 0 10px 15px 10px;
-            border-color: transparent transparent #fff transparent;
-        }
+        .expert.top.active { opacity: 1; transform: translate(-50%, -60%) scale(1.1) rotate(8deg); }
+        .expert.top .expert-text { bottom: -10px; left: 60%; transform: translateX(-50%); }
+        .expert.top .expert-text::after { top: -12px; left: 50px; border-width: 0 10px 15px 10px; border-color: transparent transparent #fff transparent; }
 
-        /* 右から出る専門家の吹き出し配置 */
         .expert.right { top: 40%; right: 0; width: 240px; transform-origin: right center; }
-        .expert.right.active { 
-            opacity: 1; 
-            transform: translate(70%, 0) scale(1.1) rotate(15deg); 
-        }
-        .expert.right .expert-text { 
-            top: -20px; 
-            right: -10px; /* 顔を避けて右上に */
-        }
-        .expert.right .expert-text::after {
-            bottom: -12px;
-            left: 30px; /* しっぽを左下に向けて顔の方へ */
-            border-width: 15px 0 0 15px;
-            border-color: #fff transparent transparent transparent;
-        }
+        .expert.right.active { opacity: 1; transform: translate(70%, 0) scale(1.1) rotate(15deg); }
+        .expert.right .expert-text { top: -20px; right: -10px; }
+        .expert.right .expert-text::after { bottom: -12px; left: 30px; border-width: 15px 0 0 15px; border-color: #fff transparent transparent transparent; }
 
-        /* ★ 新規：下（時計回りの3番目） ★ */
         .expert.bottom { bottom: 0; left: 50%; width: 260px; transform-origin: bottom center; }
-        .expert.bottom.active { 
-            opacity: 1; 
-            transform: translate(-50%, 30%) scale(1.1) rotate(-8deg); /* 下から飛び出す */
-        }
-        .expert.bottom .expert-text { 
-            top: -80px; 
-            left: 60%; transform: translateX(-50%); /* 吹き出しを下から上に */
-        }
-        .expert.bottom .expert-text::after {
-            top: 100%;
-            left: 50px; /* しっぽを下に向けて顔の方へ */
-            border-width: 15px 10px 0 10px;
-            border-color: #fff transparent transparent transparent;
-        }
+        .expert.bottom.active { opacity: 1; transform: translate(-50%, 30%) scale(1.1) rotate(-8deg); }
+        .expert.bottom .expert-text { top: -80px; left: 60%; transform: translateX(-50%); }
+        .expert.bottom .expert-text::after { top: 100%; left: 50px; border-width: 15px 10px 0 10px; border-color: #fff transparent transparent transparent; }
 
-        /* 左から出る専門家の吹き出し配置 */
         .expert.left { top: 15%; left: 0; width: 240px; transform-origin: left center; }
-        .expert.left.active { 
-            opacity: 1; 
-            transform: translate(-70%, 0) scale(1.1) rotate(-15deg); 
-        }
+        .expert.left.active { opacity: 1; transform: translate(-70%, 0) scale(1.1) rotate(-15deg); }
         .expert.left .expert-text { top: 0; left: -10px; }
-        .expert.left .expert-text::after {
-            bottom: -12px; right: 30px; border-width: 15px 15px 0 0;
-            border-color: #fff transparent transparent transparent;
-        }
-
+        .expert.left .expert-text::after { bottom: -12px; right: 30px; border-width: 15px 15px 0 0; border-color: #fff transparent transparent transparent; }
 
         /* --- スマホ内部コンテンツ --- */
         .header {
@@ -386,23 +343,19 @@
         /* --- スマホ用レスポンシブ (768px以下) --- */
         @media (max-width: 768px) {
             body { overflow: auto; }
-            .top-left-logo { display: none; } /* スマホ表示時は左上の固定ロゴを隠す */
+            .top-left-logo { display: none; }
             .layout-wrapper { display: block; }
             .desktop-sidebar { display: none; }
             
             .preview-area { width: 100%; padding: 0; align-items: flex-start; height: 100vh;}
-            .phone-container-wrapper { position: relative; top: 0; left: 0; width: 100%; height: 100vh; transform: none; }
+            .phone-container-wrapper { position: relative; top: 0; left: 0; width: 100%; height: 100vh; transform: none; max-height: none; }
             .phone-mockup { border: none; border-radius: 0; box-shadow: none; }
-            .experts-layer { position: fixed; width: 100%; height: 100vh; }
+            
+            /* ★ スマホ表示時は裏の専門家アニメーションを完全に非表示にする ★ */
+            .experts-layer { display: none !important; }
 
             .header-btns { display: none; }
             .hamburger-btn { display: flex; }
-
-            /* スマホ時の飛び出し具合の調整 */
-            .expert.top.active { transform: translate(-50%, -30%) scale(0.85) rotate(10deg); }
-            .expert.right.active { transform: translate(45%, 0) scale(0.85) rotate(-10deg); }
-            .expert.bottom.active { transform: translate(-50%, 15%) scale(0.85) rotate(10deg); }
-            .expert.left.active { transform: translate(-45%, 0) scale(0.85) rotate(-10deg); }
         }
     </style>
 </head>
@@ -416,7 +369,7 @@
     </div>
 
     <div class="top-left-logo">
-        <h1>RESET BASE</h1>
+        <h1>RESET<span>BASE</span></h1>
         <p>すべての人に、専属チームを</p>
     </div>
 
@@ -440,28 +393,28 @@
                 
                 <div class="experts-layer">
                     <div class="expert group1 left" id="exp-1-1">
-                        <img src="https://i.imgur.com/2HOZ5L8.png" alt="理学療法士">
+                        <img src="https://i.imgur.com/9qzg7jM.png" alt="理学療法士">
                         <div class="expert-text">
                             <span class="expert-role">理学療法士 佐藤健二</span>
                             <span class="expert-msg">一緒に！</span>
                         </div>
                     </div>
                     <div class="expert group1 right" id="exp-1-2">
-                        <img src="https://i.imgur.com/2HOZ5L8.png" alt="トレーナー">
+                        <img src="https://i.imgur.com/4LIOFht.png" alt="トレーナー">
                         <div class="expert-text">
                             <span class="expert-role">コンディショニングチーフ 石出佳正</span>
                             <span class="expert-msg">大丈夫！</span>
                         </div>
                     </div>
                     <div class="expert group1 top" id="exp-1-3">
-                        <img src="https://i.imgur.com/2HOZ5L8.png" alt="管理栄養士">
+                        <img src="https://i.imgur.com/4LIOFht.png" alt="管理栄養士">
                         <div class="expert-text">
                             <span class="expert-role">管理栄養士 高橋美咲</span>
                             <span class="expert-msg">一緒に！</span>
                         </div>
                     </div>
                     <div class="expert group1 bottom" id="exp-1-4">
-                        <img src="https://i.imgur.com/2HOZ5L8.png" alt="整体師">
+                        <img src="https://i.imgur.com/9qzg7jM.png" alt="整体師">
                         <div class="expert-text">
                             <span class="expert-role">整体師</span>
                             <span class="expert-msg">ケアするよ！</span>
@@ -739,41 +692,54 @@
                 });
             });
 
-            // ★ 新規：専属チーム・サブスクリプションアニメーション（8人/2グループ） ★
+            // 専属チーム・サブスクリプションアニメーション（8人/2グループ）
             const expertsGroup1 = document.querySelectorAll('.expert.group1');
             const expertsGroup2 = document.querySelectorAll('.expert.group2');
-            let currentGroup = 1; // 1: グループ1, 2: グループ2
+            let currentGroup = 1;
+
+            // スマホ表示時（画面幅768px以下）はアニメーションをスキップ
+            function isMobile() {
+                return window.innerWidth <= 768;
+            }
 
             function cycleExperts() {
+                if (isMobile()) return; // スマホ表示時は実行しない
+
                 const groupToAnimate = (currentGroup === 1) ? expertsGroup1 : expertsGroup2;
 
-                // 各要素を時計回りに順番に出現 (setTimeoutでずらす)
-                // 佐藤(左)->石出(右)->高橋(上)->整体師(下) or 同様の順序
-                groupToAnimate[0].classList.add('active'); // 起点
-                setTimeout(() => groupToAnimate[1].classList.add('active'), 600); // 2番目
-                setTimeout(() => groupToAnimate[2].classList.add('active'), 1200); // 3番目
-                setTimeout(() => groupToAnimate[3].classList.add('active'), 1800); // 4番目（揃う）
+                groupToAnimate[0].classList.add('active'); 
+                setTimeout(() => groupToAnimate[1].classList.add('active'), 600); 
+                setTimeout(() => groupToAnimate[2].classList.add('active'), 1200); 
+                setTimeout(() => groupToAnimate[3].classList.add('active'), 1800); 
 
-                // 全員揃って4秒待機して全員一斉に戻る
-                // 最後の出現(1800ms)から4秒後(1800 + 4000 = 5800ms)
                 setTimeout(() => {
                     groupToAnimate.forEach(exp => {
-                        exp.classList.add('out'); // 一斉に戻るアニメーション
+                        exp.classList.add('out'); 
                     });
 
-                    // アニメーション完了後 (戻るアニメーション0.4s + バッファ)、クラスをクリアして次のグループへ
                     setTimeout(() => {
                         groupToAnimate.forEach(exp => {
                             exp.classList.remove('active', 'out');
                         });
                         currentGroup = (currentGroup === 1) ? 2 : 1;
-                        cycleExperts(); // 再帰的に繰り返す
-                    }, 500); // バッファ込みで500ms
+                        cycleExperts(); 
+                    }, 500); 
                 }, 5800);
             }
 
-            // 最初のサイクルを開始
-            setTimeout(cycleExperts, 1000); // ロード1秒後に開始
+            // 初回実行（PC表示のときのみ開始）
+            setTimeout(() => {
+                if (!isMobile()) {
+                    cycleExperts();
+                }
+            }, 1000); 
+
+            // ウィンドウサイズ変更時にスマホ表示になったらアクティブな要素をリセット
+            window.addEventListener('resize', () => {
+                if (isMobile()) {
+                    document.querySelectorAll('.expert').forEach(exp => exp.classList.remove('active', 'out'));
+                }
+            });
         });
     </script>
 </body>
