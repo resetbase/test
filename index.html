@@ -185,14 +185,34 @@
             height: auto; 
             object-fit: contain;
             background: transparent;
+            /* ★ 追加：画像の下30%くらいを徐々に透明にして「パツッと切れ」を馴染ませる */
+            -webkit-mask-image: linear-gradient(to bottom, black 70%, transparent 95%);
+            mask-image: linear-gradient(to bottom, black 70%, transparent 95%);
         }
 
-        /* ★ 修正：左右の位置・出現時アニメーション設定をさらに10度回転 ★ */
-        .expert.right { top: 40%; right: 0; width: 240px; transform-origin: right center; }
-        .expert.right.active { opacity: 1; transform: translate(70%, 0) scale(1.1) rotate(25deg); }
+        /* --- 左右の位置・出現時アニメーション設定 --- */
+        /* ★ 変更：回転軸（transform-origin）をスマホ側に変更し、切断面が飛び出しにくく調整 */
+        .expert.right { 
+            top: 40%; 
+            right: 10px; /* 少しスマホ内側に潜らせる */
+            width: 240px; 
+            transform-origin: bottom left; /* 左下（スマホ側）を軸に回転 */
+        }
+        .expert.right.active { 
+            opacity: 1; 
+            transform: translate(60%, -10%) scale(1.1) rotate(25deg); 
+        }
 
-        .expert.left { top: 15%; left: 0; width: 240px; transform-origin: left center; }
-        .expert.left.active { opacity: 1; transform: translate(-70%, 0) scale(1.1) rotate(-25deg); }
+        .expert.left { 
+            top: 15%; 
+            left: 10px; /* 少しスマホ内側に潜らせる */
+            width: 240px; 
+            transform-origin: bottom right; /* 右下（スマホ側）を軸に回転 */
+        }
+        .expert.left.active { 
+            opacity: 1; 
+            transform: translate(-60%, -10%) scale(1.1) rotate(-25deg); 
+        }
 
         /* --- スマホ内部コンテンツ --- */
         .header {
