@@ -71,7 +71,7 @@
         .preview-area { width: 70%; }
         .phone-container-wrapper { position: absolute; top: 50%; left: 50%; width: var(--phone-width); height: var(--phone-height); max-height: 95vh; transform: translate(-50%, -50%); z-index: 10; }
 
-        /* ★修正：border: 12px solid #fff; を削除し、端から端まで表示されるように */
+        /* ベゼルレス風モックアップ */
         .phone-mockup {
             position: relative; z-index: 10; width: 100%; height: 100%;
             background: #fff; 
@@ -91,19 +91,23 @@
         .expert.left.active { opacity: 1; transform: translate(-60%, -10%) scale(1.1) rotate(-25deg); }
 
         /* --- LP内部スタイル --- */
-        /* ★修正：border-bottom を削除して線を消す */
+        /* ★修正：ヘッダーのロゴサイズ調整と、LINEボタンのアイコン追加デザイン */
         .lp-header {
             display: flex; justify-content: space-between; align-items: center;
             padding: 16px 20px; background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 100;
         }
-        .lp-logo { color: var(--primary-bg); font-size: 20px; font-weight: 900; font-family: var(--font-en); font-style: italic; line-height: 1.1; }
-        .lp-logo span { display: block; font-size: 9px; font-style: normal; font-weight: 500; color: #888; letter-spacing: 0.05em; }
+        .lp-logo { color: var(--primary-bg); font-size: 26px; font-weight: 900; font-family: var(--font-en); font-style: italic; line-height: 1; letter-spacing: -0.02em; }
+        .lp-logo span { display: block; font-size: 10px; font-style: normal; font-weight: 600; color: #666; letter-spacing: 0.02em; margin-top: 4px; }
+        
         .btn-sm-line {
+            display: inline-flex; align-items: center; gap: 6px;
             background: #06C755; color: #fff; text-decoration: none;
-            font-size: 11px; font-weight: 700; padding: 8px 16px; border-radius: 20px;
-            box-shadow: 0 4px 10px rgba(6, 199, 85, 0.3);
+            font-size: 13px; font-weight: 700; padding: 10px 18px; border-radius: 24px;
+            box-shadow: 0 4px 10px rgba(6, 199, 85, 0.3); transition: transform 0.2s;
         }
+        .btn-sm-line i { font-size: 16px; }
+        .btn-sm-line:active { transform: scale(0.95); }
 
         .hero { position: relative; height: 480px; overflow: hidden; background: #fff; width: 100%; }
         
@@ -187,6 +191,7 @@
         .qr-code img { width: 100%; height: 100%; display: block; }
         .line-btn-large { display: flex; align-items: center; justify-content: center; background: #06C755; color: #fff; font-size: 16px; font-weight: 700; padding: 18px; border-radius: 8px; text-decoration: none; box-shadow: 0 6px 15px rgba(6, 199, 85, 0.3); }
         
+        /* フッター */
         .footer {
             background-color: var(--primary-bg);
             background-image: radial-gradient(rgba(255, 255, 255, 0.15) 2px, transparent 2px);
@@ -260,7 +265,9 @@
                             RESET BASE
                             <span>すべての人に、専属チームを</span>
                         </div>
-                        <a href="#contact" class="btn-sm-line">LINE相談</a>
+                        <a href="#contact" class="btn-sm-line">
+                            <i class="fa-brands fa-line"></i>LINE相談
+                        </a>
                     </header>
 
                     <section class="hero" id="hero">
@@ -426,7 +433,7 @@
                         </div>
                         <div class="faq-item">
                             <div class="faq-q">どんな専門家が在籍していますか？</div>
-                            <div class="faq-a">理学療法士、管理栄養士、ボいストレーナー、スポーツトレーナーなど、多様なプロフェッショナルが在籍しています。</div>
+                            <div class="faq-a">理学療法士、管理栄養士、ボイストレーナー、スポーツトレーナーなど、多様なプロフェッショナルが在籍しています。</div>
                         </div>
                     </section>
 
@@ -458,7 +465,7 @@
 
                     <footer class="footer">
                         <div class="footer-logo">RESET BASE</div>
-                        <div class="footer-sub">すべての人に、専属チームを</div>
+                        <div class="footer-sub">すべての人に、専属チームを。</div>
                         
                         <div class="footer-sns">
                             <a href="#" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i></a>
