@@ -11,8 +11,9 @@
             --font-en: 'Open Sans', sans-serif;
             --primary-bg: #2b65f1;
             --text-dark: #333333;
-            --phone-width: 440px;
-            --phone-height: 850px;
+            /* ★変更：スマホ風画面のサイズを大きくしました */
+            --phone-width: 520px;
+            --phone-height: 92vh;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -131,7 +132,8 @@
             left: 50%;
             width: var(--phone-width);
             height: var(--phone-height);
-            max-height: 90vh; 
+            /* ★変更：縦の最大サイズを少し緩和しました */
+            max-height: 95vh; 
             transform: translate(-50%, -50%); 
             z-index: 10;
         }
@@ -152,7 +154,7 @@
         }
         .phone-mockup::-webkit-scrollbar { width: 0; }
 
-        /* --- 専門家アニメーション（左右のみ・吹き出しなし） --- */
+        /* --- 専門家アニメーション --- */
         .experts-layer {
             position: absolute;
             top: 0; left: 0;
@@ -169,7 +171,8 @@
             transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.4s ease;
             opacity: 0; 
             transform: translate(0, 0) scale(0.5);
-            width: 240px; 
+            /* ★変更：モックアップが大きくなったのに合わせて画像も少し大きく */
+            width: 280px; 
             transform-origin: center 80%;
             pointer-events: none;
         }
@@ -185,18 +188,15 @@
             height: auto; 
             object-fit: contain;
             background: transparent;
-            /* ★ 追加：画像の下30%くらいを徐々に透明にして「パツッと切れ」を馴染ませる */
             -webkit-mask-image: linear-gradient(to bottom, black 70%, transparent 95%);
             mask-image: linear-gradient(to bottom, black 70%, transparent 95%);
         }
 
         /* --- 左右の位置・出現時アニメーション設定 --- */
-        /* ★ 変更：回転軸（transform-origin）をスマホ側に変更し、切断面が飛び出しにくく調整 */
         .expert.right { 
             top: 40%; 
-            right: 10px; /* 少しスマホ内側に潜らせる */
-            width: 240px; 
-            transform-origin: bottom left; /* 左下（スマホ側）を軸に回転 */
+            right: 10px;
+            transform-origin: bottom left;
         }
         .expert.right.active { 
             opacity: 1; 
@@ -205,9 +205,8 @@
 
         .expert.left { 
             top: 15%; 
-            left: 10px; /* 少しスマホ内側に潜らせる */
-            width: 240px; 
-            transform-origin: bottom right; /* 右下（スマホ側）を軸に回転 */
+            left: 10px;
+            transform-origin: bottom right;
         }
         .expert.left.active { 
             opacity: 1; 
@@ -589,6 +588,21 @@
             const phoneMockup = document.querySelector('.phone-mockup');
             const desktopLinks = document.querySelectorAll('.desktop-nav a');
 
+            function isMobile() {
+                return window.innerWidth <= 768;
+            }
+
+            // ★追加：画面のどこでスクロールしてもスマホ内部をスクロールさせる
+            window.addEventListener('wheel', (e) => {
+                // スマホ実機サイズの時は標準のスクロールに任せる
+                if (isMobile()) return;
+                
+                // カーソルがスマホモックアップの中にない場合のみ、スクロール量を同期
+                if (!phoneMockup.contains(e.target) && e.target !== phoneMockup) {
+                    phoneMockup.scrollTop += e.deltaY;
+                }
+            }, { passive: true });
+
             // PCサイドメニュークリック時のスマホ内部連動スクロール処理
             desktopLinks.forEach(link => {
                 link.addEventListener('click', (e) => {
@@ -635,10 +649,6 @@
             const expertsGroup1 = document.querySelectorAll('.expert.group1');
             const expertsGroup2 = document.querySelectorAll('.expert.group2');
             let currentGroup = 1;
-
-            function isMobile() {
-                return window.innerWidth <= 768;
-            }
 
             function cycleExperts() {
                 if (isMobile()) return;
