@@ -64,18 +64,15 @@
         .desktop-nav li.active a.nav-link { opacity: 1; }
         .desktop-nav li:not(.active) a.nav-link { opacity: 0.8; }
 
-        /* 独立したパートナーボタン */
         .btn-sidebar-partner {
             display: inline-flex; align-items: center; gap: 10px;
             padding: 14px 28px; border: 2px solid #fff; border-radius: 8px;
             color: var(--primary-bg); background: #fff; text-decoration: none; font-size: 15px; font-weight: 800;
             transition: all 0.3s ease; box-shadow: 0 10px 25px rgba(0,0,0,0.1);
         }
-        .btn-sidebar-partner.active {
-            background: var(--plan-yellow); border-color: var(--plan-yellow); color: #333;
-        }
+        .btn-sidebar-partner.active { background: var(--plan-yellow); border-color: var(--plan-yellow); color: #333; }
         .btn-sidebar-partner:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(0,0,0,0.15); }
-        .btn-sidebar-partner i { font-size: 18px; color: var(--primary-bg); }
+        .btn-sidebar-partner i { font-size: 18px; color: var(--plan-yellow); }
         .btn-sidebar-partner.active i { color: #333; }
 
         .preview-area { width: 70%; }
@@ -104,11 +101,31 @@
         }
         .lp-logo { color: var(--primary-bg); font-size: 26px; font-weight: 900; font-family: var(--font-en); font-style: italic; line-height: 1; letter-spacing: -0.02em; }
         .lp-logo span { display: block; font-size: 10px; font-style: normal; font-weight: 600; color: #666; letter-spacing: 0.02em; margin-top: 4px; }
+        
+        .header-actions { display: flex; align-items: center; gap: 12px; }
         .btn-sm-line {
             display: inline-flex; align-items: center; gap: 6px; background: #06C755; color: #fff; text-decoration: none;
             font-size: 13px; font-weight: 700; padding: 10px 18px; border-radius: 24px; box-shadow: 0 4px 10px rgba(6, 199, 85, 0.3); transition: transform 0.2s;
         }
         .btn-sm-line i { font-size: 16px; }
+
+        /* ★追加：モバイル用ハンバーガーメニュー */
+        .hamburger-btn { display: none; background: none; border: none; flex-direction: column; gap: 6px; cursor: pointer; z-index: 110; padding: 4px; }
+        .hamburger-btn span { display: block; width: 24px; height: 2px; background: var(--primary-bg); transition: 0.3s; border-radius: 2px; }
+        .hamburger-btn.open span:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+        .hamburger-btn.open span:nth-child(2) { opacity: 0; }
+        .hamburger-btn.open span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
+
+        .mobile-menu {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(255,255,255,0.98); z-index: 105;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            opacity: 0; pointer-events: none; transition: opacity 0.3s;
+        }
+        .mobile-menu.open { opacity: 1; pointer-events: auto; }
+        .mobile-nav-list { list-style: none; text-align: center; }
+        .mobile-nav-list li { margin-bottom: 24px; }
+        .mobile-nav-list a { font-size: 18px; font-weight: 700; color: var(--text-dark); text-decoration: none; letter-spacing: 0.05em; }
 
         /* --- メインLP（B2C） --- */
         #view-main { position: relative; width: 100%; }
@@ -133,10 +150,7 @@
         
         .concept-text { font-size: 14px; line-height: 1.8; color: #444; text-align: justify; margin-bottom: 24px; }
         .concept-highlight { color: var(--primary-bg); font-weight: 700; font-size: 16px; display: block; margin: 16px 0; text-align: center;}
-        .trust-partner-wrap { margin-top: 48px; padding-top: 40px; border-top: 1px dashed #eee; text-align: center; }
-        .trust-partner-title { font-size: 14px; font-weight: 700; color: var(--text-dark); margin-bottom: 16px; }
-        .trust-partner-box { background: #fff; border: 1px solid #eaeaea; border-radius: 8px; padding: 16px 24px; display: flex; justify-content: center; align-items: center; max-width: 280px; margin: 0 auto; box-shadow: 0 4px 15px rgba(0,0,0,0.02); }
-        .trust-partner-box img { max-width: 100%; height: auto; max-height: 40px; object-fit: contain; }
+        
         .feature-card { background: #fff; border-radius: 12px; overflow: hidden; margin-bottom: 24px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid #eee; }
         .feature-img { width: 100%; height: 180px; object-fit: cover; }
         .feature-body { padding: 20px; }
@@ -192,12 +206,10 @@
         .footer-copy { font-size: 11px; opacity: 0.9; font-weight: 400; }
 
         /* ==========================================
-           ★ パートナー（B2B）専用ページ用スタイル 
-           （千葉ジェッツ風・構成の忠実再現）
+           ★ パートナー（B2B）専用ページ
            ========================================== */
         #view-partner { display: none; background-color: #fff; position: relative; width: 100%; } 
         
-        /* Header */
         .p-header {
             display: flex; align-items: center; justify-content: space-between;
             padding: 16px 20px; background: #fff; border-bottom: 1px solid #eaeaea;
@@ -208,7 +220,6 @@
         .p-header-logo { font-size: 16px; font-weight: 900; font-family: var(--font-en); font-style: italic; color: var(--primary-bg); text-align: right; line-height: 1.1;}
         .p-header-logo span { display: block; font-size: 8px; font-weight: 600; color: #888; font-style: normal; letter-spacing: 0.05em;}
 
-        /* KV */
         .p-hero {
             background: url('https://images.unsplash.com/photo-1556761175-5973dc0f32b7?auto=format&fit=crop&w=800&q=80') center/cover;
             height: 380px; position: relative; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 20px; text-align: center;
@@ -217,7 +228,6 @@
         .p-hero-content { position: relative; z-index: 2; color: #fff; width: 100%; }
         .p-hero-content h2 { font-size: 24px; font-weight: 800; line-height: 1.4; margin-bottom: 16px; }
 
-        /* CV Contact Ribbon */
         .p-cv-ribbon { background: var(--primary-bg); padding: 20px; text-align: center; }
         .btn-p-contact {
             display: inline-flex; align-items: center; justify-content: center; gap: 8px;
@@ -225,19 +235,16 @@
             padding: 16px 24px; border-radius: 8px; text-decoration: none; width: 100%; box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
 
-        /* Section Titles (Jets Style) */
         .p-sec { padding: 60px 20px; }
         .p-sec.bg-gray { background: var(--partner-gray); }
         .p-sec-ttl { text-align: center; margin-bottom: 40px; }
         .p-sec-ttl .en { display: block; font-family: var(--font-en); font-size: 28px; font-weight: 900; color: var(--primary-bg); letter-spacing: 0.1em; line-height: 1.2; text-transform: uppercase; }
         .p-sec-ttl .jp { display: block; font-size: 15px; font-weight: 700; color: var(--text-dark); margin-top: 4px; }
 
-        /* About Partner */
         .p-about-img { width: 100%; border-radius: 8px; margin-bottom: 24px; }
         .p-about-ttl { font-size: 18px; font-weight: 700; line-height: 1.4; margin-bottom: 16px; color: #111; text-align: center; border-bottom: 2px solid var(--primary-bg); padding-bottom: 16px;}
         .p-about-txt { font-size: 14px; line-height: 1.8; color: #444; }
 
-        /* Benefits */
         .p-benefit-card { background: #fff; border-radius: 8px; overflow: hidden; margin-bottom: 24px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
         .p-benefit-img { width: 100%; height: 160px; object-fit: cover; }
         .p-benefit-body { padding: 20px; }
@@ -245,7 +252,6 @@
         .p-benefit-ttl { font-size: 16px; font-weight: 700; color: #111; margin-bottom: 10px; line-height: 1.4; }
         .p-benefit-txt { font-size: 13px; line-height: 1.6; color: #555; }
 
-        /* Menu */
         .p-menu-grid { display: flex; flex-direction: column; gap: 24px; }
         .p-menu-card { background: #fff; border: 1px solid #eee; border-radius: 8px; overflow: hidden; }
         .p-menu-card img { width: 100%; height: 160px; object-fit: cover; }
@@ -253,22 +259,21 @@
         .p-menu-card-body h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; color: var(--primary-bg); }
         .p-menu-card-body p { font-size: 13px; color: #555; line-height: 1.6; }
 
-        /* Data */
         .p-data-box { background: var(--primary-bg); padding: 40px 20px; border-radius: 12px; color: #fff; text-align: center; margin-bottom: 20px; box-shadow: inset 0 0 20px rgba(0,0,0,0.1); }
         .p-data-num { font-family: var(--font-en); font-size: 48px; font-weight: 900; font-style: italic; margin: 10px 0; line-height: 1; }
         .p-data-num span { font-size: 16px; font-style: normal; font-weight: 600; margin-left: 4px; }
         .p-data-desc { font-size: 13px; opacity: 0.9; }
 
-        /* Partners Logo (ご指定のロゴと社名) */
         .p-partner-logo-item { 
             display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; 
             padding: 30px 20px; background: #fff; border: 1px solid #eaeaea; border-radius: 8px; 
             box-shadow: 0 4px 15px rgba(0,0,0,0.02); margin: 0 auto; max-width: 280px; 
         }
         .p-partner-logo-item img { width: 100%; max-height: 60px; object-fit: contain; }
-        .p-partner-name { font-size: 13px; font-weight: 700; color: #333; letter-spacing: 0.05em; }
+        .p-partner-name { font-size: 13px; font-weight: 700; color: #333; letter-spacing: 0.05em; margin-bottom: 0;}
 
         @media (max-width: 768px) {
+            .hamburger-btn { display: flex; }
             .layout-wrapper { display: block; }
             .desktop-sidebar, .top-left-logo, .bg-watermark, .experts-layer { display: none !important; }
             .preview-area { width: 100%; height: 100vh; }
@@ -320,15 +325,34 @@
 
                 <div class="phone-mockup" id="phone-mockup-scroll">
                     
+                    <div class="mobile-menu" id="js-mobile-menu">
+                        <ul class="mobile-nav-list">
+                            <li><a href="#about" class="m-nav-link">RESET BASEとは</a></li>
+                            <li><a href="#feature" class="m-nav-link">特徴</a></li>
+                            <li><a href="#plan" class="m-nav-link">料金プラン</a></li>
+                            <li><a href="#faq" class="m-nav-link">よくあるご質問</a></li>
+                            <li><a href="#access" class="m-nav-link">アクセス</a></li>
+                            <li><a href="#contact" class="m-nav-link">お問い合わせ</a></li>
+                        </ul>
+                        <a href="#" id="m-btn-show-partner" class="btn-sidebar-partner" style="margin-top: 24px; border-color: var(--primary-bg);">
+                            <i class="fa-solid fa-handshake"></i> パートナー募集
+                        </a>
+                    </div>
+
                     <div id="view-main">
                         <header class="lp-header">
                             <div class="lp-logo">
                                 RESET BASE
                                 <span>すべての人に、専属チームを</span>
                             </div>
-                            <a href="#contact" class="btn-sm-line">
-                                <i class="fa-brands fa-line"></i>LINE相談
-                            </a>
+                            <div class="header-actions">
+                                <a href="#contact" class="btn-sm-line">
+                                    <i class="fa-brands fa-line"></i>LINE相談
+                                </a>
+                                <button class="hamburger-btn" id="js-hamburger">
+                                    <span></span><span></span><span></span>
+                                </button>
+                            </div>
                         </header>
 
                         <section class="hero" id="hero">
@@ -355,15 +379,6 @@
                                 RESET BASEは、多彩なプロフェッショナルを自由に組み合わせる全く新しいサブスクリプションです。理学療法士、トレーナー、栄養士などが連携し、あなたを多角的にサポートします。
                             </p>
                             <span class="concept-highlight">「専属チーム」という、新しい最適解。</span>
-                            <div id="partner" class="trust-partner-wrap">
-                                <div class="trust-partner-title">RESET BASEは以下の企業と<br>共に歩んでいます</div>
-                                
-                                <div class="trust-partner-box">
-                                    <a href="https://kitchen-board.com/" target="_blank" rel="noopener" style="display: block; text-decoration: none;">
-                                        <img src="https://i.imgur.com/EJSvO0T.png" alt="株式会社キッチンボード">
-                                    </a>
-                                </div>
-                            </div>
                         </section>
 
                         <section class="section bg-light" id="feature">
@@ -394,6 +409,7 @@
                                 <span class="plan-en-title">Plan</span>
                                 <h2 class="plan-jp-title">料金プラン</h2>
                             </div>
+
                             <div class="img-plan-card">
                                 <div class="img-plan-badge">まずはここから！</div>
                                 <div class="img-plan-header">
@@ -415,6 +431,7 @@
                                     </div>
                                 </div>
                             </div>
+
                             <div class="img-plan-card">
                                 <div class="img-plan-badge">一番人気！</div>
                                 <div class="img-plan-header">
@@ -437,6 +454,7 @@
                                     </div>
                                 </div>
                             </div>
+
                             <div class="img-plan-card">
                                 <div class="img-plan-badge">贅沢に！</div>
                                 <div class="img-plan-header">
@@ -480,8 +498,12 @@
                                 <span class="sec-en">Access</span>
                                 <h2 class="sec-jp">アクセス</h2>
                             </div>
-                            <p style="font-size: 13px; color: #555; text-align: center; margin-bottom: 16px;">対面でのフィジカルケアやコンディショニングは、実店舗でもご提供しております。</p>
-                            <p style="font-size: 14px; font-weight: 700; text-align: center;">〒111-0032<br>東京都台東区浅草<br>RESET BASE 実店舗</p>
+                            <p style="font-size: 13px; color: #555; text-align: center; margin-bottom: 16px;">
+                                対面でのフィジカルケアやコンディショニングは、実店舗でもご提供しております。
+                            </p>
+                            <p style="font-size: 14px; font-weight: 700; text-align: center;">
+                                〒111-0032<br>東京都台東区浅草<br>RESET BASE 実店舗
+                            </p>
                             <a href="https://goo.gl/maps/LPch2UsXLLVKEz978" target="_blank" class="maps-btn">Google Mapsで開く</a>
                         </section>
 
@@ -551,7 +573,6 @@
                                 <span class="en">BENEFITS</span>
                                 <span class="jp">パートナーメリット活用事例</span>
                             </div>
-
                             <div class="p-benefit-card">
                                 <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?auto=format&fit=crop&w=400&q=80" class="p-benefit-img">
                                 <div class="p-benefit-body">
@@ -560,7 +581,6 @@
                                     <p class="p-benefit-txt">法人向けポイントを付与し、社員の皆様がご自身に合った専門家のセッションを自由に受けることができます。パフォーマンス向上と離職防止に繋がります。</p>
                                 </div>
                             </div>
-
                             <div class="p-benefit-card">
                                 <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=400&q=80" class="p-benefit-img">
                                 <div class="p-benefit-body">
@@ -616,7 +636,7 @@
                                 <span class="en">PARTNERS</span>
                                 <span class="jp">オフィシャルパートナー</span>
                             </div>
-<a href="https://kitchen-board.com/" target="_blank" rel="noopener" style="text-decoration: none; display: block;">
+                            <a href="https://kitchen-board.com/" target="_blank" rel="noopener" style="text-decoration: none; display: block;">
                                 <div class="p-partner-logo-item">
                                     <img src="https://i.imgur.com/HdiIz1X.png" alt="株式会社キッチンボード">
                                     <p class="p-partner-name">株式会社キッチンボード</p>
@@ -625,7 +645,7 @@
                         </section>
 
                         <section class="p-sec" id="p-contact" style="background: var(--primary-bg); text-align: center;">
-                            <div class="p-sec-ttl" style="margin-bottom: 24px;">
+                            <div class="p-sec-ttl" style="margin-bottom: 24px; border: none; padding: 0;">
                                 <span class="en" style="color: #fff;">CONTACT</span>
                                 <span class="jp" style="color: #fff;">お問い合わせ</span>
                             </div>
@@ -649,14 +669,27 @@
         document.addEventListener('DOMContentLoaded', () => {
             const phoneMockup = document.getElementById('phone-mockup-scroll');
             const navLinks = document.querySelectorAll('.desktop-nav a.nav-link');
+            const mNavLinks = document.querySelectorAll('.m-nav-link');
             
             const viewMain = document.getElementById('view-main');
             const viewPartner = document.getElementById('view-partner');
             const btnShowPartner = document.getElementById('btn-show-partner');
+            const mBtnShowPartner = document.getElementById('m-btn-show-partner');
             const btnBackMain = document.getElementById('btn-back-main');
             const mainNavUl = document.getElementById('main-nav-ul');
+            
+            const hamburger = document.getElementById('js-hamburger');
+            const mobileMenu = document.getElementById('js-mobile-menu');
 
             function isMobile() { return window.innerWidth <= 768; }
+
+            // ★モバイルハンバーガーメニューの開閉処理
+            if(hamburger) {
+                hamburger.addEventListener('click', () => {
+                    hamburger.classList.toggle('open');
+                    mobileMenu.classList.toggle('open');
+                });
+            }
 
             // スライダー処理
             const slides = document.querySelectorAll('.hero-slider .slide');
@@ -677,34 +710,39 @@
                 }
             }, { passive: true });
 
-            // ★修正：確実な位置取得のためのスクロール処理
-            navLinks.forEach(link => {
-                link.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    const targetId = link.getAttribute('href').replace('#', '');
-                    
-                    // パートナー画面が開かれている場合は、メイン画面に戻す
-                    if(viewMain.style.display === 'none') {
-                        viewPartner.style.display = 'none';
-                        viewMain.style.display = 'block';
-                        mainNavUl.style.opacity = '1';
-                        btnShowPartner.classList.remove('active');
-                        
-                        // 要素の再描画を待つ（位置計算ズレ防止）
-                        void viewMain.offsetWidth;
-                    }
+            // ★ナビゲーションクリックによるスクロール位置の取得を安定化
+            function navigateToSection(e, link) {
+                e.preventDefault();
+                const targetId = link.getAttribute('href').replace('#', '');
+                
+                // モバイルメニューが開いている場合は閉じる
+                if (hamburger) hamburger.classList.remove('open');
+                if (mobileMenu) mobileMenu.classList.remove('open');
 
-                    document.querySelector('.desktop-nav .active')?.classList.remove('active');
+                if(viewMain.style.display === 'none') {
+                    viewPartner.style.display = 'none';
+                    viewMain.style.display = 'block';
+                    mainNavUl.style.opacity = '1';
+                    btnShowPartner.classList.remove('active');
+                    void viewMain.offsetWidth; // 描画リセットでオフセットズレを防ぐ
+                }
+
+                document.querySelector('.desktop-nav .active')?.classList.remove('active');
+                
+                // リンクがPC用サイドバーの要素ならactiveを付与
+                if (link.classList.contains('nav-link')) {
                     link.parentElement.classList.add('active');
+                }
 
-                    const targetElement = document.getElementById(targetId);
-                    if (targetElement) {
-                        // 要素の親(phoneMockup)からの絶対位置(offsetTop)を使ってスクロール
-                        const targetTop = targetElement.offsetTop - 60;
-                        phoneMockup.scrollTo({ top: targetTop, behavior: 'smooth' });
-                    }
-                });
-            });
+                const targetElement = document.getElementById(targetId);
+                if (targetElement) {
+                    const targetTop = targetElement.offsetTop - 60; // offsetTopで絶対的な位置を取得
+                    phoneMockup.scrollTo({ top: targetTop, behavior: 'smooth' });
+                }
+            }
+
+            navLinks.forEach(link => { link.addEventListener('click', (e) => navigateToSection(e, link)); });
+            mNavLinks.forEach(link => { link.addEventListener('click', (e) => navigateToSection(e, link)); });
 
             // スクロール時のハイライト
             phoneMockup.addEventListener('scroll', () => {
@@ -728,9 +766,12 @@
                 });
             });
 
-            // B2Bパートナー画面への切り替え処理
-            btnShowPartner.addEventListener('click', (e) => {
+            // パートナー画面への切り替え処理
+            function showPartnerView(e) {
                 e.preventDefault();
+                if (hamburger) hamburger.classList.remove('open');
+                if (mobileMenu) mobileMenu.classList.remove('open');
+
                 viewMain.style.display = 'none';
                 viewPartner.style.display = 'block';
                 
@@ -739,7 +780,10 @@
                 btnShowPartner.classList.add('active');
                 
                 phoneMockup.scrollTop = 0;
-            });
+            }
+
+            btnShowPartner.addEventListener('click', showPartnerView);
+            if(mBtnShowPartner) mBtnShowPartner.addEventListener('click', showPartnerView);
 
             // メイン画面へ戻る処理
             btnBackMain.addEventListener('click', (e) => {
