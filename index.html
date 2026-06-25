@@ -16,6 +16,7 @@
             --phone-height: 85vh;
             --plan-blue: #2b5fe8; 
             --plan-yellow: #fcd34d; 
+            --partner-gray: #f4f6f9;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -57,21 +58,21 @@
         }
         .desktop-nav a.nav-link::before {
             content: ""; display: inline-block; width: 3px; height: 18px;
-            background: rgba(255, 255, 255, 0.4); margin-right: 12px; border-radius: 2px;
-            transition: all 0.3s ease;
+            background: rgba(255, 255, 255, 0.4); margin-right: 12px; border-radius: 2px; transition: all 0.3s ease;
         }
         .desktop-nav li.active a.nav-link::before { background: #fff; height: 20px; }
         .desktop-nav li.active a.nav-link { opacity: 1; }
         .desktop-nav li:not(.active) a.nav-link { opacity: 0.8; }
 
-        /* ★追加：メニュー下部の独立したパートナーボタン */
+        /* 独立したパートナーボタン */
         .btn-sidebar-partner {
-            display: inline-flex; align-items: center; gap: 8px;
-            padding: 12px 24px; border: 1px solid rgba(255,255,255,0.3); border-radius: 6px;
-            color: #fff; text-decoration: none; font-size: 14px; font-weight: 700;
-            transition: all 0.3s ease; background: rgba(0,0,0,0.1);
+            display: inline-flex; align-items: center; gap: 10px;
+            padding: 14px 28px; border: 2px solid #fff; border-radius: 8px;
+            color: var(--primary-bg); background: #fff; text-decoration: none; font-size: 15px; font-weight: 800;
+            transition: all 0.3s ease; box-shadow: 0 10px 25px rgba(0,0,0,0.1);
         }
-        .btn-sidebar-partner:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.6); }
+        .btn-sidebar-partner:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(0,0,0,0.15); }
+        .btn-sidebar-partner i { font-size: 18px; color: var(--plan-yellow); }
 
         .preview-area { width: 70%; }
         .phone-container-wrapper { position: absolute; top: 50%; left: 50%; width: var(--phone-width); height: var(--phone-height); max-height: 95vh; transform: translate(-50%, -50%); z-index: 10; }
@@ -91,7 +92,7 @@
         .expert.left { top: 15%; left: 10px; transform-origin: bottom right; }
         .expert.left.active { opacity: 1; transform: translate(-60%, -10%) scale(1.1) rotate(-25deg); }
 
-        /* --- ヘッダー・共通スタイル --- */
+        /* --- ヘッダー・共通 --- */
         .lp-header {
             display: flex; justify-content: space-between; align-items: center;
             padding: 24px 20px; background: rgba(255, 255, 255, 0.95);
@@ -99,25 +100,21 @@
         }
         .lp-logo { color: var(--primary-bg); font-size: 26px; font-weight: 900; font-family: var(--font-en); font-style: italic; line-height: 1; letter-spacing: -0.02em; }
         .lp-logo span { display: block; font-size: 10px; font-style: normal; font-weight: 600; color: #666; letter-spacing: 0.02em; margin-top: 4px; }
-        
         .btn-sm-line {
             display: inline-flex; align-items: center; gap: 6px; background: #06C755; color: #fff; text-decoration: none;
             font-size: 13px; font-weight: 700; padding: 10px 18px; border-radius: 24px; box-shadow: 0 4px 10px rgba(6, 199, 85, 0.3); transition: transform 0.2s;
         }
         .btn-sm-line i { font-size: 16px; }
-        .btn-sm-line:active { transform: scale(0.95); }
 
-        /* メインLP用スタイル */
+        /* --- メインLP（B2C）専用 --- */
         .hero { position: relative; height: 480px; overflow: hidden; background: #fff; width: 100%; }
         .hero-slider { position: absolute; inset: 0; z-index: 1; width: 100%; }
         .hero-slider .slide { position: absolute; inset: 0; background-size: cover; background-position: center; opacity: 0; transition: opacity 1.5s ease-in-out; width: 100%; }
         .hero-slider .slide.active { opacity: 1; }
         .hero::after { content: ""; position: absolute; inset: 0; background: rgba(0,0,0,0.2); z-index: 2; }
-
         .wave-top { position: absolute; top: -1px; left: 0; width: 100%; height: 50px; z-index: 3; }
         .wave-bottom { position: absolute; bottom: -1px; left: 0; width: 100%; height: 50px; z-index: 3; }
         .wave-top svg, .wave-bottom svg { width: 100%; height: 100%; display: block; fill: #fff; }
-
         .hero-content { position: absolute; top: 12%; right: 20px; z-index: 4; display: flex; flex-direction: row-reverse; gap: 12px; align-items: flex-start; }
         .vertical-catch { writing-mode: vertical-rl; color: #fff; padding: 24px 10px; font-size: 15px; font-weight: 700; letter-spacing: 0.2em; white-space: nowrap; box-shadow: 0 10px 25px rgba(0,0,0,0.2); text-align: center; }
         .vertical-catch.accent-box { background-color: #1a49b8; margin-top: 0px; }
@@ -125,14 +122,13 @@
 
         .section { padding: 60px 20px; background: #fff; border-bottom: 1px solid #f0f0f0; }
         .bg-light { background-color: #f9fafb; }
-        
         .sec-title-wrap { text-align: center; margin-bottom: 32px; }
         .sec-en { font-family: var(--font-en); color: #8ba5ec; font-size: 14px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; display: block; margin-bottom: 4px; }
         .sec-jp { font-size: 24px; font-weight: 700; color: var(--text-dark); line-height: 1.4; position: relative; display: inline-block; }
-
+        
         .concept-text { font-size: 14px; line-height: 1.8; color: #444; text-align: justify; margin-bottom: 24px; }
         .concept-highlight { color: var(--primary-bg); font-weight: 700; font-size: 16px; display: block; margin: 16px 0; text-align: center;}
-
+        
         .feature-card { background: #fff; border-radius: 12px; overflow: hidden; margin-bottom: 24px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid #eee; }
         .feature-img { width: 100%; height: 180px; object-fit: cover; }
         .feature-body { padding: 20px; }
@@ -152,18 +148,15 @@
         .img-plan-jp { font-size: 24px; font-weight: 700; }
         .img-plan-body { padding: 32px 24px 24px; text-align: center; }
         .img-plan-strike { text-decoration: line-through; color: #555; font-size: 13px; font-style: italic; display: block; margin-bottom: -5px; }
-        
         .img-plan-price-box { display: inline-flex; align-items: baseline; position: relative; margin-bottom: 32px; z-index: 1; }
         .img-plan-price-box .yen { font-size: 14px; color: var(--plan-blue); font-weight: 700; margin-right: 2px; }
         .img-plan-price-box .num { font-size: 56px; color: var(--plan-blue); font-family: var(--font-en); font-style: italic; font-weight: 800; line-height: 1; letter-spacing: -0.02em;}
         .img-plan-price-box .month { font-size: 12px; color: var(--plan-blue); font-weight: 700; margin-left: 2px; }
         .img-plan-price-box::after { content: ""; position: absolute; bottom: 6px; left: 0; width: 100%; height: 6px; background: var(--plan-yellow); z-index: -1; }
-
         .img-plan-hr { border: none; border-top: 2px dotted #e0e0e0; margin: 0 0 24px 0; }
         .img-plan-row { display: flex; align-items: flex-start; margin-bottom: 16px; text-align: left; }
         .img-plan-label { background: var(--plan-blue); color: #fff; font-size: 12px; font-weight: 700; padding: 8px 0; width: 60px; text-align: center; flex-shrink: 0; margin-right: 16px; }
         .img-plan-desc { font-size: 12px; color: var(--plan-blue); line-height: 1.6; font-weight: 500; margin-top: 6px;}
-        .img-plan-desc p { margin-bottom: 4px; }
 
         .faq-item { border: 1px solid #eee; border-radius: 6px; margin-bottom: 12px; }
         .faq-q { background: #f9f9f9; padding: 14px 16px; font-weight: 700; font-size: 13px; color: var(--text-dark); cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
@@ -190,17 +183,78 @@
         .footer-links a { color: #fff; text-decoration: underline; text-underline-offset: 3px; }
         .footer-copy { font-size: 11px; opacity: 0.9; font-weight: 400; }
 
-        /* ★追加：パートナー（B2B）専用ページ用スタイル */
-        #view-partner { display: none; } /* 初期状態は非表示 */
-        .partner-hero { background: #111; color: #fff; padding: 60px 20px; text-align: center; }
-        .partner-hero h2 { font-size: 22px; font-weight: 700; line-height: 1.5; margin-bottom: 16px; }
-        .partner-hero p { font-size: 13px; line-height: 1.8; opacity: 0.8; }
+        /* ==========================================
+           ★追加：パートナー（B2B）専用ページ用スタイル 
+           （千葉ジェッツ風リッチデザイン）
+           ========================================== */
+        #view-partner { display: none; background-color: var(--partner-gray); } 
         
-        .partner-logo-box { background: #fff; border: 1px solid #eaeaea; border-radius: 8px; padding: 24px; display: flex; justify-content: center; align-items: center; max-width: 280px; margin: 0 auto; box-shadow: 0 4px 15px rgba(0,0,0,0.02); }
-        .partner-logo-box img { max-width: 100%; height: auto; max-height: 40px; object-fit: contain; }
+        /* P: Header (Back Button) */
+        .partner-header {
+            display: flex; align-items: center; gap: 16px;
+            padding: 16px 20px; background: #fff; border-bottom: 1px solid #eaeaea;
+            position: sticky; top: 0; z-index: 100;
+        }
+        .btn-back-main {
+            display: inline-flex; justify-content: center; align-items: center;
+            width: 36px; height: 36px; background: #f0f0f0; border-radius: 50%;
+            color: var(--text-dark); text-decoration: none; font-size: 14px;
+        }
+        .partner-header-logo { font-size: 16px; font-weight: 900; font-family: var(--font-en); font-style: italic; color: var(--primary-bg); }
+
+        /* P: Hero */
+        .partner-hero {
+            background: url('https://images.unsplash.com/photo-1556761175-5973dc0f32b7?auto=format&fit=crop&w=800&q=80') center/cover;
+            height: 380px; position: relative; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 20px; text-align: center;
+        }
+        .partner-hero::after { content: ""; position: absolute; inset: 0; background: rgba(0, 30, 80, 0.75); z-index: 1; }
+        .partner-hero-content { position: relative; z-index: 2; color: #fff; }
+        .partner-hero-content h2 { font-size: 24px; font-weight: 800; line-height: 1.4; margin-bottom: 16px; letter-spacing: 0.05em; }
+        .partner-hero-content p { font-size: 13px; line-height: 1.6; opacity: 0.9; }
         
-        .btn-back { display: inline-flex; align-items: center; gap: 6px; color: var(--primary-bg); font-size: 13px; font-weight: 700; text-decoration: none; }
-        .btn-back i { font-size: 14px; }
+        /* P: Section Title (Jets Style) */
+        .p-sec { padding: 60px 20px; background: #fff; }
+        .p-sec.bg-gray { background: var(--partner-gray); }
+        .p-sec-ttl { margin-bottom: 32px; border-left: 5px solid var(--primary-bg); padding-left: 12px; }
+        .p-sec-ttl-en { display: block; font-family: var(--font-en); font-size: 13px; color: var(--primary-bg); font-weight: 800; letter-spacing: 0.1em; margin-bottom: 4px; }
+        .p-sec-ttl-jp { display: block; font-size: 22px; font-weight: 700; color: var(--text-dark); }
+
+        /* P: About */
+        .p-about-img { width: 100%; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        .p-about-txt { font-size: 14px; line-height: 1.8; color: #444; }
+
+        /* P: Benefits */
+        .p-benefit-card { background: #fff; border-radius: 8px; overflow: hidden; margin-bottom: 24px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
+        .p-benefit-img { width: 100%; height: 160px; object-fit: cover; }
+        .p-benefit-body { padding: 20px; }
+        .p-benefit-tag { display: inline-block; background: #ffe4e6; color: var(--primary-bg); font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 4px; margin-bottom: 10px; }
+        .p-benefit-ttl { font-size: 16px; font-weight: 700; color: #111; margin-bottom: 10px; line-height: 1.4; }
+        .p-benefit-txt { font-size: 13px; line-height: 1.6; color: #555; }
+
+        /* P: Menu */
+        .p-menu-list { display: flex; flex-direction: column; gap: 16px; }
+        .p-menu-item { display: flex; align-items: flex-start; gap: 16px; background: #fff; padding: 16px; border-radius: 8px; border: 1px solid #eee; }
+        .p-menu-icon { flex-shrink: 0; width: 48px; height: 48px; background: rgba(43, 101, 241, 0.1); color: var(--primary-bg); border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 20px; }
+        .p-menu-text h4 { font-size: 15px; font-weight: 700; margin-bottom: 6px; color: #222; }
+        .p-menu-text p { font-size: 12px; color: #666; line-height: 1.5; }
+
+        /* P: Data */
+        .p-data-box { background: var(--primary-bg); padding: 40px 20px; border-radius: 12px; color: #fff; text-align: center; margin-bottom: 20px; }
+        .p-data-num { font-family: var(--font-en); font-size: 48px; font-weight: 900; font-style: italic; margin: 10px 0; line-height: 1; }
+        .p-data-num span { font-size: 16px; font-style: normal; font-weight: 600; margin-left: 4px; }
+        .p-data-desc { font-size: 13px; opacity: 0.9; }
+
+        /* P: Partners (Logo) */
+        .p-partner-logo { background: #fff; border: 1px solid #eaeaea; border-radius: 8px; padding: 24px; display: flex; justify-content: center; align-items: center; max-width: 280px; margin: 0 auto; box-shadow: 0 4px 15px rgba(0,0,0,0.02); }
+        .p-partner-logo img { max-width: 100%; height: auto; max-height: 50px; object-fit: contain; }
+
+        /* P: Contact Button */
+        .btn-partner-contact {
+            display: flex; justify-content: center; align-items: center; gap: 8px;
+            background: var(--primary-bg); color: #fff; text-decoration: none;
+            padding: 18px; border-radius: 8px; font-size: 15px; font-weight: 700;
+            box-shadow: 0 6px 20px rgba(43, 101, 241, 0.3); margin-top: 20px;
+        }
 
         @media (max-width: 768px) {
             .layout-wrapper { display: block; }
@@ -237,7 +291,7 @@
                     <li><a href="#contact" class="nav-link">お問い合わせ</a></li>
                 </ul>
                 <a href="#" id="btn-show-partner" class="btn-sidebar-partner">
-                    <i class="fa-solid fa-handshake"></i> 法人パートナー募集
+                    <i class="fa-solid fa-handshake"></i> パートナー募集
                 </a>
             </nav>
         </aside>
@@ -442,41 +496,123 @@
                         </footer>
                     </div>
                     <div id="view-partner">
-                        <header class="lp-header" style="justify-content: flex-start; gap: 16px;">
-                            <a href="#" id="btn-back-main" class="btn-back">
-                                <i class="fa-solid fa-arrow-left"></i> 戻る
+                        <header class="partner-header">
+                            <a href="#" id="btn-back-main" class="btn-back-main" title="戻る">
+                                <i class="fa-solid fa-arrow-left"></i>
                             </a>
-                            <div class="lp-logo" style="font-size: 20px;">
-                                RESET BASE
-                                <span>PARTNER PROGRAM</span>
+                            <div class="partner-header-logo">
+                                RESET BASE PARTNER
                             </div>
                         </header>
 
-                        <section class="partner-hero">
-                            <h2>「すべての人に、<br>専属チームを。」</h2>
-                            <p>RESET BASEは、このビジョンを共に実現し、日本の健康課題を解決していくオフィシャルパートナー企業様を募集しています。</p>
-                        </section>
+                        <div class="partner-hero">
+                            <div class="partner-hero-content">
+                                <h2>共にハッピーになる<br>パートナーを募集しています</h2>
+                                <p>「スポンサー」ではなく「パートナー」として。<br>皆様の目標達成や課題解決を一緒に考えさせてください。</p>
+                            </div>
+                        </div>
 
-                        <section class="section">
-                            <div class="sec-title-wrap">
-                                <span class="sec-en">Official Partner</span>
-                                <h2 class="sec-jp">現在のパートナー</h2>
+                        <section class="p-sec">
+                            <div class="p-sec-ttl">
+                                <span class="p-sec-ttl-en">ABOUT PARTNER</span>
+                                <span class="p-sec-ttl-jp">パートナーシップとは</span>
                             </div>
-                            <div class="partner-logo-box">
-                                <img src="https://i.imgur.com/EJSvO0T.png" alt="株式会社キッチンボード">
-                            </div>
-                            <p style="font-size: 13px; color: #555; text-align: center; margin-top: 24px; line-height: 1.6;">
-                                従業員の皆様の健康経営や、ブランドの社会的価値向上に。スポーツと健康を通じた社会貢献を共に行いませんか？
+                            <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=600&q=80" alt="パートナーシップ" class="p-about-img">
+                            <p class="p-about-txt">
+                                ただ単にご支援いただくのではなく、お互いの強みを活かして共に発展していく関係性を目指しています。<br>
+                                RESET BASEのプロフェッショナルネットワークを活用し、御社の従業員様の健康増進や、企業価値（CSR）の向上に貢献いたします。
                             </p>
                         </section>
-                        
-                        <section class="section bg-light" style="text-align: center; padding-bottom: 80px;">
-                            <div class="sec-title-wrap">
-                                <span class="sec-en">Contact</span>
-                                <h2 class="sec-jp">協賛のお問い合わせ</h2>
+
+                        <section class="p-sec bg-gray">
+                            <div class="p-sec-ttl">
+                                <span class="p-sec-ttl-en">BENEFITS</span>
+                                <span class="p-sec-ttl-jp">パートナーメリット・活用事例</span>
                             </div>
-                            <p style="font-size: 13px; color: #555; margin-bottom: 24px;">詳細な資料請求やご相談は、以下よりお問い合わせください。</p>
-                            <a href="#" class="btn-sm-line" style="background: var(--primary-bg); padding: 14px 24px; font-size: 14px;">
+
+                            <div class="p-benefit-card">
+                                <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?auto=format&fit=crop&w=400&q=80" class="p-benefit-img">
+                                <div class="p-benefit-body">
+                                    <span class="p-benefit-tag">福利厚生・健康経営</span>
+                                    <h4 class="p-benefit-ttl">従業員の皆様の健康サポート</h4>
+                                    <p class="p-benefit-txt">法人向けポイントを付与し、社員の皆様がご自身に合った専門家（整体、栄養士等）のセッションを自由に受けることができます。パフォーマンス向上と離職防止に繋がります。</p>
+                                </div>
+                            </div>
+
+                            <div class="p-benefit-card">
+                                <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=400&q=80" class="p-benefit-img">
+                                <div class="p-benefit-body">
+                                    <span class="p-benefit-tag">イベント協賛・PR</span>
+                                    <h4 class="p-benefit-ttl">専門家コラボによるプロモーション</h4>
+                                    <p class="p-benefit-txt">御社の主催イベントにRESET BASEの専門家（元プロアスリート等）を派遣したり、SNS上でのタイアップ企画を実施し、新たな顧客層へのリーチを実現します。</p>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section class="p-sec">
+                            <div class="p-sec-ttl">
+                                <span class="p-sec-ttl-en">MENU</span>
+                                <span class="p-sec-ttl-jp">パートナーシップメニュー</span>
+                            </div>
+                            <div class="p-menu-list">
+                                <div class="p-menu-item">
+                                    <div class="p-menu-icon"><i class="fa-solid fa-coins"></i></div>
+                                    <div class="p-menu-text">
+                                        <h4>法人向け特別ポイント枠</h4>
+                                        <p>契約プランに応じて、毎月特別枠のポイントを付与。社員間のシェアも可能です。</p>
+                                    </div>
+                                </div>
+                                <div class="p-menu-item">
+                                    <div class="p-menu-icon"><i class="fa-solid fa-store"></i></div>
+                                    <div class="p-menu-text">
+                                        <h4>浅草実店舗でのロゴ掲出</h4>
+                                        <p>浅草のフラッグシップ店舗および公式Webサイトにて、パートナー企業としてロゴを掲載します。</p>
+                                    </div>
+                                </div>
+                                <div class="p-menu-item">
+                                    <div class="p-menu-icon"><i class="fa-solid fa-person-chalkboard"></i></div>
+                                    <div class="p-menu-text">
+                                        <h4>出張コンディショニング・セミナー</h4>
+                                        <p>理学療法士などの専門家がオフィスに出張し、姿勢改善や疲労回復セミナーを実施します。</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section class="p-sec">
+                            <div class="p-sec-ttl">
+                                <span class="p-sec-ttl-en">DATA</span>
+                                <span class="p-sec-ttl-jp">数字で見るRESET BASE</span>
+                            </div>
+                            <div class="p-data-box">
+                                <h4 style="font-size: 14px;">厳選されたプロフェッショナル</h4>
+                                <div class="p-data-num">10<span>%以下</span></div>
+                                <p class="p-data-desc">専門家（サポーター）の独自審査通過率</p>
+                            </div>
+                            <div class="p-data-box" style="background: #111;">
+                                <h4 style="font-size: 14px;">多彩なチーム編成</h4>
+                                <div class="p-data-num">15<span>ジャンル以上</span></div>
+                                <p class="p-data-desc">身体・栄養・メンタルなど多様な領域をカバー</p>
+                            </div>
+                        </section>
+
+                        <section class="p-sec bg-gray">
+                            <div class="p-sec-ttl">
+                                <span class="p-sec-ttl-en">PARTNERS</span>
+                                <span class="p-sec-ttl-jp">オフィシャルパートナー</span>
+                            </div>
+                            <div class="p-partner-logo">
+                                <img src="https://i.imgur.com/EJSvO0T.png" alt="株式会社キッチンボード">
+                            </div>
+                        </section>
+
+                        <section class="p-sec" style="text-align: center; padding-bottom: 80px;">
+                            <div class="p-sec-ttl" style="border: none; padding: 0;">
+                                <span class="p-sec-ttl-en">CONTACT</span>
+                                <span class="p-sec-ttl-jp">お問い合わせ</span>
+                            </div>
+                            <p style="font-size: 13px; color: #555; margin-bottom: 24px;">協賛金やプランに関する詳細なご相談は、<br>こちらよりお気軽にお問い合わせください。</p>
+                            <a href="#" class="btn-partner-contact">
                                 <i class="fa-solid fa-envelope"></i> パートナー窓口へ連絡する
                             </a>
                         </section>
@@ -572,7 +708,7 @@
             });
 
             // ==========================================
-            // ★追加：B2Bパートナー画面への切り替え処理
+            // ★B2Bパートナー画面への切り替え処理
             // ==========================================
             btnShowPartner.addEventListener('click', (e) => {
                 e.preventDefault();
