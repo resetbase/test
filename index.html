@@ -16,7 +16,7 @@
             --phone-height: 85vh;
             --plan-blue: #2b5fe8; 
             --plan-yellow: #fcd34d; 
-            --partner-gray: #f4f6f9;
+            --partner-gray: #f8f9fa;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -50,7 +50,7 @@
         .layout-wrapper { display: flex; width: 100%; height: 100%; position: relative; z-index: 10; }
         
         .desktop-sidebar { width: 30%; min-width: 250px; display: flex; flex-direction: column; justify-content: center; padding-left: 6vw; z-index: 20; }
-        .desktop-nav ul { list-style: none; margin-bottom: 40px; }
+        .desktop-nav ul { list-style: none; margin-bottom: 40px; transition: opacity 0.3s; }
         .desktop-nav li { margin-bottom: 24px; }
         .desktop-nav a.nav-link {
             display: inline-flex; align-items: center; color: #fff; text-decoration: none; font-size: 18px; font-weight: 700;
@@ -71,8 +71,12 @@
             color: var(--primary-bg); background: #fff; text-decoration: none; font-size: 15px; font-weight: 800;
             transition: all 0.3s ease; box-shadow: 0 10px 25px rgba(0,0,0,0.1);
         }
+        .btn-sidebar-partner.active {
+            background: var(--plan-yellow); border-color: var(--plan-yellow); color: #333;
+        }
         .btn-sidebar-partner:hover { transform: translateY(-3px); box-shadow: 0 15px 30px rgba(0,0,0,0.15); }
-        .btn-sidebar-partner i { font-size: 18px; color: var(--plan-yellow); }
+        .btn-sidebar-partner i { font-size: 18px; color: var(--primary-bg); }
+        .btn-sidebar-partner.active i { color: #333; }
 
         .preview-area { width: 70%; }
         .phone-container-wrapper { position: absolute; top: 50%; left: 50%; width: var(--phone-width); height: var(--phone-height); max-height: 95vh; transform: translate(-50%, -50%); z-index: 10; }
@@ -106,7 +110,8 @@
         }
         .btn-sm-line i { font-size: 16px; }
 
-        /* --- メインLP（B2C）専用 --- */
+        /* --- メインLP（B2C） --- */
+        #view-main { position: relative; width: 100%; }
         .hero { position: relative; height: 480px; overflow: hidden; background: #fff; width: 100%; }
         .hero-slider { position: absolute; inset: 0; z-index: 1; width: 100%; }
         .hero-slider .slide { position: absolute; inset: 0; background-size: cover; background-position: center; opacity: 0; transition: opacity 1.5s ease-in-out; width: 100%; }
@@ -184,77 +189,81 @@
         .footer-copy { font-size: 11px; opacity: 0.9; font-weight: 400; }
 
         /* ==========================================
-           ★追加：パートナー（B2B）専用ページ用スタイル 
-           （千葉ジェッツ風リッチデザイン）
+           ★ パートナー（B2B）専用ページ用スタイル 
+           （千葉ジェッツ風・構成の忠実再現）
            ========================================== */
-        #view-partner { display: none; background-color: var(--partner-gray); } 
+        #view-partner { display: none; background-color: #fff; position: relative; width: 100%; } 
         
-        /* P: Header (Back Button) */
-        .partner-header {
-            display: flex; align-items: center; gap: 16px;
+        /* Header */
+        .p-header {
+            display: flex; align-items: center; justify-content: space-between;
             padding: 16px 20px; background: #fff; border-bottom: 1px solid #eaeaea;
             position: sticky; top: 0; z-index: 100;
         }
-        .btn-back-main {
-            display: inline-flex; justify-content: center; align-items: center;
-            width: 36px; height: 36px; background: #f0f0f0; border-radius: 50%;
-            color: var(--text-dark); text-decoration: none; font-size: 14px;
-        }
-        .partner-header-logo { font-size: 16px; font-weight: 900; font-family: var(--font-en); font-style: italic; color: var(--primary-bg); }
+        .btn-back-main { display: flex; align-items: center; gap: 4px; color: #555; text-decoration: none; font-size: 13px; font-weight: 700; }
+        .btn-back-main i { font-size: 16px; color: var(--primary-bg); }
+        .p-header-logo { font-size: 16px; font-weight: 900; font-family: var(--font-en); font-style: italic; color: var(--primary-bg); text-align: right; line-height: 1.1;}
+        .p-header-logo span { display: block; font-size: 8px; font-weight: 600; color: #888; font-style: normal; letter-spacing: 0.05em;}
 
-        /* P: Hero */
-        .partner-hero {
+        /* KV */
+        .p-hero {
             background: url('https://images.unsplash.com/photo-1556761175-5973dc0f32b7?auto=format&fit=crop&w=800&q=80') center/cover;
             height: 380px; position: relative; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 20px; text-align: center;
         }
-        .partner-hero::after { content: ""; position: absolute; inset: 0; background: rgba(0, 30, 80, 0.75); z-index: 1; }
-        .partner-hero-content { position: relative; z-index: 2; color: #fff; }
-        .partner-hero-content h2 { font-size: 24px; font-weight: 800; line-height: 1.4; margin-bottom: 16px; letter-spacing: 0.05em; }
-        .partner-hero-content p { font-size: 13px; line-height: 1.6; opacity: 0.9; }
-        
-        /* P: Section Title (Jets Style) */
-        .p-sec { padding: 60px 20px; background: #fff; }
-        .p-sec.bg-gray { background: var(--partner-gray); }
-        .p-sec-ttl { margin-bottom: 32px; border-left: 5px solid var(--primary-bg); padding-left: 12px; }
-        .p-sec-ttl-en { display: block; font-family: var(--font-en); font-size: 13px; color: var(--primary-bg); font-weight: 800; letter-spacing: 0.1em; margin-bottom: 4px; }
-        .p-sec-ttl-jp { display: block; font-size: 22px; font-weight: 700; color: var(--text-dark); }
+        .p-hero::after { content: ""; position: absolute; inset: 0; background: rgba(0, 30, 80, 0.7); z-index: 1; }
+        .p-hero-content { position: relative; z-index: 2; color: #fff; width: 100%; }
+        .p-hero-content h2 { font-size: 24px; font-weight: 800; line-height: 1.4; margin-bottom: 16px; }
 
-        /* P: About */
-        .p-about-img { width: 100%; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+        /* CV Contact Ribbon */
+        .p-cv-ribbon { background: var(--primary-bg); padding: 20px; text-align: center; }
+        .btn-p-contact {
+            display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+            background: #fff; color: var(--primary-bg); font-size: 14px; font-weight: 700;
+            padding: 16px 24px; border-radius: 8px; text-decoration: none; width: 100%; box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        /* Section Titles (Jets Style) */
+        .p-sec { padding: 60px 20px; }
+        .p-sec.bg-gray { background: var(--partner-gray); }
+        .p-sec-ttl { text-align: center; margin-bottom: 40px; }
+        .p-sec-ttl .en { display: block; font-family: var(--font-en); font-size: 28px; font-weight: 900; color: var(--primary-bg); letter-spacing: 0.1em; line-height: 1.2; text-transform: uppercase; }
+        .p-sec-ttl .jp { display: block; font-size: 15px; font-weight: 700; color: var(--text-dark); margin-top: 4px; }
+
+        /* About Partner */
+        .p-about-img { width: 100%; border-radius: 8px; margin-bottom: 24px; }
+        .p-about-ttl { font-size: 18px; font-weight: 700; line-height: 1.4; margin-bottom: 16px; color: #111; text-align: center; border-bottom: 2px solid var(--primary-bg); padding-bottom: 16px;}
         .p-about-txt { font-size: 14px; line-height: 1.8; color: #444; }
 
-        /* P: Benefits */
+        /* Benefits */
         .p-benefit-card { background: #fff; border-radius: 8px; overflow: hidden; margin-bottom: 24px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); }
         .p-benefit-img { width: 100%; height: 160px; object-fit: cover; }
         .p-benefit-body { padding: 20px; }
-        .p-benefit-tag { display: inline-block; background: #ffe4e6; color: var(--primary-bg); font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 4px; margin-bottom: 10px; }
+        .p-benefit-tag { display: inline-block; border: 1px solid var(--primary-bg); color: var(--primary-bg); font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 4px; margin-bottom: 10px; }
         .p-benefit-ttl { font-size: 16px; font-weight: 700; color: #111; margin-bottom: 10px; line-height: 1.4; }
         .p-benefit-txt { font-size: 13px; line-height: 1.6; color: #555; }
 
-        /* P: Menu */
-        .p-menu-list { display: flex; flex-direction: column; gap: 16px; }
-        .p-menu-item { display: flex; align-items: flex-start; gap: 16px; background: #fff; padding: 16px; border-radius: 8px; border: 1px solid #eee; }
-        .p-menu-icon { flex-shrink: 0; width: 48px; height: 48px; background: rgba(43, 101, 241, 0.1); color: var(--primary-bg); border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 20px; }
-        .p-menu-text h4 { font-size: 15px; font-weight: 700; margin-bottom: 6px; color: #222; }
-        .p-menu-text p { font-size: 12px; color: #666; line-height: 1.5; }
+        /* Menu */
+        .p-menu-grid { display: flex; flex-direction: column; gap: 24px; }
+        .p-menu-card { background: #fff; border: 1px solid #eee; border-radius: 8px; overflow: hidden; }
+        .p-menu-card img { width: 100%; height: 160px; object-fit: cover; }
+        .p-menu-card-body { padding: 20px; }
+        .p-menu-card-body h3 { font-size: 16px; font-weight: 700; margin-bottom: 8px; color: var(--primary-bg); }
+        .p-menu-card-body p { font-size: 13px; color: #555; line-height: 1.6; }
 
-        /* P: Data */
-        .p-data-box { background: var(--primary-bg); padding: 40px 20px; border-radius: 12px; color: #fff; text-align: center; margin-bottom: 20px; }
+        /* Data */
+        .p-data-box { background: var(--primary-bg); padding: 40px 20px; border-radius: 12px; color: #fff; text-align: center; margin-bottom: 20px; box-shadow: inset 0 0 20px rgba(0,0,0,0.1); }
         .p-data-num { font-family: var(--font-en); font-size: 48px; font-weight: 900; font-style: italic; margin: 10px 0; line-height: 1; }
         .p-data-num span { font-size: 16px; font-style: normal; font-weight: 600; margin-left: 4px; }
         .p-data-desc { font-size: 13px; opacity: 0.9; }
 
-        /* P: Partners (Logo) */
-        .p-partner-logo { background: #fff; border: 1px solid #eaeaea; border-radius: 8px; padding: 24px; display: flex; justify-content: center; align-items: center; max-width: 280px; margin: 0 auto; box-shadow: 0 4px 15px rgba(0,0,0,0.02); }
-        .p-partner-logo img { max-width: 100%; height: auto; max-height: 50px; object-fit: contain; }
-
-        /* P: Contact Button */
-        .btn-partner-contact {
-            display: flex; justify-content: center; align-items: center; gap: 8px;
-            background: var(--primary-bg); color: #fff; text-decoration: none;
-            padding: 18px; border-radius: 8px; font-size: 15px; font-weight: 700;
-            box-shadow: 0 6px 20px rgba(43, 101, 241, 0.3); margin-top: 20px;
+        /* Partners Logo (ご指定のロゴと社名) */
+        .p-partner-logo-item { 
+            display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; 
+            padding: 30px 20px; background: #fff; border: 1px solid #eaeaea; border-radius: 8px; 
+            box-shadow: 0 4px 15px rgba(0,0,0,0.02); margin: 0 auto; max-width: 280px; 
         }
+        .p-partner-logo-item img { width: 100%; max-height: 60px; object-fit: contain; }
+        .p-partner-name { font-size: 13px; font-weight: 700; color: #333; letter-spacing: 0.05em; }
 
         @media (max-width: 768px) {
             .layout-wrapper { display: block; }
@@ -373,7 +382,6 @@
                                 <span class="plan-en-title">Plan</span>
                                 <h2 class="plan-jp-title">料金プラン</h2>
                             </div>
-
                             <div class="img-plan-card">
                                 <div class="img-plan-badge">まずはここから！</div>
                                 <div class="img-plan-header">
@@ -395,7 +403,6 @@
                                     </div>
                                 </div>
                             </div>
-
                             <div class="img-plan-card">
                                 <div class="img-plan-badge">一番人気！</div>
                                 <div class="img-plan-header">
@@ -418,7 +425,6 @@
                                     </div>
                                 </div>
                             </div>
-
                             <div class="img-plan-card">
                                 <div class="img-plan-badge">贅沢に！</div>
                                 <div class="img-plan-header">
@@ -462,12 +468,8 @@
                                 <span class="sec-en">Access</span>
                                 <h2 class="sec-jp">アクセス</h2>
                             </div>
-                            <p style="font-size: 13px; color: #555; text-align: center; margin-bottom: 16px;">
-                                対面でのフィジカルケアやコンディショニングは、実店舗でもご提供しております。
-                            </p>
-                            <p style="font-size: 14px; font-weight: 700; text-align: center;">
-                                〒111-0032<br>東京都台東区浅草<br>RESET BASE 実店舗
-                            </p>
+                            <p style="font-size: 13px; color: #555; text-align: center; margin-bottom: 16px;">対面でのフィジカルケアやコンディショニングは、実店舗でもご提供しております。</p>
+                            <p style="font-size: 14px; font-weight: 700; text-align: center;">〒111-0032<br>東京都台東区浅草<br>RESET BASE 実店舗</p>
                             <a href="https://goo.gl/maps/LPch2UsXLLVKEz978" target="_blank" class="maps-btn">Google Mapsで開く</a>
                         </section>
 
@@ -496,38 +498,46 @@
                         </footer>
                     </div>
                     <div id="view-partner">
-                        <header class="partner-header">
+                        <header class="p-header">
                             <a href="#" id="btn-back-main" class="btn-back-main" title="戻る">
-                                <i class="fa-solid fa-arrow-left"></i>
+                                <i class="fa-solid fa-angle-left"></i> もどる
                             </a>
-                            <div class="partner-header-logo">
-                                RESET BASE PARTNER
+                            <div class="p-header-logo">
+                                PARTNERSHIP
+                                <span>RESET BASE パートナーシップ</span>
                             </div>
                         </header>
 
-                        <div class="partner-hero">
-                            <div class="partner-hero-content">
-                                <h2>共にハッピーになる<br>パートナーを募集しています</h2>
-                                <p>「スポンサー」ではなく「パートナー」として。<br>皆様の目標達成や課題解決を一緒に考えさせてください。</p>
+                        <div class="p-hero">
+                            <div class="p-hero-content">
+                                <h2>共にハッピーになる<br>パートナーを<br>募集しています</h2>
                             </div>
+                        </div>
+
+                        <div class="p-cv-ribbon">
+                            <a href="#p-contact" class="btn-p-contact">
+                                まずは話を聞いてみたい<br>お問い合わせ
+                                <i class="fa-solid fa-angle-right" style="margin-left: 8px;"></i>
+                            </a>
                         </div>
 
                         <section class="p-sec">
                             <div class="p-sec-ttl">
-                                <span class="p-sec-ttl-en">ABOUT PARTNER</span>
-                                <span class="p-sec-ttl-jp">パートナーシップとは</span>
+                                <span class="en">ABOUT PARTNER</span>
+                                <span class="jp">パートナーシップとは</span>
                             </div>
                             <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=600&q=80" alt="パートナーシップ" class="p-about-img">
+                            <h3 class="p-about-ttl">共に発展していく関係性を。</h3>
                             <p class="p-about-txt">
-                                ただ単にご支援いただくのではなく、お互いの強みを活かして共に発展していく関係性を目指しています。<br>
-                                RESET BASEのプロフェッショナルネットワークを活用し、御社の従業員様の健康増進や、企業価値（CSR）の向上に貢献いたします。
+                                我々は各企業さまにただご支援いただく、という意識ではなく、共に発展していけるようにという考えのもと『スポンサー』ではなく『パートナー』という呼称を用いています。<br><br>
+                                皆様の目標達成、従業員様の健康課題解決のため我々がお手伝いできることはないか、一緒に考えさせていただけないでしょうか。
                             </p>
                         </section>
 
                         <section class="p-sec bg-gray">
                             <div class="p-sec-ttl">
-                                <span class="p-sec-ttl-en">BENEFITS</span>
-                                <span class="p-sec-ttl-jp">パートナーメリット・活用事例</span>
+                                <span class="en">BENEFITS</span>
+                                <span class="jp">パートナーメリット活用事例</span>
                             </div>
 
                             <div class="p-benefit-card">
@@ -535,54 +545,47 @@
                                 <div class="p-benefit-body">
                                     <span class="p-benefit-tag">福利厚生・健康経営</span>
                                     <h4 class="p-benefit-ttl">従業員の皆様の健康サポート</h4>
-                                    <p class="p-benefit-txt">法人向けポイントを付与し、社員の皆様がご自身に合った専門家（整体、栄養士等）のセッションを自由に受けることができます。パフォーマンス向上と離職防止に繋がります。</p>
+                                    <p class="p-benefit-txt">法人向けポイントを付与し、社員の皆様がご自身に合った専門家のセッションを自由に受けることができます。パフォーマンス向上と離職防止に繋がります。</p>
                                 </div>
                             </div>
 
                             <div class="p-benefit-card">
                                 <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?auto=format&fit=crop&w=400&q=80" class="p-benefit-img">
                                 <div class="p-benefit-body">
-                                    <span class="p-benefit-tag">イベント協賛・PR</span>
-                                    <h4 class="p-benefit-ttl">専門家コラボによるプロモーション</h4>
-                                    <p class="p-benefit-txt">御社の主催イベントにRESET BASEの専門家（元プロアスリート等）を派遣したり、SNS上でのタイアップ企画を実施し、新たな顧客層へのリーチを実現します。</p>
+                                    <span class="p-benefit-tag">販売促進・PR</span>
+                                    <h4 class="p-benefit-ttl">専門家プロデュースによるPR活動</h4>
+                                    <p class="p-benefit-txt">RESET BASEに在籍するプロフェッショナル（元プロアスリートや理学療法士等）とのタイアップ企画を実施し、新たな顧客層の獲得・売上アップに貢献します。</p>
                                 </div>
                             </div>
                         </section>
 
                         <section class="p-sec">
                             <div class="p-sec-ttl">
-                                <span class="p-sec-ttl-en">MENU</span>
-                                <span class="p-sec-ttl-jp">パートナーシップメニュー</span>
+                                <span class="en">MENU</span>
+                                <span class="jp">パートナーシップメニュー</span>
                             </div>
-                            <div class="p-menu-list">
-                                <div class="p-menu-item">
-                                    <div class="p-menu-icon"><i class="fa-solid fa-coins"></i></div>
-                                    <div class="p-menu-text">
-                                        <h4>法人向け特別ポイント枠</h4>
-                                        <p>契約プランに応じて、毎月特別枠のポイントを付与。社員間のシェアも可能です。</p>
+                            <div class="p-menu-grid">
+                                <div class="p-menu-card">
+                                    <img src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=400&q=80" alt="ロゴ掲出">
+                                    <div class="p-menu-card-body">
+                                        <h3>実店舗・Webへのロゴ掲出</h3>
+                                        <p>浅草のフラッグシップ店舗および公式Webサイトにて、パートナー企業としてロゴを掲載します。健康支援企業としてのブランディングに寄与します。</p>
                                     </div>
                                 </div>
-                                <div class="p-menu-item">
-                                    <div class="p-menu-icon"><i class="fa-solid fa-store"></i></div>
-                                    <div class="p-menu-text">
-                                        <h4>浅草実店舗でのロゴ掲出</h4>
-                                        <p>浅草のフラッグシップ店舗および公式Webサイトにて、パートナー企業としてロゴを掲載します。</p>
-                                    </div>
-                                </div>
-                                <div class="p-menu-item">
-                                    <div class="p-menu-icon"><i class="fa-solid fa-person-chalkboard"></i></div>
-                                    <div class="p-menu-text">
-                                        <h4>出張コンディショニング・セミナー</h4>
-                                        <p>理学療法士などの専門家がオフィスに出張し、姿勢改善や疲労回復セミナーを実施します。</p>
+                                <div class="p-menu-card">
+                                    <img src="https://images.unsplash.com/photo-1574680178050-55c6a6a96e0a?auto=format&fit=crop&w=400&q=80" alt="出張セミナー">
+                                    <div class="p-menu-card-body">
+                                        <h3>出張コンディショニング・セミナー</h3>
+                                        <p>理学療法士などの専門家がオフィスに出張し、社員様の姿勢改善や疲労回復セミナーを実施します。現場のモチベーションアップに最適です。</p>
                                     </div>
                                 </div>
                             </div>
                         </section>
 
-                        <section class="p-sec">
+                        <section class="p-sec bg-gray">
                             <div class="p-sec-ttl">
-                                <span class="p-sec-ttl-en">DATA</span>
-                                <span class="p-sec-ttl-jp">数字で見るRESET BASE</span>
+                                <span class="en">DATA</span>
+                                <span class="jp">数字で見るRESET BASE</span>
                             </div>
                             <div class="p-data-box">
                                 <h4 style="font-size: 14px;">厳選されたプロフェッショナル</h4>
@@ -596,24 +599,25 @@
                             </div>
                         </section>
 
-                        <section class="p-sec bg-gray">
+                        <section class="p-sec">
                             <div class="p-sec-ttl">
-                                <span class="p-sec-ttl-en">PARTNERS</span>
-                                <span class="p-sec-ttl-jp">オフィシャルパートナー</span>
+                                <span class="en">PARTNERS</span>
+                                <span class="jp">オフィシャルパートナー</span>
                             </div>
-                            <div class="p-partner-logo">
+                            <div class="p-partner-logo-item">
                                 <img src="https://i.imgur.com/HdiIz1X.png" alt="株式会社キッチンボード">
+                                <p class="p-partner-name">株式会社キッチンボード</p>
                             </div>
                         </section>
 
-                        <section class="p-sec" style="text-align: center; padding-bottom: 80px;">
-                            <div class="p-sec-ttl" style="border: none; padding: 0;">
-                                <span class="p-sec-ttl-en">CONTACT</span>
-                                <span class="p-sec-ttl-jp">お問い合わせ</span>
+                        <section class="p-sec" id="p-contact" style="background: var(--primary-bg); text-align: center;">
+                            <div class="p-sec-ttl" style="margin-bottom: 24px;">
+                                <span class="en" style="color: #fff;">CONTACT</span>
+                                <span class="jp" style="color: #fff;">お問い合わせ</span>
                             </div>
-                            <p style="font-size: 13px; color: #555; margin-bottom: 24px;">協賛金やプランに関する詳細なご相談は、<br>こちらよりお気軽にお問い合わせください。</p>
-                            <a href="#" class="btn-partner-contact">
-                                <i class="fa-solid fa-envelope"></i> パートナー窓口へ連絡する
+                            <p style="font-size: 13px; color: rgba(255,255,255,0.9); margin-bottom: 32px;">協賛金や福利厚生プランに関するご相談は、<br>こちらよりお気軽にお問い合わせください。</p>
+                            <a href="#" style="display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: #fff; color: var(--primary-bg); font-size: 15px; font-weight: 700; padding: 18px 32px; border-radius: 8px; text-decoration: none; width: 100%; box-shadow: 0 4px 15px rgba(0,0,0,0.2);">
+                                パートナー窓口へ連絡する
                             </a>
                         </section>
 
@@ -632,7 +636,6 @@
             const phoneMockup = document.getElementById('phone-mockup-scroll');
             const navLinks = document.querySelectorAll('.desktop-nav a.nav-link');
             
-            // ビュー切り替え用の要素
             const viewMain = document.getElementById('view-main');
             const viewPartner = document.getElementById('view-partner');
             const btnShowPartner = document.getElementById('btn-show-partner');
@@ -645,14 +648,14 @@
             const slides = document.querySelectorAll('.hero-slider .slide');
             let currentSlide = 0;
             function nextSlide() {
-                if(viewMain.style.display === 'none') return; // パートナー画面中は停止
+                if(viewMain.style.display === 'none') return; 
                 slides[currentSlide].classList.remove('active');
                 currentSlide = (currentSlide + 1) % slides.length;
                 slides[currentSlide].classList.add('active');
             }
             setInterval(nextSlide, 4000);
 
-            // スクロール処理
+            // ホイールスクロール連動
             window.addEventListener('wheel', (e) => {
                 if (isMobile()) return;
                 if (!phoneMockup.contains(e.target) && e.target !== phoneMockup) {
@@ -660,26 +663,30 @@
                 }
             }, { passive: true });
 
-            // ナビゲーションリンクのクリック処理
+            // ★修正：確実な位置取得のためのスクロール処理
             navLinks.forEach(link => {
                 link.addEventListener('click', (e) => {
                     e.preventDefault();
+                    const targetId = link.getAttribute('href').replace('#', '');
                     
-                    // もしパートナー画面にいる場合はメイン画面に戻す
+                    // パートナー画面が開かれている場合は、メイン画面に戻す
                     if(viewMain.style.display === 'none') {
                         viewPartner.style.display = 'none';
                         viewMain.style.display = 'block';
                         mainNavUl.style.opacity = '1';
+                        btnShowPartner.classList.remove('active');
+                        
+                        // 要素の再描画を待つ（位置計算ズレ防止）
+                        void viewMain.offsetWidth;
                     }
 
-                    document.querySelector('.desktop-nav .active').classList.remove('active');
+                    document.querySelector('.desktop-nav .active')?.classList.remove('active');
                     link.parentElement.classList.add('active');
 
-                    const targetId = link.getAttribute('href').replace('#', '');
-                    const targetElement = document.querySelector(`#${targetId}`);
-                    
+                    const targetElement = document.getElementById(targetId);
                     if (targetElement) {
-                        const targetTop = targetElement.getBoundingClientRect().top - viewMain.getBoundingClientRect().top + phoneMockup.scrollTop - 60;
+                        // 要素の親(phoneMockup)からの絶対位置(offsetTop)を使ってスクロール
+                        const targetTop = targetElement.offsetTop - 60;
                         phoneMockup.scrollTo({ top: targetTop, behavior: 'smooth' });
                     }
                 });
@@ -687,7 +694,7 @@
 
             // スクロール時のハイライト
             phoneMockup.addEventListener('scroll', () => {
-                if(viewMain.style.display === 'none') return; // パートナー画面中は無視
+                if(viewMain.style.display === 'none') return; 
 
                 let current = '';
                 const sections = viewMain.querySelectorAll('section');
@@ -707,34 +714,29 @@
                 });
             });
 
-            // ==========================================
-            // ★B2Bパートナー画面への切り替え処理
-            // ==========================================
+            // B2Bパートナー画面への切り替え処理
             btnShowPartner.addEventListener('click', (e) => {
                 e.preventDefault();
-                // 表示の切り替え
                 viewMain.style.display = 'none';
                 viewPartner.style.display = 'block';
                 
-                // 左メニューのメインリンクを少し薄くして非アクティブ感を出す
-                mainNavUl.style.opacity = '0.3';
+                mainNavUl.style.opacity = '0.4';
                 document.querySelector('.desktop-nav .active')?.classList.remove('active');
+                btnShowPartner.classList.add('active');
                 
-                // スクロール位置を一番上に戻す
                 phoneMockup.scrollTop = 0;
             });
 
+            // メイン画面へ戻る処理
             btnBackMain.addEventListener('click', (e) => {
                 e.preventDefault();
-                // メイン画面へ戻す
                 viewPartner.style.display = 'none';
                 viewMain.style.display = 'block';
                 
-                // 左メニューの復活と「RESET BASEとは」をアクティブに
                 mainNavUl.style.opacity = '1';
                 navLinks[0].parentElement.classList.add('active');
+                btnShowPartner.classList.remove('active');
                 
-                // スクロール位置を一番上に戻す
                 phoneMockup.scrollTop = 0;
             });
 
