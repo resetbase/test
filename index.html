@@ -30,7 +30,6 @@
             position: relative;
         }
 
-        /* --- 背景の流れる透かし文字 --- */
         .bg-watermark {
             position: absolute; bottom: -20px; left: 0; width: 100%;
             overflow: hidden; z-index: 0; pointer-events: none;
@@ -43,30 +42,36 @@
         }
         @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
 
-        /* 左上の固定ロゴ */
         .top-left-logo { position: absolute; top: 40px; left: 5vw; z-index: 30; color: #fff; }
         .top-left-logo h1 { font-family: var(--font-en); font-size: 40px; font-style: italic; font-weight: 900; line-height: 1; letter-spacing: -0.02em; }
         .top-left-logo p { font-family: var(--font-jp); font-size: 10px; margin-top: 4px; letter-spacing: 0.1em; padding-left: 2px; font-weight: 400; }
 
-        /* --- 大枠のレイアウト --- */
         .layout-wrapper { display: flex; width: 100%; height: 100%; position: relative; z-index: 10; }
         
-        /* --- 左側：PCナビゲーション --- */
         .desktop-sidebar { width: 30%; min-width: 250px; display: flex; flex-direction: column; justify-content: center; padding-left: 6vw; z-index: 20; }
-        .desktop-nav ul { list-style: none; }
+        .desktop-nav ul { list-style: none; margin-bottom: 40px; }
         .desktop-nav li { margin-bottom: 24px; }
-        .desktop-nav a {
+        .desktop-nav a.nav-link {
             display: inline-flex; align-items: center; color: #fff; text-decoration: none; font-size: 18px; font-weight: 700;
             position: relative; transition: all 0.3s ease; letter-spacing: 0.05em;
         }
-        .desktop-nav a::before {
+        .desktop-nav a.nav-link::before {
             content: ""; display: inline-block; width: 3px; height: 18px;
             background: rgba(255, 255, 255, 0.4); margin-right: 12px; border-radius: 2px;
             transition: all 0.3s ease;
         }
-        .desktop-nav li.active a::before { background: #fff; height: 20px; }
-        .desktop-nav li.active a { opacity: 1; }
-        .desktop-nav li:not(.active) a { opacity: 0.8; }
+        .desktop-nav li.active a.nav-link::before { background: #fff; height: 20px; }
+        .desktop-nav li.active a.nav-link { opacity: 1; }
+        .desktop-nav li:not(.active) a.nav-link { opacity: 0.8; }
+
+        /* ★追加：メニュー下部の独立したパートナーボタン */
+        .btn-sidebar-partner {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 12px 24px; border: 1px solid rgba(255,255,255,0.3); border-radius: 6px;
+            color: #fff; text-decoration: none; font-size: 14px; font-weight: 700;
+            transition: all 0.3s ease; background: rgba(0,0,0,0.1);
+        }
+        .btn-sidebar-partner:hover { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.6); }
 
         .preview-area { width: 70%; }
         .phone-container-wrapper { position: absolute; top: 50%; left: 50%; width: var(--phone-width); height: var(--phone-height); max-height: 95vh; transform: translate(-50%, -50%); z-index: 10; }
@@ -86,6 +91,7 @@
         .expert.left { top: 15%; left: 10px; transform-origin: bottom right; }
         .expert.left.active { opacity: 1; transform: translate(-60%, -10%) scale(1.1) rotate(-25deg); }
 
+        /* --- ヘッダー・共通スタイル --- */
         .lp-header {
             display: flex; justify-content: space-between; align-items: center;
             padding: 24px 20px; background: rgba(255, 255, 255, 0.95);
@@ -101,6 +107,7 @@
         .btn-sm-line i { font-size: 16px; }
         .btn-sm-line:active { transform: scale(0.95); }
 
+        /* メインLP用スタイル */
         .hero { position: relative; height: 480px; overflow: hidden; background: #fff; width: 100%; }
         .hero-slider { position: absolute; inset: 0; z-index: 1; width: 100%; }
         .hero-slider .slide { position: absolute; inset: 0; background-size: cover; background-position: center; opacity: 0; transition: opacity 1.5s ease-in-out; width: 100%; }
@@ -111,13 +118,8 @@
         .wave-bottom { position: absolute; bottom: -1px; left: 0; width: 100%; height: 50px; z-index: 3; }
         .wave-top svg, .wave-bottom svg { width: 100%; height: 100%; display: block; fill: #fff; }
 
-        .hero-content {
-            position: absolute; top: 12%; right: 20px; z-index: 4;
-            display: flex; flex-direction: row-reverse; gap: 12px; align-items: flex-start;
-        }
-        .vertical-catch {
-            writing-mode: vertical-rl; color: #fff; padding: 24px 10px; font-size: 15px; font-weight: 700; letter-spacing: 0.2em; white-space: nowrap; box-shadow: 0 10px 25px rgba(0,0,0,0.2); text-align: center;
-        }
+        .hero-content { position: absolute; top: 12%; right: 20px; z-index: 4; display: flex; flex-direction: row-reverse; gap: 12px; align-items: flex-start; }
+        .vertical-catch { writing-mode: vertical-rl; color: #fff; padding: 24px 10px; font-size: 15px; font-weight: 700; letter-spacing: 0.2em; white-space: nowrap; box-shadow: 0 10px 25px rgba(0,0,0,0.2); text-align: center; }
         .vertical-catch.accent-box { background-color: #1a49b8; margin-top: 0px; }
         .vertical-catch.main-box { background-color: var(--primary-bg); margin-top: 60px; }
 
@@ -130,17 +132,6 @@
 
         .concept-text { font-size: 14px; line-height: 1.8; color: #444; text-align: justify; margin-bottom: 24px; }
         .concept-highlight { color: var(--primary-bg); font-weight: 700; font-size: 16px; display: block; margin: 16px 0; text-align: center;}
-
-        /* ★追加：ABOUTセクション内のトラストバッジ（パートナー）デザイン */
-        .trust-partner-wrap { margin-top: 48px; padding-top: 40px; border-top: 1px dashed #eee; text-align: center; }
-        .trust-partner-title { font-size: 14px; font-weight: 700; color: var(--text-dark); margin-bottom: 16px; }
-        .trust-partner-box { background: #fff; border: 1px solid #eaeaea; border-radius: 8px; padding: 16px 24px; display: flex; justify-content: center; align-items: center; max-width: 280px; margin: 0 auto 16px; box-shadow: 0 4px 15px rgba(0,0,0,0.02); }
-        .trust-partner-box img { max-width: 100%; height: auto; max-height: 40px; object-fit: contain; }
-        
-        /* ひっそりとしたパートナー募集リンク */
-        .btn-partner-subtle { display: inline-flex; align-items: center; gap: 4px; color: #888; font-size: 11px; font-weight: 600; text-decoration: none; transition: color 0.2s; }
-        .btn-partner-subtle:hover { color: var(--primary-bg); }
-        .btn-partner-subtle i { font-size: 10px; }
 
         .feature-card { background: #fff; border-radius: 12px; overflow: hidden; margin-bottom: 24px; box-shadow: 0 4px 15px rgba(0,0,0,0.05); border: 1px solid #eee; }
         .feature-img { width: 100%; height: 180px; object-fit: cover; }
@@ -199,6 +190,18 @@
         .footer-links a { color: #fff; text-decoration: underline; text-underline-offset: 3px; }
         .footer-copy { font-size: 11px; opacity: 0.9; font-weight: 400; }
 
+        /* ★追加：パートナー（B2B）専用ページ用スタイル */
+        #view-partner { display: none; } /* 初期状態は非表示 */
+        .partner-hero { background: #111; color: #fff; padding: 60px 20px; text-align: center; }
+        .partner-hero h2 { font-size: 22px; font-weight: 700; line-height: 1.5; margin-bottom: 16px; }
+        .partner-hero p { font-size: 13px; line-height: 1.8; opacity: 0.8; }
+        
+        .partner-logo-box { background: #fff; border: 1px solid #eaeaea; border-radius: 8px; padding: 24px; display: flex; justify-content: center; align-items: center; max-width: 280px; margin: 0 auto; box-shadow: 0 4px 15px rgba(0,0,0,0.02); }
+        .partner-logo-box img { max-width: 100%; height: auto; max-height: 40px; object-fit: contain; }
+        
+        .btn-back { display: inline-flex; align-items: center; gap: 6px; color: var(--primary-bg); font-size: 13px; font-weight: 700; text-decoration: none; }
+        .btn-back i { font-size: 14px; }
+
         @media (max-width: 768px) {
             .layout-wrapper { display: block; }
             .desktop-sidebar, .top-left-logo, .bg-watermark, .experts-layer { display: none !important; }
@@ -225,15 +228,17 @@
     <div class="layout-wrapper">
         <aside class="desktop-sidebar">
             <nav class="desktop-nav">
-                <ul>
-                    <li class="active"><a href="#about">RESET BASEとは</a></li>
-                    <li><a href="#partner">パートナー</a></li>
-                    <li><a href="#feature">特徴</a></li>
-                    <li><a href="#plan">料金プラン</a></li>
-                    <li><a href="#faq">よくあるご質問</a></li>
-                    <li><a href="#access">アクセス</a></li>
-                    <li><a href="#contact">お問い合わせ</a></li>
+                <ul id="main-nav-ul">
+                    <li class="active"><a href="#about" class="nav-link">RESET BASEとは</a></li>
+                    <li><a href="#feature" class="nav-link">特徴</a></li>
+                    <li><a href="#plan" class="nav-link">料金プラン</a></li>
+                    <li><a href="#faq" class="nav-link">よくあるご質問</a></li>
+                    <li><a href="#access" class="nav-link">アクセス</a></li>
+                    <li><a href="#contact" class="nav-link">お問い合わせ</a></li>
                 </ul>
+                <a href="#" id="btn-show-partner" class="btn-sidebar-partner">
+                    <i class="fa-solid fa-handshake"></i> 法人パートナー募集
+                </a>
             </nav>
         </aside>
 
@@ -247,263 +252,271 @@
                     <div class="expert group2 right"><img src="https://i.imgur.com/GcKwfCS.png" alt=""></div>
                 </div>
 
-                <div class="phone-mockup">
+                <div class="phone-mockup" id="phone-mockup-scroll">
                     
-                    <header class="lp-header">
-                        <div class="lp-logo">
-                            RESET BASE
-                            <span>すべての人に、専属チームを</span>
-                        </div>
-                        <a href="#contact" class="btn-sm-line">
-                            <i class="fa-brands fa-line"></i>LINE相談
-                        </a>
-                    </header>
-
-                    <section class="hero" id="hero">
-                        <div class="hero-slider">
-                            <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=800&q=80');"></div>
-                            <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&w=800&q=80');"></div>
-                            <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?auto=format&fit=crop&w=800&q=80');"></div>
-                        </div>
-
-                        <div class="wave-top">
-                            <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
-                                <path d="M0,32 C160,70 320,95 480,95 C640,95 800,60 960,40 C1120,20 1280,25 1440,45 L1440,0 L0,0 Z"></path>
-                            </svg>
-                        </div>
-                        <div class="wave-bottom">
-                            <svg viewBox="0 0 1440 120" preserveAspectRatio="none">
-                                <path d="M0,64 C180,35 360,20 540,35 C720,50 900,90 1080,95 C1260,100 1350,85 1440,70 L1440,120 L0,120 Z"></path>
-                            </svg>
-                        </div>
-
-                        <div class="hero-content">
-                            <div class="vertical-catch accent-box">
-                                <span>すべての人に、専属チームを。</span>
+                    <div id="view-main">
+                        <header class="lp-header">
+                            <div class="lp-logo">
+                                RESET BASE
+                                <span>すべての人に、専属チームを</span>
                             </div>
-                            <div class="vertical-catch main-box">
-                                <span>一人で悩むのは、もう終わりに。</span>
+                            <a href="#contact" class="btn-sm-line">
+                                <i class="fa-brands fa-line"></i>LINE相談
+                            </a>
+                        </header>
+
+                        <section class="hero" id="hero">
+                            <div class="hero-slider">
+                                <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=800&q=80');"></div>
+                                <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1517838277536-f5f99be501cd?auto=format&fit=crop&w=800&q=80');"></div>
+                                <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?auto=format&fit=crop&w=800&q=80');"></div>
                             </div>
-                        </div>
-                    </section>
+                            <div class="wave-top"><svg viewBox="0 0 1440 120" preserveAspectRatio="none"><path d="M0,32 C160,70 320,95 480,95 C640,95 800,60 960,40 C1120,20 1280,25 1440,45 L1440,0 L0,0 Z"></path></svg></div>
+                            <div class="wave-bottom"><svg viewBox="0 0 1440 120" preserveAspectRatio="none"><path d="M0,64 C180,35 360,20 540,35 C720,50 900,90 1080,95 C1260,100 1350,85 1440,70 L1440,120 L0,120 Z"></path></svg></div>
+                            <div class="hero-content">
+                                <div class="vertical-catch accent-box"><span>すべての人に、専属チームを。</span></div>
+                                <div class="vertical-catch main-box"><span>一人で悩むのは、もう終わりに。</span></div>
+                            </div>
+                        </section>
 
-                    <section class="section" id="about">
-                        <div class="sec-title-wrap">
-                            <span class="sec-en">About</span>
-                            <h2 class="sec-jp">RESET BASEとは</h2>
-                        </div>
-                        <p class="concept-text">
-                            トップアスリートや経営者だけのものであった「専属チーム」を、すべての人へ。<br><br>
-                            RESET BASEは、多彩なプロフェッショナルを自由に組み合わせる全く新しいサブスクリプションです。理学療法士、トレーナー、栄養士などが連携し、あなたを多角的にサポートします。
-                        </p>
-                        <span class="concept-highlight">「専属チーム」という、新しい最適解。</span>
+                        <section class="section" id="about">
+                            <div class="sec-title-wrap">
+                                <span class="sec-en">About</span>
+                                <h2 class="sec-jp">RESET BASEとは</h2>
+                            </div>
+                            <p class="concept-text">
+                                トップアスリートや経営者だけのものであった「専属チーム」を、すべての人へ。<br><br>
+                                RESET BASEは、多彩なプロフェッショナルを自由に組み合わせる全く新しいサブスクリプションです。理学療法士、トレーナー、栄養士などが連携し、あなたを多角的にサポートします。
+                            </p>
+                            <span class="concept-highlight">「専属チーム」という、新しい最適解。</span>
+                        </section>
 
-                        <div id="partner" class="trust-partner-wrap">
-                            <div class="trust-partner-title">RESET BASEは以下の企業と<br>共に歩んでいます</div>
-                            
-                            <div class="trust-partner-box">
+                        <section class="section bg-light" id="feature">
+                            <div class="sec-title-wrap">
+                                <span class="sec-en">Features</span>
+                                <h2 class="sec-jp">特徴</h2>
+                            </div>
+                            <div class="feature-card">
+                                <img src="https://images.unsplash.com/photo-1552581234-26160f608093?auto=format&fit=crop&w=600&q=80" class="feature-img" alt="">
+                                <div class="feature-body">
+                                    <div class="feature-num">01</div>
+                                    <h3 class="feature-title">ポイント制で自由にアサイン</h3>
+                                    <p class="feature-desc">毎月付与されるポイントを使って、必要な時に最適な専門家を予約。身体のケアからスキルトレーニングまで、その時の課題に合わせて自在にチームを編成できます。</p>
+                                </div>
+                            </div>
+                            <div class="feature-card">
+                                <img src="https://images.unsplash.com/photo-1511556820780-d912e42b4980?auto=format&fit=crop&w=600&q=80" class="feature-img" alt="">
+                                <div class="feature-body">
+                                    <div class="feature-num">02</div>
+                                    <h3 class="feature-title">余ったポイントは応援・物販へ</h3>
+                                    <p class="feature-desc">ポイントはプロ厳選のケアグッズ購入や、活動を頑張る専門家・アスリートへのギフティング（応援）にも利用可能。無駄なく価値を循環させます。</p>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section class="section" id="plan">
+                            <div class="plan-section-title">
+                                <span class="plan-en-title">Plan</span>
+                                <h2 class="plan-jp-title">料金プラン</h2>
+                            </div>
+
+                            <div class="img-plan-card">
+                                <div class="img-plan-badge">まずはここから！</div>
+                                <div class="img-plan-header">
+                                    <div class="img-plan-en">Basic Plan</div>
+                                    <div class="img-plan-jp">ベーシックプラン</div>
+                                </div>
+                                <div class="img-plan-body">
+                                    <div class="img-plan-price-box">
+                                        <span class="yen">¥</span><span class="num">8,000</span><span class="month">/月</span>
+                                    </div>
+                                    <hr class="img-plan-hr">
+                                    <div class="img-plan-row">
+                                        <div class="img-plan-label">内容</div>
+                                        <div class="img-plan-desc"><p>・一般的な器具の利用</p><p>・ロッカー利用</p><p>・シャワー利用</p></div>
+                                    </div>
+                                    <div class="img-plan-row">
+                                        <div class="img-plan-label">時間</div>
+                                        <div class="img-plan-desc" style="margin-top: 8px;">平日9:00〜18:00</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="img-plan-card">
+                                <div class="img-plan-badge">一番人気！</div>
+                                <div class="img-plan-header">
+                                    <div class="img-plan-en">Standard Plan</div>
+                                    <div class="img-plan-jp">スタンダードプラン</div>
+                                </div>
+                                <div class="img-plan-body">
+                                    <span class="img-plan-strike">¥ 12,000 /月</span>
+                                    <div class="img-plan-price-box">
+                                        <span class="yen">¥</span><span class="num">9,800</span><span class="month">/月</span>
+                                    </div>
+                                    <hr class="img-plan-hr">
+                                    <div class="img-plan-row">
+                                        <div class="img-plan-label">内容</div>
+                                        <div class="img-plan-desc"><p>・一般的な器具の利用</p><p>・グループクラス参加（週3回まで）</p><p>・ロッカー・シャワー利用</p></div>
+                                    </div>
+                                    <div class="img-plan-row">
+                                        <div class="img-plan-label">時間</div>
+                                        <div class="img-plan-desc" style="margin-top: 8px;">無制限</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="img-plan-card">
+                                <div class="img-plan-badge">贅沢に！</div>
+                                <div class="img-plan-header">
+                                    <div class="img-plan-en">Premium Plan</div>
+                                    <div class="img-plan-jp">プレミアムプラン</div>
+                                </div>
+                                <div class="img-plan-body">
+                                    <div class="img-plan-price-box" style="margin-top: 16px;">
+                                        <span class="yen">¥</span><span class="num">15,000</span><span class="month">/月</span>
+                                    </div>
+                                    <hr class="img-plan-hr">
+                                    <div class="img-plan-row">
+                                        <div class="img-plan-label">内容</div>
+                                        <div class="img-plan-desc"><p>・一般的な器具の利用</p><p>・グループクラス無制限参加</p><p>・専門のパーソナルトレーナーによる月1回のコンサルテーション</p><p>・ロッカー・シャワー・サウナ利用</p></div>
+                                    </div>
+                                    <div class="img-plan-row">
+                                        <div class="img-plan-label">時間</div>
+                                        <div class="img-plan-desc" style="margin-top: 8px;">無制限</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                        <section class="section bg-light" id="faq">
+                            <div class="sec-title-wrap">
+                                <span class="sec-en">Faq</span>
+                                <h2 class="sec-jp">よくあるご質問</h2>
+                            </div>
+                            <div class="faq-item">
+                                <div class="faq-q">余ったポイントは翌月に繰り越せますか？</div>
+                                <div class="faq-a">はい、繰り越し可能です。ポイントの有効期限は付与された日から6ヶ月間となりますので、ご自身のペースでご利用いただけます。</div>
+                            </div>
+                            <div class="faq-item">
+                                <div class="faq-q">どんな専門家が在籍していますか？</div>
+                                <div class="faq-a">理学療法士、管理栄養士、ボイストレーナー、スポーツトレーナーなど、多様なプロフェッショナルが在籍しています。</div>
+                            </div>
+                        </section>
+
+                        <section class="section" id="access">
+                            <div class="sec-title-wrap">
+                                <span class="sec-en">Access</span>
+                                <h2 class="sec-jp">アクセス</h2>
+                            </div>
+                            <p style="font-size: 13px; color: #555; text-align: center; margin-bottom: 16px;">
+                                対面でのフィジカルケアやコンディショニングは、実店舗でもご提供しております。
+                            </p>
+                            <p style="font-size: 14px; font-weight: 700; text-align: center;">
+                                〒111-0032<br>東京都台東区浅草<br>RESET BASE 実店舗
+                            </p>
+                            <a href="https://goo.gl/maps/LPch2UsXLLVKEz978" target="_blank" class="maps-btn">Google Mapsで開く</a>
+                        </section>
+
+                        <section class="line-section" id="contact">
+                            <div class="line-wrap">
+                                <h2 class="line-title">まずは公式LINEで<br>お問い合わせ・無料相談</h2>
+                                <div class="qr-code"><img src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=https://line.me/R/ti/p/@your_line_id_here" alt="LINE QRコード"></div>
+                                <a href="https://line.me/R/ti/p/@your_line_id_here" class="line-btn-large">LINEアプリを開く</a>
+                            </div>
+                        </section>
+
+                        <footer class="footer">
+                            <div class="footer-logo">RESET BASE</div>
+                            <div class="footer-sub">すべての人に、専属チームを。</div>
+                            <div class="footer-sns">
+                                <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                                <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                                <a href="#"><i class="fa-brands fa-facebook-f"></i></a>
+                            </div>
+                            <div class="footer-links">
+                                <a href="#">プライバシーポリシー</a>
+                                <a href="#">特定商取引法に基づく表記</a>
+                                <a href="#">利用規約</a>
+                            </div>
+                            <div class="footer-copy">©2026 RESET BASE All rights reserved.</div>
+                        </footer>
+                    </div>
+                    <div id="view-partner">
+                        <header class="lp-header" style="justify-content: flex-start; gap: 16px;">
+                            <a href="#" id="btn-back-main" class="btn-back">
+                                <i class="fa-solid fa-arrow-left"></i> 戻る
+                            </a>
+                            <div class="lp-logo" style="font-size: 20px;">
+                                RESET BASE
+                                <span>PARTNER PROGRAM</span>
+                            </div>
+                        </header>
+
+                        <section class="partner-hero">
+                            <h2>「すべての人に、<br>専属チームを。」</h2>
+                            <p>RESET BASEは、このビジョンを共に実現し、日本の健康課題を解決していくオフィシャルパートナー企業様を募集しています。</p>
+                        </section>
+
+                        <section class="section">
+                            <div class="sec-title-wrap">
+                                <span class="sec-en">Official Partner</span>
+                                <h2 class="sec-jp">現在のパートナー</h2>
+                            </div>
+                            <div class="partner-logo-box">
                                 <img src="https://i.imgur.com/EJSvO0T.png" alt="株式会社キッチンボード">
                             </div>
-
-                            <a href="partner.html" class="btn-partner-subtle">
-                                オフィシャルパートナー募集について <i class="fa-solid fa-angle-right"></i>
-                            </a>
-                        </div>
-                    </section>
-
-                    <section class="section bg-light" id="feature">
-                        <div class="sec-title-wrap">
-                            <span class="sec-en">Features</span>
-                            <h2 class="sec-jp">特徴</h2>
-                        </div>
-
-                        <div class="feature-card">
-                            <img src="https://images.unsplash.com/photo-1552581234-26160f608093?auto=format&fit=crop&w=600&q=80" class="feature-img" alt="">
-                            <div class="feature-body">
-                                <div class="feature-num">01</div>
-                                <h3 class="feature-title">ポイント制で自由にアサイン</h3>
-                                <p class="feature-desc">毎月付与されるポイントを使って、必要な時に最適な専門家を予約。身体のケアからスキルトレーニングまで、その時の課題に合わせて自在にチームを編成できます。</p>
-                            </div>
-                        </div>
-
-                        <div class="feature-card">
-                            <img src="https://images.unsplash.com/photo-1511556820780-d912e42b4980?auto=format&fit=crop&w=600&q=80" class="feature-img" alt="">
-                            <div class="feature-body">
-                                <div class="feature-num">02</div>
-                                <h3 class="feature-title">余ったポイントは応援・物販へ</h3>
-                                <p class="feature-desc">ポイントはプロ厳選のケアグッズ購入や、活動を頑張る専門家・アスリートへのギフティング（応援）にも利用可能。無駄なく価値を循環させます。</p>
-                            </div>
-                        </div>
-                    </section>
-
-                    <section class="section" id="plan">
-                        <div class="plan-section-title">
-                            <span class="plan-en-title">Plan</span>
-                            <h2 class="plan-jp-title">料金プラン</h2>
-                        </div>
-
-                        <div class="img-plan-card">
-                            <div class="img-plan-badge">まずはここから！</div>
-                            <div class="img-plan-header">
-                                <div class="img-plan-en">Basic Plan</div>
-                                <div class="img-plan-jp">ベーシックプラン</div>
-                            </div>
-                            <div class="img-plan-body">
-                                <div class="img-plan-price-box">
-                                    <span class="yen">¥</span><span class="num">8,000</span><span class="month">/月</span>
-                                </div>
-                                <hr class="img-plan-hr">
-                                <div class="img-plan-row">
-                                    <div class="img-plan-label">内容</div>
-                                    <div class="img-plan-desc">
-                                        <p>・一般的な器具の利用</p>
-                                        <p>・ロッカー利用</p>
-                                        <p>・シャワー利用</p>
-                                    </div>
-                                </div>
-                                <div class="img-plan-row">
-                                    <div class="img-plan-label">時間</div>
-                                    <div class="img-plan-desc" style="margin-top: 8px;">平日9:00〜18:00</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="img-plan-card">
-                            <div class="img-plan-badge">一番人気！</div>
-                            <div class="img-plan-header">
-                                <div class="img-plan-en">Standard Plan</div>
-                                <div class="img-plan-jp">スタンダードプラン</div>
-                            </div>
-                            <div class="img-plan-body">
-                                <span class="img-plan-strike">¥ 12,000 /月</span>
-                                <div class="img-plan-price-box">
-                                    <span class="yen">¥</span><span class="num">9,800</span><span class="month">/月</span>
-                                </div>
-                                <hr class="img-plan-hr">
-                                <div class="img-plan-row">
-                                    <div class="img-plan-label">内容</div>
-                                    <div class="img-plan-desc">
-                                        <p>・一般的な器具の利用</p>
-                                        <p>・グループクラス参加（週3回まで）</p>
-                                        <p>・ロッカー・シャワー利用</p>
-                                    </div>
-                                </div>
-                                <div class="img-plan-row">
-                                    <div class="img-plan-label">時間</div>
-                                    <div class="img-plan-desc" style="margin-top: 8px;">無制限</div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="img-plan-card">
-                            <div class="img-plan-badge">贅沢に！</div>
-                            <div class="img-plan-header">
-                                <div class="img-plan-en">Premium Plan</div>
-                                <div class="img-plan-jp">プレミアムプラン</div>
-                            </div>
-                            <div class="img-plan-body">
-                                <div class="img-plan-price-box" style="margin-top: 16px;">
-                                    <span class="yen">¥</span><span class="num">15,000</span><span class="month">/月</span>
-                                </div>
-                                <hr class="img-plan-hr">
-                                <div class="img-plan-row">
-                                    <div class="img-plan-label">内容</div>
-                                    <div class="img-plan-desc">
-                                        <p>・一般的な器具の利用</p>
-                                        <p>・グループクラス無制限参加</p>
-                                        <p>・専門のパーソナルトレーナーによる月1回のコンサルテーション</p>
-                                        <p>・ロッカー・シャワー・サウナ利用</p>
-                                    </div>
-                                </div>
-                                <div class="img-plan-row">
-                                    <div class="img-plan-label">時間</div>
-                                    <div class="img-plan-desc" style="margin-top: 8px;">無制限</div>
-                                </div>
-                            </div>
-                        </div>
-                    </section>
-
-                    <section class="section bg-light" id="faq">
-                        <div class="sec-title-wrap">
-                            <span class="sec-en">Faq</span>
-                            <h2 class="sec-jp">よくあるご質問</h2>
-                        </div>
-                        <div class="faq-item">
-                            <div class="faq-q">余ったポイントは翌月に繰り越せますか？</div>
-                            <div class="faq-a">はい、繰り越し可能です。ポイントの有効期限は付与された日から6ヶ月間となりますので、ご自身のペースでご利用いただけます。</div>
-                        </div>
-                        <div class="faq-item">
-                            <div class="faq-q">どんな専門家が在籍していますか？</div>
-                            <div class="faq-a">理学療法士、管理栄養士、ボイストレーナー、スポーツトレーナーなど、多様なプロフェッショナルが在籍しています。</div>
-                        </div>
-                    </section>
-
-                    <section class="section" id="access">
-                        <div class="sec-title-wrap">
-                            <span class="sec-en">Access</span>
-                            <h2 class="sec-jp">アクセス</h2>
-                        </div>
-                        <p style="font-size: 13px; color: #555; text-align: center; margin-bottom: 16px;">
-                            対面でのフィジカルケアやコンディショニングは、実店舗でもご提供しております。
-                        </p>
-                        <p style="font-size: 14px; font-weight: 700; text-align: center;">
-                            〒111-0032<br>東京都台東区浅草<br>RESET BASE 実店舗
-                        </p>
-                        <a href="https://goo.gl/maps/LPch2UsXLLVKEz978" target="_blank" class="maps-btn">Google Mapsで開く</a>
-                    </section>
-
-                    <section class="line-section" id="contact">
-                        <div class="line-wrap">
-                            <h2 class="line-title">まずは公式LINEで<br>お問い合わせ・無料相談</h2>
-                            <div class="qr-code">
-                                <img src="https://api.qrserver.com/v1/create-qr-code/?size=140x140&data=https://line.me/R/ti/p/@your_line_id_here" alt="LINE QRコード">
-                            </div>
-                            <a href="https://line.me/R/ti/p/@your_line_id_here" class="line-btn-large">
-                                LINEアプリを開く
-                            </a>
-                        </div>
-                    </section>
-
-                    <footer class="footer">
-                        <div class="footer-logo">RESET BASE</div>
-                        <div class="footer-sub">すべての人に、専属チームを。</div>
+                            <p style="font-size: 13px; color: #555; text-align: center; margin-top: 24px; line-height: 1.6;">
+                                従業員の皆様の健康経営や、ブランドの社会的価値向上に。スポーツと健康を通じた社会貢献を共に行いませんか？
+                            </p>
+                        </section>
                         
-                        <div class="footer-sns">
-                            <a href="#" target="_blank" rel="noopener"><i class="fa-brands fa-instagram"></i></a>
-                            <a href="#" target="_blank" rel="noopener"><i class="fa-brands fa-twitter"></i></a>
-                            <a href="#" target="_blank" rel="noopener"><i class="fa-brands fa-facebook-f"></i></a>
-                        </div>
+                        <section class="section bg-light" style="text-align: center; padding-bottom: 80px;">
+                            <div class="sec-title-wrap">
+                                <span class="sec-en">Contact</span>
+                                <h2 class="sec-jp">協賛のお問い合わせ</h2>
+                            </div>
+                            <p style="font-size: 13px; color: #555; margin-bottom: 24px;">詳細な資料請求やご相談は、以下よりお問い合わせください。</p>
+                            <a href="#" class="btn-sm-line" style="background: var(--primary-bg); padding: 14px 24px; font-size: 14px;">
+                                <i class="fa-solid fa-envelope"></i> パートナー窓口へ連絡する
+                            </a>
+                        </section>
 
-                        <div class="footer-links">
-                            <a href="#">プライバシーポリシー</a>
-                            <a href="#">特定商取引法に基づく表記</a>
-                            <a href="#">利用規約</a>
-                        </div>
-                        <div class="footer-copy">©2026 RESET BASE All rights reserved.</div>
-                    </footer>
-
-                </div>
+                        <footer class="footer">
+                            <div class="footer-logo">RESET BASE</div>
+                            <div class="footer-copy">©2026 RESET BASE All rights reserved.</div>
+                        </footer>
+                    </div>
+                    </div>
             </div>
         </main>
     </div>
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const phoneMockup = document.querySelector('.phone-mockup');
-            const desktopLinks = document.querySelectorAll('.desktop-nav a');
+            const phoneMockup = document.getElementById('phone-mockup-scroll');
+            const navLinks = document.querySelectorAll('.desktop-nav a.nav-link');
+            
+            // ビュー切り替え用の要素
+            const viewMain = document.getElementById('view-main');
+            const viewPartner = document.getElementById('view-partner');
+            const btnShowPartner = document.getElementById('btn-show-partner');
+            const btnBackMain = document.getElementById('btn-back-main');
+            const mainNavUl = document.getElementById('main-nav-ul');
 
             function isMobile() { return window.innerWidth <= 768; }
 
+            // スライダー処理
             const slides = document.querySelectorAll('.hero-slider .slide');
             let currentSlide = 0;
-
             function nextSlide() {
+                if(viewMain.style.display === 'none') return; // パートナー画面中は停止
                 slides[currentSlide].classList.remove('active');
                 currentSlide = (currentSlide + 1) % slides.length;
                 slides[currentSlide].classList.add('active');
             }
             setInterval(nextSlide, 4000);
 
+            // スクロール処理
             window.addEventListener('wheel', (e) => {
                 if (isMobile()) return;
                 if (!phoneMockup.contains(e.target) && e.target !== phoneMockup) {
@@ -511,25 +524,37 @@
                 }
             }, { passive: true });
 
-            desktopLinks.forEach(link => {
+            // ナビゲーションリンクのクリック処理
+            navLinks.forEach(link => {
                 link.addEventListener('click', (e) => {
                     e.preventDefault();
+                    
+                    // もしパートナー画面にいる場合はメイン画面に戻す
+                    if(viewMain.style.display === 'none') {
+                        viewPartner.style.display = 'none';
+                        viewMain.style.display = 'block';
+                        mainNavUl.style.opacity = '1';
+                    }
+
                     document.querySelector('.desktop-nav .active').classList.remove('active');
                     link.parentElement.classList.add('active');
 
                     const targetId = link.getAttribute('href').replace('#', '');
-                    const targetElement = phoneMockup.querySelector(`#${targetId}`);
+                    const targetElement = document.querySelector(`#${targetId}`);
                     
                     if (targetElement) {
-                        const targetTop = targetElement.getBoundingClientRect().top - phoneMockup.getBoundingClientRect().top + phoneMockup.scrollTop - 60;
+                        const targetTop = targetElement.getBoundingClientRect().top - viewMain.getBoundingClientRect().top + phoneMockup.scrollTop - 60;
                         phoneMockup.scrollTo({ top: targetTop, behavior: 'smooth' });
                     }
                 });
             });
 
+            // スクロール時のハイライト
             phoneMockup.addEventListener('scroll', () => {
+                if(viewMain.style.display === 'none') return; // パートナー画面中は無視
+
                 let current = '';
-                const sections = phoneMockup.querySelectorAll('section');
+                const sections = viewMain.querySelectorAll('section');
                 
                 sections.forEach(section => {
                     const sectionTop = section.offsetTop;
@@ -538,7 +563,7 @@
                     }
                 });
 
-                desktopLinks.forEach(link => {
+                navLinks.forEach(link => {
                     link.parentElement.classList.remove('active');
                     if (link.getAttribute('href').includes(current)) {
                         link.parentElement.classList.add('active');
@@ -546,25 +571,46 @@
                 });
             });
 
-            const faqItems = document.querySelectorAll('.faq-item');
-            faqItems.forEach(item => {
-                const q = item.querySelector('.faq-q');
-                q.addEventListener('click', () => {
-                    item.classList.toggle('open');
-                });
+            // ==========================================
+            // ★追加：B2Bパートナー画面への切り替え処理
+            // ==========================================
+            btnShowPartner.addEventListener('click', (e) => {
+                e.preventDefault();
+                // 表示の切り替え
+                viewMain.style.display = 'none';
+                viewPartner.style.display = 'block';
+                
+                // 左メニューのメインリンクを少し薄くして非アクティブ感を出す
+                mainNavUl.style.opacity = '0.3';
+                document.querySelector('.desktop-nav .active')?.classList.remove('active');
+                
+                // スクロール位置を一番上に戻す
+                phoneMockup.scrollTop = 0;
             });
 
+            btnBackMain.addEventListener('click', (e) => {
+                e.preventDefault();
+                // メイン画面へ戻す
+                viewPartner.style.display = 'none';
+                viewMain.style.display = 'block';
+                
+                // 左メニューの復活と「RESET BASEとは」をアクティブに
+                mainNavUl.style.opacity = '1';
+                navLinks[0].parentElement.classList.add('active');
+                
+                // スクロール位置を一番上に戻す
+                phoneMockup.scrollTop = 0;
+            });
+
+            // 専門家アニメーション
             const expertsGroup1 = document.querySelectorAll('.expert.group1');
             const expertsGroup2 = document.querySelectorAll('.expert.group2');
             let currentGroup = 1;
-
             function cycleExperts() {
                 if (isMobile()) return;
                 const groupToAnimate = (currentGroup === 1) ? expertsGroup1 : expertsGroup2;
-
                 groupToAnimate[0].classList.add('active'); 
                 setTimeout(() => groupToAnimate[1].classList.add('active'), 600); 
-
                 setTimeout(() => {
                     groupToAnimate.forEach(exp => exp.classList.add('out'));
                     setTimeout(() => {
@@ -574,13 +620,9 @@
                     }, 500); 
                 }, 4000);
             }
-
             setTimeout(() => { if (!isMobile()) cycleExperts(); }, 1000); 
-
             window.addEventListener('resize', () => {
-                if (isMobile()) {
-                    document.querySelectorAll('.expert').forEach(exp => exp.classList.remove('active', 'out'));
-                }
+                if (isMobile()) { document.querySelectorAll('.expert').forEach(exp => exp.classList.remove('active', 'out')); }
             });
         });
     </script>
